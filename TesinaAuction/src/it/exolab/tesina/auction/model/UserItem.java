@@ -37,7 +37,7 @@ public class UserItem {
 	public UserItem(Integer soldToUserId, Integer userId, String title, String description, String notes,
 			String picture1, String picture2, String picture3, String picture4, String picture5,
 			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime soldAt) {
-		super();
+
 		this.soldToUserId = soldToUserId;
 		this.userId = userId;
 		this.title = title;

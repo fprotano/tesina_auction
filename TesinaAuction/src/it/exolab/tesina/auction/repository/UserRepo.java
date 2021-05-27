@@ -1,8 +1,10 @@
 package it.exolab.tesina.auction.repository;
 
-public class UserRepo {
-	
-	
-	
+import org.springframework.data.repository.CrudRepository;
+
+import it.exolab.tesina.auction.model.User;
+
+
+public interface UserRepo extends  CrudRepository<User, Integer> {
 
 }

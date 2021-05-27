@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.api.model.dto.UserDTO;
 import it.exolab.tesina.auction.controller.BaseController;
-import it.exolab.tesina.auction.model.User;
-import it.exolab.tesina.auction.service.UserService;
+import it.exolab.tesina.auction.service.api.UserService;
+
 
 @CrossOrigin
 @Controller

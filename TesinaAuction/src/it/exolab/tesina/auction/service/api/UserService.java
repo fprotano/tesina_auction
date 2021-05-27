@@ -1,4 +1,4 @@
-package it.exolab.tesina.auction.service;
+package it.exolab.tesina.auction.service.api;
 
 import java.util.List;
 

@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.exolab.tesina.auction.api.model.dto.UserDTO;
-import it.exolab.tesina.auction.model.User;
+
 import it.exolab.tesina.auction.repository.UserRepo;
 
 public class UserService {
+	
 	private UserRepo userRepo;
 
 	@Autowired(required = true)
 	public void setUserRepo(UserRepo userRepo) {
 		this.userRepo = userRepo;
-
 	}
 
-	public User find(int id) {
+	public UserDTO find(int id) {
 		return userRepo.findOne(id);
 	}
 
-	public List<User> findAll() {
-		return (List<User>) userRepo.findAll();
+	public List<UserDTO> findAll() {
+		return (List<UserDTO>) userRepo.findAll();
 	}
 
 	public void save(UserDTO model) {
@@ -32,7 +32,7 @@ public class UserService {
 	public void delete(int id) {
 		userRepo.delete(id);
 	}
-	public User findByEmailAndPassword(String email,String password) {
+	public UserDTO findByEmailAndPassword(String email,String password) {
 		return userRepo.findByEmailAndPassword(email, password);
 	}
 

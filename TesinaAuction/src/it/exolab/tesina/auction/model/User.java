@@ -16,22 +16,49 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="create_at")
-	private LocalDateTime createAt;
-	@Column(name="update_at")
-	private LocalDateTime updatedAt;
+	
 	private Integer enabled;
-	private String email;
-	private String password;
-	private String name;
-	private String surname;
-	@Column(name="next_otp_code_after_date")
-	private LocalDateTime nextOtpCodeAfterDate;
+	
+	private String email, password, name, surname, question;
+	
 	@Column(name="otp_code")
 	private String otpCode;
+	
+	@Column(name="create_at")
+	private LocalDateTime createAt;
+	
+	@Column(name="update_at")
+	private LocalDateTime updatedAt;
+	
+	@Column(name="next_otp_code_after_date")
+	private LocalDateTime nextOtpCodeAfterDate;
+	
 	@Column(name="otp_code_expires_at")
 	private LocalDateTime otpCodeExpiresAt;
-	private String question;
+
+	
+	public User(Integer id, LocalDateTime createAt, LocalDateTime updatedAt, Integer enabled, String email,
+			String password, String name, String surname, LocalDateTime nextOtpCodeAfterDate, String otpCode,
+			LocalDateTime otpCodeExpiresAt, String question) {
+		
+		this.id = id;
+		this.createAt = createAt;
+		this.updatedAt = updatedAt;
+		this.enabled = enabled;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
+		this.otpCode = otpCode;
+		this.otpCodeExpiresAt = otpCodeExpiresAt;
+		this.question = question;
+	}
+	
+	public User() {
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -104,27 +131,7 @@ public class User {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-	public User(Integer id, LocalDateTime createAt, LocalDateTime updatedAt, Integer enabled, String email,
-			String password, String name, String surname, LocalDateTime nextOtpCodeAfterDate, String otpCode,
-			LocalDateTime otpCodeExpiresAt, String question) {
-		super();
-		this.id = id;
-		this.createAt = createAt;
-		this.updatedAt = updatedAt;
-		this.enabled = enabled;
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.surname = surname;
-		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
-		this.otpCode = otpCode;
-		this.otpCodeExpiresAt = otpCodeExpiresAt;
-		this.question = question;
-	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", enabled=" + enabled
@@ -132,6 +139,4 @@ public class User {
 				+ ", nextOtpCodeAfterDate=" + nextOtpCodeAfterDate + ", otpCode=" + otpCode + ", otpCodeExpiresAt="
 				+ otpCodeExpiresAt + ", question=" + question + "]";
 	}
-   
-
 }

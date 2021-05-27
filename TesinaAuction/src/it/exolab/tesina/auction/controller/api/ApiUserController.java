@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.api.model.dto.UserDTO;
 import it.exolab.tesina.auction.controller.BaseController;
+import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.UserService;
 
 @CrossOrigin
@@ -28,8 +29,18 @@ public class ApiUserController extends BaseController {
 	
 	@RequestMapping(value="insert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<UserDTO> insert(@RequestBody UserDTO model) {
+	public HttpResponse<UserDTO> doInsert(@RequestBody UserDTO model) {
+		System.out.println(model);
 		userService.save(model);
 		return (HttpResponse<UserDTO>) sendSuccess(model);
+	}
+	
+	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<UserDTO> doLogin(@RequestBody UserDTO model) {
+		System.out.println(model);
+		UserDTO modelDTO = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
+		System.out.println(modelDTO);
+		return (HttpResponse<UserDTO>) sendSuccess(modelDTO);
 	}
 }

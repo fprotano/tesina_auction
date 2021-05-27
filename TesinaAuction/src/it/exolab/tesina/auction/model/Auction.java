@@ -56,9 +56,6 @@ public class Auction {
 	
 	@Column(name="closed_auction_at")
 	public LocalDateTime closedAuctionAt;
-
-	
-	
 	
 	public Auction() {
 		super();

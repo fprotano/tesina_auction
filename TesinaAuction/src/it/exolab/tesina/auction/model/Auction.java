@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -17,11 +18,29 @@ public class Auction {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer id;
 	
-	public Integer enabled;
-	public String email, password, name, surname, question, answer;
+	@Column(name="user_item_id")
+	public Integer userItemId;
 	
-	@Column(name="otp_code")
-	public String otpCode;
+	@Column(name="winner_user_id")
+	public Integer winnerUserId;
+	
+	@Column(name="fixed_bid_every_time")
+	public Integer freeBidEveryTime;
+	
+	@Column(name="start_price")
+	public Double start_price;
+	
+	@Column(name="current_bid")
+	public Double currentBid;;
+	
+	@Column(name="shipment_extra_price")
+	public Double shipmentExtraPrice;
+	
+	@Column(name="min_earn")
+	public Double minEarn;
+	
+	@Column(name="fixed_bid_every_time")
+	public Double fixedBidEveryTime;
 	
 	@Column(name="created_at")
 	public LocalDateTime createdAt;
@@ -29,32 +48,40 @@ public class Auction {
 	@Column(name="updated_at")
 	public LocalDateTime updatedAt;
 	
-	@Column(name="next_otp_code_after_date")
-	public LocalDateTime nextOtpCodeAfterDate;
+	@Column(name="start_auction_at")
+	public LocalDateTime startAuctionAt;
 	
-	@Column(name="otp_code_expires_at")
-	public LocalDateTime otpCodeExpiresAt;
+	@Column(name="end_auction_at")
+	public LocalDateTime endAuctionAt;
+	
+	@Column(name="closed_auction_at")
+	public LocalDateTime closedAuctionAt;
 
+	
+	
 	
 	public Auction() {
-
+		super();
 	}
-	
-	public Auction(Integer enabled, String email, String password, String name, String surname, String question,
-			String answer, String otpCode, LocalDateTime createdAt, LocalDateTime updatedAt,
-			LocalDateTime nextOtpCodeAfterDate, LocalDateTime otpCodeExpiresAt) {
-		this.enabled = enabled;
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.surname = surname;
-		this.question = question;
-		this.answer = answer;
-		this.otpCode = otpCode;
+
+	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double start_price,
+			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
+			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime startAuctionAt, LocalDateTime endAuctionAt,
+			LocalDateTime closedAuctionAt) {
+		super();
+		this.userItemId = userItemId;
+		this.winnerUserId = winnerUserId;
+		this.freeBidEveryTime = freeBidEveryTime;
+		this.start_price = start_price;
+		this.currentBid = currentBid;
+		this.shipmentExtraPrice = shipmentExtraPrice;
+		this.minEarn = minEarn;
+		this.fixedBidEveryTime = fixedBidEveryTime;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
-		this.otpCodeExpiresAt = otpCodeExpiresAt;
+		this.startAuctionAt = startAuctionAt;
+		this.endAuctionAt = endAuctionAt;
+		this.closedAuctionAt = closedAuctionAt;
 	}
 
 	public Integer getId() {
@@ -65,68 +92,68 @@ public class Auction {
 		this.id = id;
 	}
 
-	public Integer getEnabled() {
-		return enabled;
+	public Integer getUserItemId() {
+		return userItemId;
 	}
 
-	public void setEnabled(Integer enabled) {
-		this.enabled = enabled;
+	public void setUserItemId(Integer userItemId) {
+		this.userItemId = userItemId;
 	}
 
-	public String getEmail() {
-		return email;
+	public Integer getWinnerUserId() {
+		return winnerUserId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setWinnerUserId(Integer winnerUserId) {
+		this.winnerUserId = winnerUserId;
 	}
 
-	public String getPassword() {
-		return password;
+	public Integer getFreeBidEveryTime() {
+		return freeBidEveryTime;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFreeBidEveryTime(Integer freeBidEveryTime) {
+		this.freeBidEveryTime = freeBidEveryTime;
 	}
 
-	public String getName() {
-		return name;
+	public Double getStart_price() {
+		return start_price;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setStart_price(Double start_price) {
+		this.start_price = start_price;
 	}
 
-	public String getSurname() {
-		return surname;
+	public Double getCurrentBid() {
+		return currentBid;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setCurrentBid(Double currentBid) {
+		this.currentBid = currentBid;
 	}
 
-	public String getQuestion() {
-		return question;
+	public Double getShipmentExtraPrice() {
+		return shipmentExtraPrice;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setShipmentExtraPrice(Double shipmentExtraPrice) {
+		this.shipmentExtraPrice = shipmentExtraPrice;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public Double getMinEarn() {
+		return minEarn;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setMinEarn(Double minEarn) {
+		this.minEarn = minEarn;
 	}
 
-	public String getOtpCode() {
-		return otpCode;
+	public Double getFixedBidEveryTime() {
+		return fixedBidEveryTime;
 	}
 
-	public void setOtpCode(String otpCode) {
-		this.otpCode = otpCode;
+	public void setFixedBidEveryTime(Double fixedBidEveryTime) {
+		this.fixedBidEveryTime = fixedBidEveryTime;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -145,29 +172,49 @@ public class Auction {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getNextOtpCodeAfterDate() {
-		return nextOtpCodeAfterDate;
+	public LocalDateTime getStartAuctionAt() {
+		return startAuctionAt;
 	}
 
-	public void setNextOtpCodeAfterDate(LocalDateTime nextOtpCodeAfterDate) {
-		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
-	}
-	
-	public LocalDateTime getOtpCodeExpiresAt() {
-		return otpCodeExpiresAt;
+	public void setStartAuctionAt(LocalDateTime startAuctionAt) {
+		this.startAuctionAt = startAuctionAt;
 	}
 
-	public void setOtpCodeExpiresAt(LocalDateTime otpCodeExpiresAt) {
-		this.otpCodeExpiresAt = otpCodeExpiresAt;
+	public LocalDateTime getEndAuctionAt() {
+		return endAuctionAt;
+	}
+
+	public void setEndAuctionAt(LocalDateTime endAuctionAt) {
+		this.endAuctionAt = endAuctionAt;
+	}
+
+	public LocalDateTime getClosedAuctionAt() {
+		return closedAuctionAt;
+	}
+
+	public void setClosedAuctionAt(LocalDateTime closedAuctionAt) {
+		this.closedAuctionAt = closedAuctionAt;
 	}
 
 	@Override
 	public String toString() {
-		return "Auction [id=" + id + ", enabled=" + enabled + ", email=" + email + ", password=" + password + ", name="
-				+ name + ", surname=" + surname + ", question=" + question + ", answer=" + answer + ", otpCode="
-				+ otpCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
-				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + "]";
+		return "Auction [id=" + id + ", userItemId=" + userItemId + ", winnerUserId=" + winnerUserId
+				+ ", freeBidEveryTime=" + freeBidEveryTime + ", start_price=" + start_price + ", currentBid="
+				+ currentBid + ", shipmentExtraPrice=" + shipmentExtraPrice + ", minEarn=" + minEarn
+				+ ", fixedBidEveryTime=" + fixedBidEveryTime + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
+				+ closedAuctionAt + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 	

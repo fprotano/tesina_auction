@@ -22,7 +22,7 @@ import it.exolab.tesina.auction.service.api.FakeService;
 @RequestMapping(value="api/fake")
 public class ApiFakeController extends BaseController {
 
-	private FakeService    fakeService;
+	private FakeService     fakeService;
 	 
 	
 	

@@ -52,6 +52,7 @@ public class UserItem {
 		this.soldAt = soldAt;
 	}
 	
+	
 	public Integer getId() {
 		return id;
 	}

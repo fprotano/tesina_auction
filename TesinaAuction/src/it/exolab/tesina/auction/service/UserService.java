@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import it.exolab.tesina.auction.api.model.dto.UserDTO;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.repository.UserRepo;
 
@@ -24,7 +25,7 @@ public class UserService {
 		return (List<User>) userRepo.findAll();
 	}
 
-	public void save(User model) {
+	public void save(UserDTO model) {
 		this.userRepo.save(model);
 	}
 

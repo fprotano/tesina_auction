@@ -53,6 +53,7 @@ public class UserItem {
 		this.soldAt = soldAt;
 	}
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -165,6 +166,7 @@ public class UserItem {
 		this.soldAt = soldAt;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "UserItem [id=" + id + ", soldToUserId=" + soldToUserId + ", userId=" + userId + ", title=" + title
@@ -172,7 +174,4 @@ public class UserItem {
 				+ picture2 + ", picture3=" + picture3 + ", picture4=" + picture4 + ", picture5=" + picture5
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", soldAt=" + soldAt + "]";
 	}
-	
-	
-
 }

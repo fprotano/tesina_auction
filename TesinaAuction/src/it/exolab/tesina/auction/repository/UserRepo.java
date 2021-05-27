@@ -6,6 +6,7 @@ import it.exolab.tesina.auction.model.User;
 
 
 public interface UserRepo extends  CrudRepository<User, Integer> {
-	User findByEmailAndPassword(String email, String password);
+	
+	public User findByEmailAndPassword(String email, String password);
 
 }

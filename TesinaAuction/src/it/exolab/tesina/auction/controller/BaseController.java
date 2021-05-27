@@ -2,6 +2,7 @@ package it.exolab.tesina.auction.controller;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
 
+
 public class BaseController {
 	public static final String ERR_001 = "001";//
 	public static final String ERR_002 = "002";

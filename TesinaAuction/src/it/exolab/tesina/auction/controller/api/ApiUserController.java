@@ -16,20 +16,20 @@ import it.exolab.tesina.auction.service.UserService;
 
 @CrossOrigin
 @Controller
-@RequestMapping(value="api/fake")
+@RequestMapping(value="api/user")
 public class ApiUserController extends BaseController {
-  private UserService userService;
+	
+	private UserService userService;
   
-
 	@Autowired
-	public void setFakeService(UserService userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	
 	@RequestMapping(value="insert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse insert(@RequestBody UserDTO model) {
+	public HttpResponse<UserDTO> insert(@RequestBody UserDTO model) {
 		userService.save(model);
-		return sendSuccess(model);
-		
+		return (HttpResponse<UserDTO>) sendSuccess(model);
 	}
 }

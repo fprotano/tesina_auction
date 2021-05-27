@@ -37,7 +37,7 @@ public class Auction {
 
 	
 	public Auction() {
-		super();
+
 	}
 	
 	public Auction(Integer enabled, String email, String password, String name, String surname, String question,
@@ -168,9 +168,6 @@ public class Auction {
 				+ otpCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
 				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + "]";
 	}
-	
-	
-	
-	
+
 }
 	

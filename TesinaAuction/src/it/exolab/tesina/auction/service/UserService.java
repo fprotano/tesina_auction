@@ -31,5 +31,8 @@ public class UserService {
 	public void delete(int id) {
 		userRepo.delete(id);
 	}
+	public User findByEmailAndPassword(String email,String password) {
+		return userRepo.findByEmailAndPassword(email, password);
+	}
 
 }

@@ -3,18 +3,33 @@ package it.exolab.tesina.auction.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table
 public class User {
-	
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="create_at")
 	private LocalDateTime createAt;
-	private LocalDateTime updateedAt;
+	@Column(name="update_at")
+	private LocalDateTime updatedAt;
 	private Integer enabled;
 	private String email;
 	private String password;
 	private String name;
 	private String surname;
+	@Column(name="next_otp_code_after_date")
 	private LocalDateTime nextOtpCodeAfterDate;
+	@Column(name="otp_code")
 	private String otpCode;
+	@Column(name="otp_code_expires_at")
 	private LocalDateTime otpCodeExpiresAt;
 	private String question;
 	public Integer getId() {
@@ -29,11 +44,11 @@ public class User {
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
-	public LocalDateTime getUpdateedAt() {
-		return updateedAt;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
-	public void setUpdateedAt(LocalDateTime updateedAt) {
-		this.updateedAt = updateedAt;
+	public void setUpdateedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	public Integer getEnabled() {
 		return enabled;
@@ -89,13 +104,13 @@ public class User {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-	public User(Integer id, LocalDateTime createAt, LocalDateTime updateedAt, Integer enabled, String email,
+	public User(Integer id, LocalDateTime createAt, LocalDateTime updatedAt, Integer enabled, String email,
 			String password, String name, String surname, LocalDateTime nextOtpCodeAfterDate, String otpCode,
 			LocalDateTime otpCodeExpiresAt, String question) {
 		super();
 		this.id = id;
 		this.createAt = createAt;
-		this.updateedAt = updateedAt;
+		this.updatedAt = updatedAt;
 		this.enabled = enabled;
 		this.email = email;
 		this.password = password;
@@ -112,7 +127,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", createAt=" + createAt + ", updateedAt=" + updateedAt + ", enabled=" + enabled
+		return "User [id=" + id + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", enabled=" + enabled
 				+ ", email=" + email + ", password=" + password + ", name=" + name + ", surname=" + surname
 				+ ", nextOtpCodeAfterDate=" + nextOtpCodeAfterDate + ", otpCode=" + otpCode + ", otpCodeExpiresAt="
 				+ otpCodeExpiresAt + ", question=" + question + "]";

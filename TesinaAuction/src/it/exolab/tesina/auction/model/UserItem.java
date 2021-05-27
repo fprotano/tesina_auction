@@ -29,7 +29,7 @@ public class UserItem {
 	@Column(name="sold_at")
 	public LocalDateTime soldAt;
 
-
+	
 	public UserItem() {
 	
 	}

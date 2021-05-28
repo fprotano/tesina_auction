@@ -65,7 +65,7 @@ public class Auction {
 			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
 			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime startAuctionAt, LocalDateTime endAuctionAt,
 			LocalDateTime closedAuctionAt) {
-		super();
+
 		this.userItemId = userItemId;
 		this.winnerUserId = winnerUserId;
 		this.freeBidEveryTime = freeBidEveryTime;

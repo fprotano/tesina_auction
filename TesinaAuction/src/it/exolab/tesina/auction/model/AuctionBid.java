@@ -22,8 +22,8 @@ public class AuctionBid {
 	private Integer auctionId;
 	@Column(name="user_id")
 	private Integer userId;
-	private Integer bid;
-	public AuctionBid( LocalDateTime createAt, Integer auctionId, Integer userId, Integer bid) {
+	private Double bid;
+	public AuctionBid( LocalDateTime createAt, Integer auctionId, Integer userId, Double bid) {
 		super();
 		
 		this.createAt = createAt;
@@ -59,10 +59,10 @@ public class AuctionBid {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public Integer getBid() {
+	public Double getBid() {
 		return bid;
 	}
-	public void setBid(Integer bid) {
+	public void setBid(Double bid) {
 		this.bid = bid;
 	}
 	@Override

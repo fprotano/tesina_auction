@@ -25,10 +25,10 @@ public class Staff {
 	@Column(name="otp_code")
 	private String otpCode;
 	
-	@Column(name="create_at")
+	@Column(name="created_at")
 	private LocalDateTime createAt;
 	
-	@Column(name="update_at")
+	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
 	@Column(name="next_otp_code_after_date")

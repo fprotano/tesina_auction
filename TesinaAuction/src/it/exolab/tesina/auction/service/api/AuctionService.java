@@ -34,4 +34,8 @@ public class AuctionService {
 	public void delete(int id) {
 		auctionRepo.delete(id);
 	}
+	
+	public List<Auction> findAuctionsByUser(Integer idUser) {
+		return auctionRepo.findAuctionsbyUser(idUser);
+	}
 }

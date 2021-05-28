@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.controller.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +22,7 @@ public class ApiUserController extends BaseController {
 	
 	private UserService userService;
   
-
+	@Autowired(required = true)
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -39,8 +40,9 @@ public class ApiUserController extends BaseController {
 	public HttpResponse<User> doLogin(@RequestBody User model) {
 		System.out.println(model);
 		System.out.println(model.getEmail() + "   " + model.getPassword());
-		model = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
-		System.out.println(model);
-		return (HttpResponse<User>) sendSuccess(model);
+		System.out.println("dfhjvbldkjvlzd" + userService.findByEmailAndPassword(model.getEmail(), model.getPassword()));
+		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
+		System.out.println(modelNew);
+		return (HttpResponse<User>) sendSuccess(modelNew);
 	}
 }

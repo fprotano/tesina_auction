@@ -27,9 +27,9 @@ public class ApiUserController extends BaseController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(value="insert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="register", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<UserDTO> doInsert(@RequestBody UserDTO model) {
+	public HttpResponse<UserDTO> doRegister(@RequestBody UserDTO model) {
 		System.out.println(model);
 		userService.save(model);
 		return (HttpResponse<UserDTO>) sendSuccess(model);  //ritorno in http ogg

@@ -39,7 +39,7 @@ public class Auction {
 	@Column(name="min_earn")
 	public Double minEarn;
 	
-	@Column(name="fixed_bid_every_time")
+	@Column(name="fixed_bid_every_time", insertable=false, updatable=false)
 	public Double fixedBidEveryTime;
 	
 	@Column(name="created_at")

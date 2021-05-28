@@ -39,7 +39,7 @@ public class Auction {
 	@Column(name="min_earn")
 	public Double minEarn;
 	
-	@Column(name="fixed_bid_every_time")
+	@Column(name="fixed_bid_every_time", insertable=false, updatable=false)
 	public Double fixedBidEveryTime;
 	
 	@Column(name="created_at")
@@ -58,14 +58,14 @@ public class Auction {
 	public LocalDateTime closedAuctionAt;
 	
 	public Auction() {
-		super();
+	
 	}
 
 	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double start_price,
 			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
 			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime startAuctionAt, LocalDateTime endAuctionAt,
 			LocalDateTime closedAuctionAt) {
-		super();
+
 		this.userItemId = userItemId;
 		this.winnerUserId = winnerUserId;
 		this.freeBidEveryTime = freeBidEveryTime;

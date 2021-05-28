@@ -63,7 +63,17 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         <property name="suffix" value=".jsp" />
     </bean>	
    <bean  class="it.exolab.tesina.auction.service.FakeService"/>
-   <bean id="apiFakeService" class="it.exolab.tesina.auction.service.api.FakeService"/>
+   <bean id="AuctionOrderService" class="it.exolab.tesina.auction.service.api.AuctionOrderService"/>
+   <bean id="AuctionOrderStatusService" class="it.exolab.tesina.auction.service.api.AuctionOrderStatusService"/>
+   <bean id="AuctionOrderTransactionLogService" class="it.exolab.tesina.auction.service.api.AuctionOrderTransactionLogService"/>
+   <bean id="HelpCenterService" class="it.exolab.tesina.auction.service.api.HelpCenterService"/>
+   <bean id="HelpCenterThreadService" class="it.exolab.tesina.auction.service.api.HelpCenterThreadService"/>
+   <bean id="InvoiceService" class="it.exolab.tesina.auction.service.api.InvoiceService"/>
+   <bean id="StaffService" class="it.exolab.tesina.auction.service.api.StaffService"/>
+   <bean id="UserItemService" class="it.exolab.tesina.auction.service.api.UserItemService"/>
+   <bean id="UserService" class="it.exolab.tesina.auction.service.api.UserService"/>
+   <bean id="AuctionService" class="it.exolab.tesina.auction.service.api.AuctionService"/>
+  
     
   <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">

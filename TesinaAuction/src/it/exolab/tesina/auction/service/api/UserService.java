@@ -32,8 +32,7 @@ public class UserService {
 		userRepo.delete(id);
 	}
 	public User findByEmailAndPassword(String email, String password) {
-		System.out.println(email + "zdckjhvzldkjvbzklasdbvlzkjdv" + password);
-		System.out.println(userRepo.findByEmailAndPassword(email, password));
+
 		return userRepo.findByEmailAndPassword(email, password);
 	}
 	

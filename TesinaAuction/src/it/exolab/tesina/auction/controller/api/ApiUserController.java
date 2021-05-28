@@ -38,11 +38,9 @@ public class ApiUserController extends BaseController {
 	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<User> doLogin(@RequestBody User model) {
-		System.out.println(model);
-		System.out.println(model.getEmail() + "   " + model.getPassword());
-		System.out.println("dfhjvbldkjvlzd" + userService.findByEmailAndPassword(model.getEmail(), model.getPassword()));
+	
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
-		System.out.println(modelNew);
+
 		return (HttpResponse<User>) sendSuccess(modelNew);
 	}
 }

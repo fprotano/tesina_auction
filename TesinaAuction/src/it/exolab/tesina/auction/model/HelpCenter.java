@@ -2,13 +2,23 @@ package it.exolab.tesina.auction.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+@Entity
+@Table
 public class HelpCenter {
 	private Integer id;
+	@Column(name="create_at")
 	private LocalDateTime createdAt;
+	@Column(name="update_at")
 	private LocalDateTime updatedAt;
+	@Column(name="closed_at")
 	private LocalDateTime closedAt;
+	@Column(name="user_id")
 	private Integer userId;
 	private String question;
+	@Column(name="assigned_to_id")
 	private Integer assignedToId;
 
 	public Integer getId() {

@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.InvoiceDTO;
-
+import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.repository.InvoiceRepo;
 
 
@@ -18,15 +17,15 @@ public class InvoiceService {
 		this.invoiceRepo = invoiceRepo;
 	}
 	
-	public InvoiceDTO find(int id) {
+	public Invoice find(int id) {
 		return invoiceRepo.findOne(id);
 	}
 
-	public List<InvoiceDTO> findAll() {
-		return (List<InvoiceDTO>) invoiceRepo.findAll();
+	public List<Invoice> findAll() {
+		return (List<Invoice>) invoiceRepo.findAll();
 	}
 
-	public void save(InvoiceDTO model) {
+	public void save(Invoice model) {
 		this.invoiceRepo.save(model);
 	}
 

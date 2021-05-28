@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.HelpCenterDTO;
+import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.repository.HelpCenterRepo;
 
 public class HelpCenterService {
@@ -16,15 +16,15 @@ public class HelpCenterService {
 
 	}
 
-	public HelpCenterDTO find(int id) {
+	public HelpCenter find(int id) {
 		return helpCenterRepo.findOne(id);
 	}
 
-	public List<HelpCenterDTO> findAll() {
-		return (List<HelpCenterDTO>) helpCenterRepo.findAll();
+	public List<HelpCenter> findAll() {
+		return (List<HelpCenter>) helpCenterRepo.findAll();
 	}
 
-	public void save(HelpCenterDTO model) {
+	public void save(HelpCenter model) {
 		this.helpCenterRepo.save(model);
 	}
 

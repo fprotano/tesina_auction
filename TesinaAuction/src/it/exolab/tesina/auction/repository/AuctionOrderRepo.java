@@ -2,8 +2,8 @@ package it.exolab.tesina.auction.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.exolab.tesina.auction.api.model.dto.AuctionOrderDTO;
+import it.exolab.tesina.auction.model.AuctionOrder;
 
-public interface AuctionOrderRepo extends CrudRepository<AuctionOrderDTO, Integer>{
+public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
 
 }

@@ -94,7 +94,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
 <!--         spring based scanning for entity classes -->
-        <property name="packagesToScan" value="it.exolab.tesina.auction.model.dto"/>
+        <property name="packagesToScan" value="it.exolab.tesina.auction.model"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>

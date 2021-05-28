@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.StaffDTO;
-
+import it.exolab.tesina.auction.model.Staff;
 import it.exolab.tesina.auction.repository.StaffRepo;
 
 
@@ -18,15 +17,15 @@ public class StaffService {
 		this.staffRepo = staffRepo;
 	}
 	
-	public StaffDTO find(int id) {
+	public Staff find(int id) {
 		return staffRepo.findOne(id);
 	}
 
-	public List<StaffDTO> findAll() {
-		return (List<StaffDTO>) staffRepo.findAll();
+	public List<Staff> findAll() {
+		return (List<Staff>) staffRepo.findAll();
 	}
 
-	public void save(StaffDTO model) {
+	public void save(Staff model) {
 		this.staffRepo.save(model);
 	}
 

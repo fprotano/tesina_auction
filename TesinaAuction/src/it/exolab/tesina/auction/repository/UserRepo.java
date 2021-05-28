@@ -3,11 +3,12 @@ package it.exolab.tesina.auction.repository;
 import org.springframework.data.repository.CrudRepository;
 
 import it.exolab.tesina.auction.api.model.dto.UserDTO;
+import it.exolab.tesina.auction.model.User;
 
 
 
-public interface UserRepo extends CrudRepository<UserDTO, Integer> {
+public interface UserRepo extends CrudRepository<User, Integer> {
 	
-	public UserDTO findByEmailAndPassword(String email, String password);
+	public User findByEmailAndPassword(String email, String password);
 
 }

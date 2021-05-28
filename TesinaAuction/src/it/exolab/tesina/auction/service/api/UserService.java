@@ -2,10 +2,8 @@ package it.exolab.tesina.auction.service.api;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import it.exolab.tesina.auction.api.model.dto.UserDTO;
-
+import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.repository.UserRepo;
 
 public class UserService {
@@ -17,22 +15,22 @@ public class UserService {
 		this.userRepo = userRepo;
 	}
 
-	public UserDTO find(int id) {
+	public User find(int id) {
 		return userRepo.findOne(id);
 	}
 
-	public List<UserDTO> findAll() {
-		return (List<UserDTO>) userRepo.findAll();
+	public List<User> findAll() {
+		return (List<User>) userRepo.findAll();
 	}
 
-	public void save(UserDTO model) {
+	public void save(User model) {
 		this.userRepo.save(model);
 	}
 
 	public void delete(int id) {
 		userRepo.delete(id);
 	}
-	public UserDTO findByEmailAndPassword(String email,String password) {
+	public User findByEmailAndPassword(String email,String password) {
 		return userRepo.findByEmailAndPassword(email, password);
 	}
 

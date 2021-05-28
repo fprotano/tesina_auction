@@ -2,8 +2,8 @@ package it.exolab.tesina.auction.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.exolab.tesina.auction.api.model.dto.HelpCenterThreadDTO;
+import it.exolab.tesina.auction.model.HelpCenterThread;
 
-public interface HelpCenterThreadRepo extends CrudRepository<HelpCenterThreadDTO,Integer>{
+public interface HelpCenterThreadRepo extends CrudRepository<HelpCenterThread,Integer>{
 
 }

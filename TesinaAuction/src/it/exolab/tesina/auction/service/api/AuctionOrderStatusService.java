@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.AuctionOrderStatusDTO;
+import it.exolab.tesina.auction.model.AuctionOrderStatus;
 import it.exolab.tesina.auction.repository.AuctionOrderStatusRepo;
 
 public class AuctionOrderStatusService {
@@ -16,15 +16,15 @@ public class AuctionOrderStatusService {
 		this.auctionOrderStatusRepo = auctionOrderStatusRepo;
 	}
 
-	public AuctionOrderStatusDTO find(int id) {
+	public AuctionOrderStatus find(int id) {
 		return auctionOrderStatusRepo.findOne(id);
 	}
 
-	public List<AuctionOrderStatusDTO> findAll() {
-		return (List<AuctionOrderStatusDTO>) auctionOrderStatusRepo.findAll();
+	public List<AuctionOrderStatus> findAll() {
+		return (List<AuctionOrderStatus>) auctionOrderStatusRepo.findAll();
 	}
 
-	public void save(AuctionOrderStatusDTO model) {
+	public void save(AuctionOrderStatus model) {
 		this.auctionOrderStatusRepo.save(model);
 	}
 

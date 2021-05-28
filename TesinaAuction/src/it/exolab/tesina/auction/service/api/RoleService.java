@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.RoleDTO;
+import it.exolab.tesina.auction.model.Role;
 import it.exolab.tesina.auction.repository.RoleRepo;
 
 public class RoleService {
@@ -15,15 +15,15 @@ public class RoleService {
 		this.roleRepo = roleRepo;
 	}
 
-	public RoleDTO find(int id) {
+	public Role find(int id) {
 		return roleRepo.findOne(id);
 	}
 
-	public List<RoleDTO> findAll() {
-		return (List<RoleDTO>) roleRepo.findAll();
+	public List<Role> findAll() {
+		return (List<Role>) roleRepo.findAll();
 	}
 
-	public void save(RoleDTO model) {
+	public void save(Role model) {
 		this.roleRepo.save(model);
 	}
 

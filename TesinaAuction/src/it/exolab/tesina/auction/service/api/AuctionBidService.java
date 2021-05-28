@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.AuctionBidDTO;
+import it.exolab.tesina.auction.model.AuctionBid;
 import it.exolab.tesina.auction.repository.AuctionBidRepo;
 
-public class AuctioBidService {
+public class AuctionBidService {
 private AuctionBidRepo auctionBidRepo;
 	
 	@Autowired(required = true)
@@ -15,15 +15,15 @@ private AuctionBidRepo auctionBidRepo;
 		this.auctionBidRepo =auctionBidRepo;
 	}
 	
-	public AuctionBidDTO find(int id) {
+	public AuctionBid find(int id) {
 		return auctionBidRepo.findOne(id);
 	}
 
-	public List<AuctionBidDTO> findAll() {
-		return (List<AuctionBidDTO>) auctionBidRepo.findAll();
+	public List<AuctionBid> findAll() {
+		return (List<AuctionBid>) auctionBidRepo.findAll();
 	}
 
-	public void save(AuctionBidDTO model) {
+	public void save(AuctionBid model) {
 		this.auctionBidRepo.save(model);
 	}
 

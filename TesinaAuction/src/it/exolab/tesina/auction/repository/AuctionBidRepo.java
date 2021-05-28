@@ -2,10 +2,10 @@ package it.exolab.tesina.auction.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.exolab.tesina.auction.api.model.dto.AuctionBidDTO;
+import it.exolab.tesina.auction.model.AuctionBid;
 
 
-public interface AuctionBidRepo extends   CrudRepository<AuctionBidDTO, Integer>{
+public interface AuctionBidRepo extends   CrudRepository<AuctionBid, Integer>{
 
 }
 

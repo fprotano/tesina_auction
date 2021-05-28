@@ -33,5 +33,4 @@ public class AuctionOrderService {
 	public void delete(int id) {
 		auctionOrderRepo.delete(id);
 	}
-
 }

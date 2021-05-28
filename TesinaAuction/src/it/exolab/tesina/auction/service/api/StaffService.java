@@ -33,5 +33,4 @@ public class StaffService {
 	public void delete(int id) {
 		staffRepo.delete(id);
 	}
-	
 }

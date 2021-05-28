@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.UserDTO;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.repository.UserRepo;
 

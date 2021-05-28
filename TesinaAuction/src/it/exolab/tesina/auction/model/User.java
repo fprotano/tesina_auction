@@ -1,13 +1,18 @@
 package it.exolab.tesina.auction.model;
 
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
+
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table
@@ -25,34 +30,34 @@ public class User {
 	private String otpCode;
 
 	@Column(name = "created_at")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 
 	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 
 	@Column(name = "next_otp_code_after_date")
-	private LocalDateTime nextOtpCodeAfterDate;
+	private Timestamp nextOtpCodeAfterDate;
 
 	@Column(name = "otp_code_expires_at")
-	private LocalDateTime otpCodeExpiresAt;
+	private Timestamp otpCodeExpiresAt;
 
-	public User(Integer id, LocalDateTime createAt, LocalDateTime updatedAt, Integer enabled, String email,
-			String password, String name, String surname, LocalDateTime nextOtpCodeAfterDate, String otpCode,
-			LocalDateTime otpCodeExpiresAt, String question, String answer) {
-
-		this.id = id;
-		this.createAt = createAt;
-		this.updatedAt = updatedAt;
+	
+	public User(Integer enabled, String email, String password, String name, String surname, String question,
+			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
+			Timestamp otpCodeExpiresAt) {
+	
 		this.enabled = enabled;
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.surname = surname;
-		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
-		this.otpCode = otpCode;
-		this.otpCodeExpiresAt = otpCodeExpiresAt;
 		this.question = question;
 		this.answer = answer;
+		this.otpCode = otpCode;
+		this.createAt = createAt;
+		this.updatedAt = updatedAt;
+		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
+		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 
 	public User() {
@@ -131,36 +136,38 @@ public class User {
 		this.otpCode = otpCode;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getNextOtpCodeAfterDate() {
+	public Timestamp getNextOtpCodeAfterDate() {
 		return nextOtpCodeAfterDate;
 	}
 
-	public void setNextOtpCodeAfterDate(LocalDateTime nextOtpCodeAfterDate) {
+	public void setNextOtpCodeAfterDate(Timestamp nextOtpCodeAfterDate) {
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 	}
 
-	public LocalDateTime getOtpCodeExpiresAt() {
+	public Timestamp getOtpCodeExpiresAt() {
 		return otpCodeExpiresAt;
 	}
 
-	public void setOtpCodeExpiresAt(LocalDateTime otpCodeExpiresAt) {
+	public void setOtpCodeExpiresAt(Timestamp otpCodeExpiresAt) {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
+
+	
 
 }

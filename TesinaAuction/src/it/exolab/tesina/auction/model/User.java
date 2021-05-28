@@ -22,7 +22,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private Integer enabled;
+	private Integer enabled = 0;
 
 	private String email, password, name, surname, question, answer;
 

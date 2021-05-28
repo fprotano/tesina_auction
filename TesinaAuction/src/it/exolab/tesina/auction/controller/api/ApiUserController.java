@@ -1,6 +1,5 @@
 package it.exolab.tesina.auction.controller.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
-import it.exolab.tesina.auction.api.model.dto.UserDTO;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.UserService;

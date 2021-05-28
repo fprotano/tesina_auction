@@ -24,7 +24,7 @@ public class AuctionBid {
 	private Integer userId;
 	private Double bid;
 	public AuctionBid( LocalDateTime createAt, Integer auctionId, Integer userId, Double bid) {
-		super();
+	
 		
 		this.createAt = createAt;
 		this.auctionId = auctionId;

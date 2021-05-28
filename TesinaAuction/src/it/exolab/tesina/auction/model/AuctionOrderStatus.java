@@ -1,7 +1,16 @@
 package it.exolab.tesina.auction.model;
 
-public class AuctionOrderStatus {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class AuctionOrderStatus {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String title;
 

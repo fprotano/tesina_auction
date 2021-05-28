@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -27,16 +28,16 @@ public class AuctionOrder {
 	public Integer auctionOrderStatusId;
 	
 	@Column(name="create_at")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 	
 	@Column(name="update_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 	
 	@Column(name="payment_verify_expires_at")
-	private LocalDateTime paymentVerifyExpiresAt;
+	private Timestamp paymentVerifyExpiresAt;
 	
 	@Column(name="paid_at")
-	private LocalDateTime paidAt;
+	private Timestamp paidAt;
 	
 	private Double amount;
 	
@@ -44,8 +45,8 @@ public class AuctionOrder {
 	private String transactionId;
 
 	
-	public AuctionOrder(Integer orderNo, Integer auctionId, Integer auctionOrderStatusId, LocalDateTime createAt,
-			LocalDateTime updatedAt, LocalDateTime paymentVerifyExpiresAt, LocalDateTime paidAt, Double amount,
+	public AuctionOrder(Integer orderNo, Integer auctionId, Integer auctionOrderStatusId, Timestamp createAt,
+			Timestamp updatedAt, Timestamp paymentVerifyExpiresAt, Timestamp paidAt, Double amount,
 			String transactionId) {
 		this.orderNo = orderNo;
 		this.auctionId = auctionId;
@@ -94,35 +95,35 @@ public class AuctionOrder {
 		this.auctionOrderStatusId = auctionOrderStatusId;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getPaymentVerifyExpiresAt() {
+	public Timestamp getPaymentVerifyExpiresAt() {
 		return paymentVerifyExpiresAt;
 	}
 
-	public void setPaymentVerifyExpiresAt(LocalDateTime paymentVerifyExpiresAt) {
+	public void setPaymentVerifyExpiresAt(Timestamp paymentVerifyExpiresAt) {
 		this.paymentVerifyExpiresAt = paymentVerifyExpiresAt;
 	}
 
-	public LocalDateTime getPaidAt() {
+	public Timestamp getPaidAt() {
 		return paidAt;
 	}
 
-	public void setPaidAt(LocalDateTime paidAt) {
+	public void setPaidAt(Timestamp paidAt) {
 		this.paidAt = paidAt;
 	}
 

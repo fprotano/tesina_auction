@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,13 +27,13 @@ public class UserItem {
 	public String title, description, notes, picture1, picture2, picture3, picture4, picture5;
 	
 	@Column(name="created_at")
-	public LocalDateTime createdAt;
+	public Timestamp createdAt;
 	
 	@Column(name="updated_at")
-	public LocalDateTime updatedAt;
+	public Timestamp updatedAt;
 	
 	@Column(name="sold_at")
-	public LocalDateTime soldAt;
+	public Timestamp soldAt;
 
 	public UserItem() {
 	
@@ -40,7 +41,7 @@ public class UserItem {
 
 	public UserItem(Integer soldToUserId, Integer userId, String title, String description, String notes,
 			String picture1, String picture2, String picture3, String picture4, String picture5,
-			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime soldAt) {
+			Timestamp createdAt, Timestamp updatedAt, Timestamp soldAt) {
 
 		this.soldToUserId = soldToUserId;
 		this.userId = userId;
@@ -146,27 +147,27 @@ public class UserItem {
 		this.picture5 = picture5;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getSoldAt() {
+	public Timestamp getSoldAt() {
 		return soldAt;
 	}
 
-	public void setSoldAt(LocalDateTime soldAt) {
+	public void setSoldAt(Timestamp soldAt) {
 		this.soldAt = soldAt;
 	}
 

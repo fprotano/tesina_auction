@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,16 +27,16 @@ public class Staff {
 	private String otpCode;
 	
 	@Column(name="created_at")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 	
 	@Column(name="updated_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 	
 	@Column(name="next_otp_code_after_date")
-	private LocalDateTime nextOtpCodeAfterDate;
+	private Timestamp nextOtpCodeAfterDate;
 	
 	@Column(name="otp_code_expires_at")
-	private LocalDateTime otpCodeExpiresAt;
+	private Timestamp otpCodeExpiresAt;
 
 	
 	public Staff() {
@@ -43,8 +44,8 @@ public class Staff {
 	}
 
 	public Staff(Integer id, Integer roleId, String email, String password, String name, String surname, String otpCode,
-			LocalDateTime createAt, LocalDateTime updatedAt, LocalDateTime nextOtpCodeAfterDate,
-			LocalDateTime otpCodeExpiresAt) {
+			Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
+			Timestamp otpCodeExpiresAt) {
 		this.id = id;
 		this.roleId = roleId;
 		this.email = email;
@@ -114,35 +115,35 @@ public class Staff {
 		this.otpCode = otpCode;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getNextOtpCodeAfterDate() {
+	public Timestamp getNextOtpCodeAfterDate() {
 		return nextOtpCodeAfterDate;
 	}
 
-	public void setNextOtpCodeAfterDate(LocalDateTime nextOtpCodeAfterDate) {
+	public void setNextOtpCodeAfterDate(Timestamp nextOtpCodeAfterDate) {
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 	}
 
-	public LocalDateTime getOtpCodeExpiresAt() {
+	public Timestamp getOtpCodeExpiresAt() {
 		return otpCodeExpiresAt;
 	}
 
-	public void setOtpCodeExpiresAt(LocalDateTime otpCodeExpiresAt) {
+	public void setOtpCodeExpiresAt(Timestamp otpCodeExpiresAt) {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 

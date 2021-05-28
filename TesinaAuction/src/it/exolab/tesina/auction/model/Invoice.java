@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ public class Invoice {
 	public Integer auctionOrderId;
 	
 	@Column(name="create_at")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 	
 	public Double amount, iva, total;
 
@@ -36,7 +37,7 @@ public class Invoice {
 
 	}
 
-	public Invoice(Integer id, Integer invoiceNo, Integer userId, Integer auctionOrderId, LocalDateTime createAt,
+	public Invoice(Integer id, Integer invoiceNo, Integer userId, Integer auctionOrderId, Timestamp createAt,
 			Double amount, Double iva, Double total) {
 		super();
 		this.id = id;
@@ -81,11 +82,11 @@ public class Invoice {
 		this.auctionOrderId = auctionOrderId;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 

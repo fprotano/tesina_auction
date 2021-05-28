@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,29 +16,31 @@ public class AuctionOrderTransactionLog {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="create_at")
-	private LocalDateTime createdAt;
+	private Timestamp createdAt;
 	@Column(name="update_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 	@Column(name="auction_order_id")
 	private Integer auctionOrderId;
 	private String paramName;
 	private String paramValue;
+	
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDateTime getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public Integer getAuctionOrderId() {
@@ -58,7 +61,7 @@ public class AuctionOrderTransactionLog {
 	public void setParamValue(String paramValue) {
 		this.paramValue = paramValue;
 	}
-	public AuctionOrderTransactionLog(LocalDateTime createdAt, LocalDateTime updatedAt, Integer auctionOrderId,
+	public AuctionOrderTransactionLog(Timestamp createdAt, Timestamp updatedAt, Integer auctionOrderId,
 			String paramName, String paramValue) {
 		super();
 		this.createdAt = createdAt;

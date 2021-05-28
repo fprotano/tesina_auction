@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -17,15 +18,16 @@ public class AuctionBid {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="create_id")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 	@Column(name="auction_id")
 	private Integer auctionId;
 	@Column(name="user_id")
 	private Integer userId;
 	private Double bid;
-	public AuctionBid( LocalDateTime createAt, Integer auctionId, Integer userId, Double bid) {
 	
-		
+	
+	public AuctionBid( Timestamp createAt, Integer auctionId, Integer userId, Double bid) {
+	
 		this.createAt = createAt;
 		this.auctionId = auctionId;
 		this.userId = userId;
@@ -41,10 +43,11 @@ public class AuctionBid {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDateTime getCreateAt() {
+	
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 	public Integer getAuctionId() {

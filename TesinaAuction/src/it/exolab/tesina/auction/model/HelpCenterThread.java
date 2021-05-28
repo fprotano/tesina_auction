@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,13 +16,13 @@ public class HelpCenterThread {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="create_at")
-	private LocalDateTime createAt;
+	private Timestamp createAt;
 	@Column(name="help_center_id")
 	private Integer helpCenterId;
 	private String question;
 	private String answer;
 
-	public HelpCenterThread(LocalDateTime createAt, Integer helpCenterId, String question, String answer) {
+	public HelpCenterThread(Timestamp createAt, Integer helpCenterId, String question, String answer) {
 		super();
 		this.createAt = createAt;
 		this.helpCenterId = helpCenterId;
@@ -42,11 +43,11 @@ public class HelpCenterThread {
 		this.id = id;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public Timestamp getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(LocalDateTime createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 

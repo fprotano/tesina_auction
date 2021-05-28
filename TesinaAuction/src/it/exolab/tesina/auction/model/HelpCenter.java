@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -18,11 +19,11 @@ public class HelpCenter {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="create_at")
-	private LocalDateTime createdAt;
+	private Timestamp createdAt;
 	@Column(name="update_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 	@Column(name="closed_at")
-	private LocalDateTime closedAt;
+	private Timestamp closedAt;
 	@Column(name="user_id")
 	private Integer userId;
 	private String question;
@@ -37,27 +38,27 @@ public class HelpCenter {
 		this.id = id;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getClosedAt() {
+	public Timestamp getClosedAt() {
 		return closedAt;
 	}
 
-	public void setClosedAt(LocalDateTime closedAt) {
+	public void setClosedAt(Timestamp closedAt) {
 		this.closedAt = closedAt;
 	}
 
@@ -91,7 +92,7 @@ public class HelpCenter {
 				+ closedAt + ", userId=" + userId + ", question=" + question + ", assignedToId=" + assignedToId + "]";
 	}
 
-	public HelpCenter(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime closedAt, Integer userId,
+	public HelpCenter(Timestamp createdAt, Timestamp updatedAt, Timestamp closedAt, Integer userId,
 			String question, Integer assignedToId) {
 		super();
 		this.createdAt = createdAt;

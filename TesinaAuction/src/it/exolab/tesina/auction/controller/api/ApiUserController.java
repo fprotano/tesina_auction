@@ -38,6 +38,7 @@ public class ApiUserController extends BaseController {
 	@ResponseBody
 	public HttpResponse<User> doLogin(@RequestBody User model) {
 		System.out.println(model);
+		System.out.println(model.getEmail() + "   " + model.getPassword());
 		model = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
 		System.out.println(model);
 		return (HttpResponse<User>) sendSuccess(model);

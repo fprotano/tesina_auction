@@ -58,7 +58,7 @@ public class Auction {
 	public LocalDateTime closedAuctionAt;
 	
 	public Auction() {
-		super();
+	
 	}
 
 	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double start_price,

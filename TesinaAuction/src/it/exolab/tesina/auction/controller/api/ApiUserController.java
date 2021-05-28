@@ -32,7 +32,7 @@ public class ApiUserController extends BaseController {
 	public HttpResponse<UserDTO> doInsert(@RequestBody UserDTO model) {
 		System.out.println(model);
 		userService.save(model);
-		return (HttpResponse<UserDTO>) sendSuccess(model);
+		return (HttpResponse<UserDTO>) sendSuccess(model);  //ritorno in http ogg
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)

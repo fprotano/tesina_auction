@@ -22,7 +22,7 @@ public class ApiUserController extends BaseController {
 	
 	private UserService userService;
   
-	@Autowired
+	// @Autowired(required = true)
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}

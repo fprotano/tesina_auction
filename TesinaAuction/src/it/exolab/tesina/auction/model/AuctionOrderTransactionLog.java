@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table
+@Table(name="auction_order_transaction_log")
 public class AuctionOrderTransactionLog {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

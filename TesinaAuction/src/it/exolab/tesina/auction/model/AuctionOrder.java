@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="auction_order")
 public class AuctionOrder {
 	
 	@Id

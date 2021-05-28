@@ -12,7 +12,7 @@ public class UserService {
 	
 	private UserRepo userRepo;
 
-	@Autowired(required = true)
+	//@Autowired(required = true)
 	public void setUserRepo(UserRepo userRepo) {
 		this.userRepo = userRepo;
 	}

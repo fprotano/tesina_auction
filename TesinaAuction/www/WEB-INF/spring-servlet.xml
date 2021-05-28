@@ -80,7 +80,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 
 
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://localhost:3306/tesina_auction?serverTimezone=UTC" />
+    <property name="url" value="jdbc:mysql://localhost:3306/tesina_auction?serverTimezone=UTC&amp;useSSL=false" />
     <property name="username" value="root" />
     <property name="password" value="Alessio01!" />
   </bean>
@@ -94,7 +94,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
 <!--         spring based scanning for entity classes -->
-        <property name="packagesToScan" value="it.exolab.tesina.auction.model"/>
+        <property name="packagesToScan" value="it.exolab.tesina.auction.model.dto"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table
+@Table(name="help_center_thread")
 public class HelpCenterThread {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

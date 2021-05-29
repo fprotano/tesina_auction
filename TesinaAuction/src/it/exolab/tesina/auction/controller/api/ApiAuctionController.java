@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
-import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.AuctionService;
 
 @CrossOrigin
@@ -22,8 +21,12 @@ import it.exolab.tesina.auction.service.api.AuctionService;
 @RequestMapping(value="api/auction")
 public class ApiAuctionController extends BaseController {
 	
-	@Autowired(required = true)
 	private AuctionService auctionService;
+	
+	@Autowired(required = true)
+	public void setAuctionService(AuctionService auctionService) {
+		this.auctionService = auctionService;
+	}
 	
 	@RequestMapping(value="auctionInsert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

@@ -5,10 +5,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table
@@ -16,46 +22,51 @@ public class Auction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer id;
+	private Integer id;
 	
 	@Column(name="user_item_id")
-	public Integer userItemId;
+	private Integer userItemId;
 	
 	@Column(name="winner_user_id")
-	public Integer winnerUserId;
+	private Integer winnerUserId;
 	
 	@Column(name="fixed_bid_every_time")
-	public Integer freeBidEveryTime;
+	private Integer freeBidEveryTime;
 	
 	@Column(name="start_price")
-	public Double start_price;
+	private Double start_price;
 	
 	@Column(name="current_bid")
-	public Double currentBid;;
+	private Double currentBid;;
 	
 	@Column(name="shipment_extra_price")
-	public Double shipmentExtraPrice;
+	private Double shipmentExtraPrice;
 	
 	@Column(name="min_earn")
-	public Double minEarn;
+	private Double minEarn;
 	
 	@Column(name="fixed_bid_every_time", insertable=false, updatable=false)
-	public Double fixedBidEveryTime;
+	private Double fixedBidEveryTime;
 	
 	@Column(name="created_at")
-	public LocalDateTime createdAt;
+	private LocalDateTime createdAt;
 	
 	@Column(name="updated_at")
-	public LocalDateTime updatedAt;
+	private LocalDateTime updatedAt;
 	
 	@Column(name="start_auction_at")
-	public LocalDateTime startAuctionAt;
+	private LocalDateTime startAuctionAt;
 	
 	@Column(name="end_auction_at")
-	public LocalDateTime endAuctionAt;
+	private LocalDateTime endAuctionAt;
 	
 	@Column(name="closed_auction_at")
-	public LocalDateTime closedAuctionAt;
+	private LocalDateTime closedAuctionAt;
+	
+	@Fetch(value=FetchMode.JOIN)
+	@OneToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name="user_item_id", nullable=false,insertable=false, updatable=false)
+	private UserItem userItem;
 	
 	public Auction() {
 	

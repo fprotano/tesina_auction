@@ -5,10 +5,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="user_item")
@@ -16,24 +22,29 @@ public class UserItem {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer id;
+	private Integer id;
 	
 	@Column(name="sold_to_user_id")
-	public Integer soldToUserId;
+	private Integer soldToUserId;
 	
-	@Column(name="user_id")
-	public Integer userId;
+	@Column(name="userId")
+	private Integer userId;
 	
-	public String title, description, notes, picture1, picture2, picture3, picture4, picture5;
+	private String title, description, notes, picture1, picture2, picture3, picture4, picture5;
 	
 	@Column(name="created_at")
-	public Timestamp createdAt;
+	private Timestamp createdAt;
 	
 	@Column(name="updated_at")
-	public Timestamp updatedAt;
+	private Timestamp updatedAt;
 	
 	@Column(name="sold_at")
-	public Timestamp soldAt;
+	private Timestamp soldAt;
+	
+	@Fetch(value=FetchMode.JOIN)
+	@OneToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
+	private User user;
 
 	public UserItem() {
 	

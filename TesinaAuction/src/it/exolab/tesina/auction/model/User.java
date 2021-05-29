@@ -2,14 +2,16 @@ package it.exolab.tesina.auction.model;
 
 
 import java.sql.Timestamp;
-
+import java.util.List;
 
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -40,7 +42,14 @@ public class User {
 
 	@Column(name = "otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
+	
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	private List<UserItem> userItem;
+	
+	
+	public User() {
 
+	}
 	
 	public User(Integer enabled, String email, String password, String name, String surname, String question,
 			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
@@ -58,10 +67,6 @@ public class User {
 		this.updatedAt = updatedAt;
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
-	}
-
-	public User() {
-
 	}
 
 	public Integer getId() {

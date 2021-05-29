@@ -14,7 +14,6 @@ import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.UserService;
 
-
 @CrossOrigin
 @Controller
 @RequestMapping(value="api/user")

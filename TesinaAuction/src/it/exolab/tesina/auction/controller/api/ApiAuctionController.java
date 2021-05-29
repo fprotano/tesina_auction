@@ -54,4 +54,6 @@ public class ApiAuctionController extends BaseController {
 		System.out.println(auctionsList);
 		return (HttpResponse<Auction>) sendSuccess(auctionsList);
 	}
+	
+	// find auctionbyid
 }

@@ -30,6 +30,4 @@ public interface AuctionRepo extends CrudRepository<Auction, Integer>{
 			+ "u.id=?1")
 	public List<Auction> findAuctionsbyUser(Integer idUser);
 	
-	
-
 }

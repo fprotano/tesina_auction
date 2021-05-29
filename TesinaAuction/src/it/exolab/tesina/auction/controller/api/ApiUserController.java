@@ -42,4 +42,7 @@ public class ApiUserController extends BaseController {
 
 		return (HttpResponse<User>) sendSuccess(modelNew);
 	}
+	
+	// findUserById
+	
 }

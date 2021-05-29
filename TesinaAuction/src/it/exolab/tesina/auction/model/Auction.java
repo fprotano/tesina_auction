@@ -1,6 +1,7 @@
 package it.exolab.tesina.auction.model;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -49,19 +50,19 @@ public class Auction {
 	private Double fixedBidEveryTime;
 	
 	@Column(name="created_at")
-	private LocalDateTime createdAt;
+	private Timestamp createdAt;
 	
 	@Column(name="updated_at")
-	private LocalDateTime updatedAt;
+	private Timestamp updatedAt;
 	
 	@Column(name="start_auction_at")
-	private LocalDateTime startAuctionAt;
+	private Timestamp startAuctionAt;
 	
 	@Column(name="end_auction_at")
-	private LocalDateTime endAuctionAt;
+	private Timestamp endAuctionAt;
 	
 	@Column(name="closed_auction_at")
-	private LocalDateTime closedAuctionAt;
+	private Timestamp closedAuctionAt;
 	
 	@Fetch(value=FetchMode.JOIN)
 	@OneToOne(fetch=FetchType.EAGER,optional=false)
@@ -74,8 +75,8 @@ public class Auction {
 
 	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double start_price,
 			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
-			LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime startAuctionAt, LocalDateTime endAuctionAt,
-			LocalDateTime closedAuctionAt) {
+			Timestamp createdAt, Timestamp updatedAt, Timestamp startAuctionAt, Timestamp endAuctionAt,
+			Timestamp closedAuctionAt) {
 
 		this.userItemId = userItemId;
 		this.winnerUserId = winnerUserId;
@@ -164,43 +165,43 @@ public class Auction {
 		this.fixedBidEveryTime = fixedBidEveryTime;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public LocalDateTime getStartAuctionAt() {
+	public Timestamp getStartAuctionAt() {
 		return startAuctionAt;
 	}
 
-	public void setStartAuctionAt(LocalDateTime startAuctionAt) {
+	public void setStartAuctionAt(Timestamp startAuctionAt) {
 		this.startAuctionAt = startAuctionAt;
 	}
 
-	public LocalDateTime getEndAuctionAt() {
+	public Timestamp getEndAuctionAt() {
 		return endAuctionAt;
 	}
 
-	public void setEndAuctionAt(LocalDateTime endAuctionAt) {
+	public void setEndAuctionAt(Timestamp endAuctionAt) {
 		this.endAuctionAt = endAuctionAt;
 	}
 
-	public LocalDateTime getClosedAuctionAt() {
+	public Timestamp getClosedAuctionAt() {
 		return closedAuctionAt;
 	}
 
-	public void setClosedAuctionAt(LocalDateTime closedAuctionAt) {
+	public void setClosedAuctionAt(Timestamp closedAuctionAt) {
 		this.closedAuctionAt = closedAuctionAt;
 	}
 

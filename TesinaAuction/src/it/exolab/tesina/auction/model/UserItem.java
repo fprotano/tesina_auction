@@ -27,7 +27,7 @@ public class UserItem {
 	@Column(name="sold_to_user_id")
 	private Integer soldToUserId;
 	
-	@Column(name="userId")
+	@Column(name="user_id")
 	private Integer userId;
 	
 	private String title, description, notes, picture1, picture2, picture3, picture4, picture5;

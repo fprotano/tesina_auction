@@ -1,7 +1,6 @@
 package it.exolab.tesina.auction.util;
 
-import it.exolab.tesina.auction.api.model.dto.FakeDTO;
-import it.exolab.tesina.auction.model.Fake;
+
 
 public class Factory {
 
@@ -19,9 +18,9 @@ public class Factory {
 	}
 	
 	
-	public FakeDTO makeFake(Fake model) {
-		FakeDTO ret = new FakeDTO();
-		ret.setParam1(model.getParam1());
-		return ret;
-	}
+//	public FakeDTO makeFake(Fake model) {
+//		FakeDTO ret = new FakeDTO();
+//		ret.setParam1(model.getParam1());
+//		return ret;
+//	}
 }

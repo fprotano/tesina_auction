@@ -35,7 +35,7 @@ public class Auction {
 	private Integer freeBidEveryTime;
 	
 	@Column(name="start_price")
-	private Double start_price;
+	private Double startPrice;
 	
 	@Column(name="current_bid")
 	private Double currentBid;;
@@ -73,7 +73,7 @@ public class Auction {
 	
 	}
 
-	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double start_price,
+	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double startPrice,
 			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
 			Timestamp createdAt, Timestamp updatedAt, Timestamp startAuctionAt, Timestamp endAuctionAt,
 			Timestamp closedAuctionAt) {
@@ -81,7 +81,7 @@ public class Auction {
 		this.userItemId = userItemId;
 		this.winnerUserId = winnerUserId;
 		this.freeBidEveryTime = freeBidEveryTime;
-		this.start_price = start_price;
+		this.startPrice = startPrice;
 		this.currentBid = currentBid;
 		this.shipmentExtraPrice = shipmentExtraPrice;
 		this.minEarn = minEarn;
@@ -125,12 +125,12 @@ public class Auction {
 		this.freeBidEveryTime = freeBidEveryTime;
 	}
 
-	public Double getStart_price() {
-		return start_price;
+	public Double getStartPrice() {
+		return startPrice;
 	}
 
-	public void setStart_price(Double start_price) {
-		this.start_price = start_price;
+	public void setStartPrice(Double startPrice) {
+		this.startPrice = startPrice;
 	}
 
 	public Double getCurrentBid() {
@@ -208,7 +208,7 @@ public class Auction {
 	@Override
 	public String toString() {
 		return "Auction [id=" + id + ", userItemId=" + userItemId + ", winnerUserId=" + winnerUserId
-				+ ", freeBidEveryTime=" + freeBidEveryTime + ", start_price=" + start_price + ", currentBid="
+				+ ", freeBidEveryTime=" + freeBidEveryTime + ", start_price=" + startPrice + ", currentBid="
 				+ currentBid + ", shipmentExtraPrice=" + shipmentExtraPrice + ", minEarn=" + minEarn
 				+ ", fixedBidEveryTime=" + fixedBidEveryTime + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="

@@ -32,5 +32,9 @@ public class UserItemService {
 	public void delete(int id) {
 		userItemRepo.delete(id);
 	}
+	
+	public List<UserItem> findUserItemByUserId(Integer userId) {
+		return userItemRepo.findUserItemByUserId(userId);
+	}
 
 }

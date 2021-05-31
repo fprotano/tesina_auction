@@ -31,7 +31,7 @@ public class ApiAuctionController extends BaseController {
 	@RequestMapping(value="auctionInsert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Auction> doauctionInsert(@RequestBody Auction model) {
-		System.out.println(model);
+		System.out.println("nel auctionInsert, auction > " + model);
 		auctionService.save(model);
 		return sendSuccess(model); 
 	}
@@ -52,7 +52,7 @@ public class ApiAuctionController extends BaseController {
 	@RequestMapping(value="findAuctionsByUser", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Auction> dofindAuctionsByUser(@RequestBody String userId) {
-		System.out.println(userId);
+		System.out.println("nell findAuctionsByUser, user id > " + userId);
 		List<Auction> auctionsList = auctionService.findAuctionsByUser(Integer.parseInt(userId));
 		System.out.println(auctionsList);
 		return sendSuccess(auctionsList);

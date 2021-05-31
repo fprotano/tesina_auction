@@ -48,7 +48,7 @@ public class User {
 	
 	
 	public User() {
-
+	
 	}
 	
 	public User(Integer enabled, String email, String password, String name, String surname, String question,
@@ -180,4 +180,12 @@ public class User {
 				+ otpCode + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
 				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", userItem=" + userItem + "]";
 	}
+
+//	@Override
+//	public Object conversionTimeRetobj(Object a) {
+//		// TODO Auto-generated method stub
+//		return super.conversionTimeRetobj(a);
+//	}
+	
+	
 }

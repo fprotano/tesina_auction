@@ -46,6 +46,7 @@ public class ApiAuctionController extends BaseController {
 		
 		System.out.println("stampa delle aste > " + auctionsList);
 		return sendSuccess(auctionsList);
+	
 	}
 	
 	@RequestMapping(value="findAuctionsByUser", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -24,7 +24,7 @@ import it.exolab.tesina.auction.service.api.UserService;
 @CrossOrigin
 @Controller
 @RequestMapping(value="api/user")
-public class ApiUserController extends BaseController {
+public class ApiUserController extends BaseController<User> {
 	
 	private UserService userService;
   
@@ -51,7 +51,8 @@ public class ApiUserController extends BaseController {
 		System.out.println("nel login, model il ingresso > " + model);
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
 		
-
+	
+		// return sendSuccess(modelNew.conversionTimeRetobj(modelNew));
 		return sendSuccess(modelNew);
 	}
 	

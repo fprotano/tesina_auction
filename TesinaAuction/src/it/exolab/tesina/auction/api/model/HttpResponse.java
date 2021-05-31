@@ -7,6 +7,8 @@ public class HttpResponse<T> {
 	private String err;
 	private String err_code;
 	private T data;
+	
+	
 	public boolean isSuccess() {
 		return success;
 	}

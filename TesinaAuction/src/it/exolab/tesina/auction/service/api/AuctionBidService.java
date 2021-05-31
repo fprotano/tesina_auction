@@ -15,20 +15,34 @@ private AuctionBidRepo auctionBidRepo;
 		this.auctionBidRepo =auctionBidRepo;
 	}
 	
-	public AuctionBid find(int id) {
-		return auctionBidRepo.findOne(id);
-	}
-
-	public List<AuctionBid> findAll() {
-		return (List<AuctionBid>) auctionBidRepo.findAll();
-	}
-
-	public void save(AuctionBid model) {
-		this.auctionBidRepo.save(model);
-	}
-
-	public void delete(int id) {
-		auctionBidRepo.delete(id);
-	}
+//	public AuctionBid find(int id) {
+//		return auctionBidRepo.findOne(id);
+//	}
+//
+//	public List<AuctionBid> findAll() {
+//		return (List<AuctionBid>) auctionBidRepo.findAll();
+//	}
+//
+//	public void save(AuctionBid model) {
+//		this.auctionBidRepo.save(model);
+//	}
+//
+//	public void delete(int id) {
+//		auctionBidRepo.delete(id);
+//	}
+//
+//	public List<AuctionBid> findBidsByAuctionId(int id) {
+//		return (List<AuctionBid>) auctionBidRepo.findBidsByAuctionId(id);
+//	}
+//
+//	public List<AuctionBid> findBidsOfActiveAuctionsByUserId(int id) {
+//		return (List<AuctionBid>) auctionBidRepo.findBidsOfActiveAuctionsByUserId(id);
+//	}
+//
+//	public List<AuctionBid> findLastBidsOfActiveAuctionsByUserId(int id) {
+//		return (List<AuctionBid>) auctionBidRepo.findLastBidsOfActiveAuctionsByUserId(id);
+//	}
+	
+	
 
 }

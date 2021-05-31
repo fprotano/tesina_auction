@@ -17,12 +17,19 @@ public class AuctionBid {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	/* dovrebbe essere name="create_at" non "created_id"
 	@Column(name="create_id")
+	*/
+	@Column(name="created_at")
 	private Timestamp createAt;
+	
 	@Column(name="auction_id")
 	private Integer auctionId;
+	
 	@Column(name="user_id")
 	private Integer userId;
+	
 	private Double bid;
 	
 	

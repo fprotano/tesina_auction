@@ -56,4 +56,13 @@ public class ApiAuctionController extends BaseController {
 	}
 	
 	// find auctionbyid
+	
+//	@RequestMapping(value="finAuctiondByAuctionById", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//	@ResponseBody
+//	public HttpResponse<Auction> dofindAuctionBy1AuctionId(@RequestBody String auctionId) {
+//		System.out.println(auctionId);
+//		Auction auction = auctionService.find(Integer.parseInt(auctionId));
+//		System.out.println(auction);
+//		return (HttpResponse<Auction>) sendSuccess(auction);
+//	}
 }

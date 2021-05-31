@@ -1,5 +1,12 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -29,7 +36,10 @@ public class ApiUserController extends BaseController {
 	@RequestMapping(value="register", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<User> doRegister(@RequestBody User model) {
-		System.out.println(model);
+		System.out.println("nel register, model il ingresso > " + model);
+		
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		model.setCreateAt(currentTime);
 		userService.save(model);
 		return (HttpResponse<User>) sendSuccess(model);  //ritorno in http ogg
 	}
@@ -37,7 +47,8 @@ public class ApiUserController extends BaseController {
 	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<User> doLogin(@RequestBody User model) {
-	
+		
+		System.out.println("nel login, model il ingresso > " + model);
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
 		
 

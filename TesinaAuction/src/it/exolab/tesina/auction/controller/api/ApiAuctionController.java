@@ -37,12 +37,14 @@ public class ApiAuctionController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value="FindAllAuctions", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="findAllAuctions", method=RequestMethod.GET,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Auction> doFindAllAuctions() {
-	
+		
+		System.out.println("sono nel findAllAuctions");
 		List<Auction> auctionsList = auctionService.findAll();
-
+		
+		System.out.println("stampa delle aste > " + auctionsList);
 		return sendSuccess(auctionsList);
 	}
 	

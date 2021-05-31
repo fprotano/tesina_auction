@@ -33,7 +33,7 @@ public class ApiAuctionController extends BaseController {
 	public HttpResponse<Auction> doauctionInsert(@RequestBody Auction model) {
 		System.out.println(model);
 		auctionService.save(model);
-		return (HttpResponse<Auction>) sendSuccess(model); 
+		return sendSuccess(model); 
 	}
 	
 	
@@ -43,7 +43,7 @@ public class ApiAuctionController extends BaseController {
 	
 		List<Auction> auctionsList = auctionService.findAll();
 
-		return (HttpResponse<Auction>) sendSuccess(auctionsList);
+		return sendSuccess(auctionsList);
 	}
 	
 	@RequestMapping(value="findAuctionsByUser", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +52,7 @@ public class ApiAuctionController extends BaseController {
 		System.out.println(userId);
 		List<Auction> auctionsList = auctionService.findAuctionsByUser(Integer.parseInt(userId));
 		System.out.println(auctionsList);
-		return (HttpResponse<Auction>) sendSuccess(auctionsList);
+		return sendSuccess(auctionsList);
 	}
 	
 	// find auctionbyid
@@ -63,6 +63,6 @@ public class ApiAuctionController extends BaseController {
 //		System.out.println(auctionId);
 //		Auction auction = auctionService.find(Integer.parseInt(auctionId));
 //		System.out.println(auction);
-//		return (HttpResponse<Auction>) sendSuccess(auction);
+//		return sendSuccess(auction);
 //	}
 }

@@ -41,7 +41,7 @@ public class ApiUserController extends BaseController {
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		model.setCreateAt(currentTime);
 		userService.save(model);
-		return (HttpResponse<User>) sendSuccess(model);  //ritorno in http ogg
+		return sendSuccess(model);  //ritorno in http ogg
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +52,7 @@ public class ApiUserController extends BaseController {
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
 		
 
-		return (HttpResponse<User>) sendSuccess(modelNew);
+		return sendSuccess(modelNew);
 	}
 	
 	// findUserById

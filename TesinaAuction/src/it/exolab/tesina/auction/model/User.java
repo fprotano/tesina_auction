@@ -173,6 +173,14 @@ public class User {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", enabled=" + enabled + ", email=" + email + ", password=" + password + ", name="
+				+ name + ", surname=" + surname + ", question=" + question + ", answer=" + answer + ", otpCode="
+				+ otpCode + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
+				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", userItem=" + userItem + "]";
+	}
+
 	
 
 }

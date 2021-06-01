@@ -1,10 +1,7 @@
 package it.exolab.tesina.auction.model;
 
 
-
-
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -243,5 +239,4 @@ public class Auction {
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
 				+ closedAuctionAt + ", bids=" + bids + "]";
 	}
-
 }

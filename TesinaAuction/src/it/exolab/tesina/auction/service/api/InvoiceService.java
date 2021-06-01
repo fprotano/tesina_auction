@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.exolab.tesina.auction.model.Invoice;
+import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.repository.InvoiceRepo;
 
 
@@ -31,6 +32,10 @@ public class InvoiceService {
 
 	public void delete(int id) {
 		invoiceRepo.delete(id);
+	}
+	public Invoice findByUser(User model){
+		return invoiceRepo.findOne(model.getId()) ;
+		
 	}
 
 }

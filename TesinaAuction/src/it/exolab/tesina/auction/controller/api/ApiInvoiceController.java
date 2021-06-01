@@ -2,6 +2,8 @@ package it.exolab.tesina.auction.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +14,10 @@ import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.InvoiceService;
-
-public class ApiInvoiceController extends BaseController {
+@CrossOrigin
+@Controller
+@RequestMapping(value="api/invoice")
+public class ApiInvoiceController extends BaseController<Invoice> {
 	private InvoiceService invoiceService;
 
 	@Autowired(required = true)

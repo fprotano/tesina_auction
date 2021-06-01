@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.UserItem;
 import it.exolab.tesina.auction.repository.AuctionOrderRepo;
 
 
@@ -31,5 +32,8 @@ public class AuctionOrderService {
 
 	public void delete(int id) {
 		auctionOrderRepo.delete(id);
+	}
+    public List<AuctionOrder> findByAuction(Integer auctionId) {
+		return auctionOrderRepo.findByAuction(auctionId);
 	}
 }

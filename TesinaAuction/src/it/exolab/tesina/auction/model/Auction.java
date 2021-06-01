@@ -39,6 +39,11 @@ public class Auction {
 	@Column(name="winner_user_id")
 	private Integer winnerUserId;
 	
+	@Fetch(value=FetchMode.JOIN)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="winner_user_id", nullable=false, insertable=false, updatable=false)
+	private User userWinner;
+	
 	@Column(name="fixed_bid_every_time")
 	private Integer freeBidEveryTime;
 	

@@ -73,6 +73,10 @@ public class User {
 	@OneToMany(mappedBy="userBid", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AuctionBid> userBids;
 	
+	@Transient
+	@OneToMany(mappedBy="userWinner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Auction> wonAuctions;
+	
 	
 	public User() {
 	

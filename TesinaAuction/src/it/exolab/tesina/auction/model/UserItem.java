@@ -47,7 +47,7 @@ public class UserItem {
 	private String title;
 	
 	@Column 
-	String description;
+	private String description;
 	
 	@Column
 	private String notes;

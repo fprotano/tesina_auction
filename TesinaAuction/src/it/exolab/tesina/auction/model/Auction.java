@@ -3,7 +3,9 @@ package it.exolab.tesina.auction.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -45,7 +48,7 @@ public class Auction {
 	private Double startPrice;
 	
 	@Column(name="current_bid")
-	private Double currentBid;;
+	private Double currentBid;
 	
 	@Column(name="shipment_extra_price")
 	private Double shipmentExtraPrice;
@@ -71,7 +74,10 @@ public class Auction {
 	@Column(name="closed_auction_at")
 	private Timestamp closedAuctionAt;
 	
-	
+	@Transient
+	@OneToMany(mappedBy="bidAuction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<AuctionBid> bids;
+
 	public Auction() {
 	
 	}
@@ -217,6 +223,14 @@ public class Auction {
 	public void setClosedAuctionAt(Timestamp closedAuctionAt) {
 		this.closedAuctionAt = closedAuctionAt;
 	}
+	
+	public List<AuctionBid> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<AuctionBid> bids) {
+		this.bids = bids;
+	}
 
 	@Override
 	public String toString() {
@@ -225,7 +239,7 @@ public class Auction {
 				+ ", currentBid=" + currentBid + ", shipmentExtraPrice=" + shipmentExtraPrice + ", minEarn=" + minEarn
 				+ ", fixedBidEveryTime=" + fixedBidEveryTime + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
-				+ closedAuctionAt + "]";
+				+ closedAuctionAt + ", bids=" + bids + "]";
 	}
 }
 	

@@ -1,5 +1,7 @@
 package it.exolab.tesina.auction.api.model;
 
+import org.springframework.http.HttpStatus;
+
 public class HttpResponse<T> {
 
 	
@@ -47,6 +49,9 @@ public class HttpResponse<T> {
 		this(false,err,err_code,null);
 	}
 	public HttpResponse() {
+		
+	}
+	public HttpResponse(HttpStatus ok, String string) {
 		
 	}
 	

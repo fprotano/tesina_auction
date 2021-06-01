@@ -36,5 +36,8 @@ public class UserItemService {
 	public List<UserItem> findUserItemByUserId(Integer userId) {
 		return userItemRepo.findUserItemByUserId(userId);
 	}
+//	public List<UserItem> findAllItems(){
+//		return userItemRepo.findAllItems();
+//	}
 
 }

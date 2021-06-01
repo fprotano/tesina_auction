@@ -61,7 +61,7 @@ public class Auction {
 	
 	@Column(name="created_at")
 	private Timestamp createdAt;
-	@Time
+	
 	@Column(name="updated_at")
 	private Timestamp updatedAt;
 	

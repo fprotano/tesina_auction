@@ -8,5 +8,6 @@ import it.exolab.tesina.auction.model.AuctionOrder;
 
 
 public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
-	public List<AuctionOrder> findByAuction(Integer auctionId);  //
+	
+	public List<AuctionOrder> findAuctionOrderByAuctionId(Integer auctionId);  //
 }

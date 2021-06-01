@@ -37,7 +37,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	@ResponseBody
 	public HttpResponse<AuctionOrder> doauctionOrderFindByAuction(@RequestBody Auction model) {
 		System.out.println("nel auctionOrderFindByAuction, Auction > " + model);
-		List<AuctionOrder> auctionOrder =auctionOrderService.findByAuction(model.getId());
+		List<AuctionOrder> auctionOrder =auctionOrderService.findAuctionOrderByAuctionId(model.getId());
 		return sendSuccess(auctionOrder); 
 	}
 }

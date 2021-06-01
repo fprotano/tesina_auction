@@ -33,7 +33,7 @@ public class AuctionOrderService {
 	public void delete(int id) {
 		auctionOrderRepo.delete(id);
 	}
-    public List<AuctionOrder> findByAuction(Integer auctionId) {
-		return auctionOrderRepo.findByAuction(auctionId);
+    public List<AuctionOrder> findAuctionOrderByAuctionId(Integer auctionId) {
+		return auctionOrderRepo.findAuctionOrderByAuctionId(auctionId);
 	}
 }

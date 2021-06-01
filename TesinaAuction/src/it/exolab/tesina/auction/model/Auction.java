@@ -241,7 +241,5 @@ public class Auction {
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
 				+ closedAuctionAt + ", bids=" + bids + "]";
 	}
-	
-	
 }
 	

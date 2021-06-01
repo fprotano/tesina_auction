@@ -41,4 +41,20 @@ public class AuctionService {
 	public List<Auction> findAllAuctions() {
 		return auctionRepo.findAllAuctions();
 	}
+	
+	public void closeAuction(Integer id) {
+		auctionRepo.closeAuction(id);
+	}
+	
+	public void closeAllExpiredAuctions() {
+		auctionRepo.closeAllExpiredAuctions();
+	}
+	
+	public void closeExpiredAuction(Integer id) {
+		auctionRepo.closeAuction(id);
+	}
+	
+	public void updateCurrentBid(Integer id, Double currentBid, Integer userId) {
+		auctionRepo.updateCurrentBid(id, currentBid, userId);
+	}
 }

@@ -33,6 +33,7 @@ public class ApiUserItemController extends BaseController<UserItem> {
 	public void setUserItemService(UserItemService userItemService) {
 		this.userItemService = userItemService;
 	}
+	
 
 	
 	@RequestMapping(value = "userItemInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -18,5 +18,5 @@ public interface UserItemRepo extends CrudRepository<UserItem, Integer>{
 			+ "WHERE u.id=?1")
 	public List<UserItem> findUserItemByUserId(Integer userId);
 
-//	public List<UserItem> findAllItems();
+
 }

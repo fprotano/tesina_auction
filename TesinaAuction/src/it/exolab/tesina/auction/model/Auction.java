@@ -1,3 +1,5 @@
+package it.exolab.tesina.auction.model;
+
 
 
 

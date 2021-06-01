@@ -1,7 +1,5 @@
 
 
-package it.exolab.tesina.auction.model;
-
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -243,5 +241,5 @@ public class Auction {
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
 				+ closedAuctionAt + ", bids=" + bids + "]";
 	}
+
 }
-	

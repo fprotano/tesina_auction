@@ -34,6 +34,7 @@ public class ApiUserItemController extends BaseController<UserItem> {
 		this.userItemService = userItemService;
 	}
 
+	
 	@RequestMapping(value = "userItemInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<UserItem> doUserItemInsert(@RequestBody UserItem model) {

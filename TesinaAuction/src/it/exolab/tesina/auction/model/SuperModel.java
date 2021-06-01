@@ -21,7 +21,7 @@ public class SuperModel {
 				try {
 					Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(fields[i].get(a).toString());
 					System.out.println(date);
-					fields[i].set(date, "DateForClient"+i);
+					fields[i].set(date, "DateForClient"+i); //importante 
 					convert = fields;
 					
 

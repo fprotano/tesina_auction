@@ -69,6 +69,10 @@ public class User {
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserItem> userItem;
 	
+	@Transient
+	@OneToMany(mappedBy="userBid", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<AuctionBid> userBids;
+	
 	
 	public User() {
 	
@@ -76,8 +80,8 @@ public class User {
 
 	public User(Integer enabled, String email, String password, String name, String surname, String question,
 			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
-			Timestamp otpCodeExpiresAt, List<UserItem> userItem) {
-		
+			Timestamp otpCodeExpiresAt, List<UserItem> userItem, List<AuctionBid> userBids) {
+		super();
 		this.enabled = enabled;
 		this.email = email;
 		this.password = password;
@@ -91,6 +95,7 @@ public class User {
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 		this.userItem = userItem;
+		this.userBids = userBids;
 	}
 
 	public Integer getId() {
@@ -205,11 +210,49 @@ public class User {
 		this.userItem = userItem;
 	}
 
+	public List<AuctionBid> getUserBids() {
+		return userBids;
+	}
+
+	public void setUserBids(List<AuctionBid> userBids) {
+		this.userBids = userBids;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", enabled=" + enabled + ", email=" + email + ", password=" + password + ", name="
 				+ name + ", surname=" + surname + ", question=" + question + ", answer=" + answer + ", otpCode="
 				+ otpCode + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
-				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", userItem=" + userItem + "]";
+				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", userItem=" + userItem
+				+ ", userBids=" + userBids + "]";
 	}
+	
+	
+	
+	
 }

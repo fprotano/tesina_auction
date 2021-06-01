@@ -1,7 +1,6 @@
 package it.exolab.tesina.auction.model;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

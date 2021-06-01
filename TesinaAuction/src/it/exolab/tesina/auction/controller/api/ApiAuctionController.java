@@ -42,7 +42,7 @@ public class ApiAuctionController extends BaseController {
 	public HttpResponse<Auction> doFindAllAuctions() {
 		
 		System.out.println("sono nel findAllAuctions");
-		List<Auction> auctionsList = auctionService.findAll();
+		List<Auction> auctionsList = auctionService.findAllAuctions();
 		
 		System.out.println("stampa delle aste > " + auctionsList);
 		return sendSuccess(auctionsList);

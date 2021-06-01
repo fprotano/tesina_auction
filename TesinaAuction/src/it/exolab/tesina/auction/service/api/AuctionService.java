@@ -38,4 +38,7 @@ public class AuctionService {
 	public List<Auction> findAuctionsByUser(Integer idUser) {
 		return auctionRepo.findAuctionsbyUser(idUser);
 	}
+	public List<Auction> findAllAuctions() {
+		return auctionRepo.findAllAuctions();
+	}
 }

@@ -54,7 +54,7 @@ public class ApiAuctionController extends BaseController {
 	public HttpResponse<Auction> dofindAuctionsByUser(@RequestBody String userId) {
 		System.out.println("nell findAuctionsByUser, user id > " + userId);
 		List<Auction> auctionsList = auctionService.findAuctionsByUser(Integer.parseInt(userId));
-		System.out.println(auctionsList);
+		System.out.println("nell findAuctionsByUser dopo il find, user id > " + auctionsList);
 		return sendSuccess(auctionsList);
 	}
 	

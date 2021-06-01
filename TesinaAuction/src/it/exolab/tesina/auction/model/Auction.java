@@ -30,15 +30,9 @@ public class Auction {
 	@Column(name="user_item_id")
 	private Integer userItemId;
 	
-//	@Fetch(value=FetchMode.JOIN)
-//	@OneToOne(fetch=FetchType.EAGER,optional=false)
-//	@JoinColumn(name="user_item_id", nullable=false,insertable=false, updatable=false)
-//	private UserItem userItem;
-	
-	@Transient
 	@Fetch(value=FetchMode.JOIN)
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_item_id", referencedColumnName="id", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="user_item_id", nullable=false, insertable=false, updatable=false)
 	private UserItem userItem;
 
 	@Column(name="winner_user_id")
@@ -77,16 +71,19 @@ public class Auction {
 	@Column(name="closed_auction_at")
 	private Timestamp closedAuctionAt;
 	
+	
 	public Auction() {
 	
 	}
 
-	public Auction(Integer userItemId, Integer winnerUserId, Integer freeBidEveryTime, Double startPrice,
-			Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
+	public Auction(Integer id, Integer userItemId, UserItem userItem, Integer winnerUserId, Integer freeBidEveryTime,
+			Double startPrice, Double currentBid, Double shipmentExtraPrice, Double minEarn, Double fixedBidEveryTime,
 			Timestamp createdAt, Timestamp updatedAt, Timestamp startAuctionAt, Timestamp endAuctionAt,
 			Timestamp closedAuctionAt) {
-
+		
+		this.id = id;
 		this.userItemId = userItemId;
+		this.userItem = userItem;
 		this.winnerUserId = winnerUserId;
 		this.freeBidEveryTime = freeBidEveryTime;
 		this.startPrice = startPrice;
@@ -108,14 +105,6 @@ public class Auction {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public UserItem getUserItem() {
-		return userItem;
-	}
-
-	public void setUserItem(UserItem userItem) {
-		this.userItem = userItem;
-	}
 
 	public Integer getUserItemId() {
 		return userItemId;
@@ -123,6 +112,14 @@ public class Auction {
 
 	public void setUserItemId(Integer userItemId) {
 		this.userItemId = userItemId;
+	}
+
+	public UserItem getUserItem() {
+		return userItem;
+	}
+
+	public void setUserItem(UserItem userItem) {
+		this.userItem = userItem;
 	}
 
 	public Integer getWinnerUserId() {
@@ -223,23 +220,12 @@ public class Auction {
 
 	@Override
 	public String toString() {
-		return "Auction [id=" + id + ", userItemId=" + userItemId + ", winnerUserId=" + winnerUserId
-				+ ", freeBidEveryTime=" + freeBidEveryTime + ", start_price=" + startPrice + ", currentBid="
-				+ currentBid + ", shipmentExtraPrice=" + shipmentExtraPrice + ", minEarn=" + minEarn
+		return "Auction [id=" + id + ", userItemId=" + userItemId + ", userItem=" + userItem + ", winnerUserId="
+				+ winnerUserId + ", freeBidEveryTime=" + freeBidEveryTime + ", startPrice=" + startPrice
+				+ ", currentBid=" + currentBid + ", shipmentExtraPrice=" + shipmentExtraPrice + ", minEarn=" + minEarn
 				+ ", fixedBidEveryTime=" + fixedBidEveryTime + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", startAuctionAt=" + startAuctionAt + ", endAuctionAt=" + endAuctionAt + ", closedAuctionAt="
 				+ closedAuctionAt + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
 	

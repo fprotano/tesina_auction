@@ -35,24 +35,9 @@ public class UserItem {
 	@Column(name="user_id")
 	private Integer userId;
 	
-//	@Fetch(value=FetchMode.JOIN)
-//	@OneToOne(fetch=FetchType.EAGER,optional=false)
-//	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
-//	private User user;
-	
-//	@Fetch(value=FetchMode.JOIN)
-//	@ManyToOne(fetch=FetchType.EAGER,optional=false)
-//	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
-//	private User user;
-	
-	@Transient
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id", referencedColumnName="id", nullable=false, insertable=false, updatable=false)
 	private User user;
-	
-
-//  @ManyToOne
-//  private User user;
 	
 	@Transient
 	@OneToMany(mappedBy="userItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -91,22 +76,19 @@ public class UserItem {
 	@Column(name="sold_at")
 	private Timestamp soldAt;
 	
-/*
- * @OneToOne(mappedBy = "userItem")
-    private Auction auction;
- * 
- */
-
+	
 	public UserItem() {
 	
 	}
-
-	public UserItem(Integer soldToUserId, Integer userId, String title, String description, String notes,
-			String picture1, String picture2, String picture3, String picture4, String picture5,
-			Timestamp createdAt, Timestamp updatedAt, Timestamp soldAt) {
+	
+	public UserItem(Integer soldToUserId, Integer userId, User user, List<Auction> auction, String title,
+			String description, String notes, String picture1, String picture2, String picture3, String picture4,
+			String picture5, Timestamp createdAt, Timestamp updatedAt, Timestamp soldAt) {
 
 		this.soldToUserId = soldToUserId;
 		this.userId = userId;
+		this.user = user;
+		this.auction = auction;
 		this.title = title;
 		this.description = description;
 		this.notes = notes;
@@ -119,23 +101,13 @@ public class UserItem {
 		this.updatedAt = updatedAt;
 		this.soldAt = soldAt;
 	}
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	 
-	
-	public List<Auction> getAuction() {
-		return auction;
-	}
-
-	public void setAuction(List<Auction> auction) {
-		this.auction = auction;
 	}
 
 	public Integer getSoldToUserId() {
@@ -152,6 +124,22 @@ public class UserItem {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Auction> getAuction() {
+		return auction;
+	}
+
+	public void setAuction(List<Auction> auction) {
+		this.auction = auction;
 	}
 
 	public String getTitle() {
@@ -244,9 +232,10 @@ public class UserItem {
 
 	@Override
 	public String toString() {
-		return "UserItem [id=" + id + ", soldToUserId=" + soldToUserId + ", userId=" + userId + ", title=" + title
-				+ ", description=" + description + ", notes=" + notes + ", picture1=" + picture1 + ", picture2="
-				+ picture2 + ", picture3=" + picture3 + ", picture4=" + picture4 + ", picture5=" + picture5
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", soldAt=" + soldAt + "]";
+		return "UserItem [id=" + id + ", soldToUserId=" + soldToUserId + ", userId=" + userId + ", user=" + user
+				+ ", auction=" + auction + ", title=" + title + ", description=" + description + ", notes=" + notes
+				+ ", picture1=" + picture1 + ", picture2=" + picture2 + ", picture3=" + picture3 + ", picture4="
+				+ picture4 + ", picture5=" + picture5 + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", soldAt=" + soldAt + "]";
 	}
 }

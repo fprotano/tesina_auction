@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 
 @Entity
@@ -62,9 +65,6 @@ public class User {
 	@Column(name = "otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
 	
-//	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-//	private List<UserItem> userItem;
-	
 	@Transient
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserItem> userItem;
@@ -73,11 +73,11 @@ public class User {
 	public User() {
 	
 	}
-	
+
 	public User(Integer enabled, String email, String password, String name, String surname, String question,
 			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
-			Timestamp otpCodeExpiresAt) {
-	
+			Timestamp otpCodeExpiresAt, List<UserItem> userItem) {
+		
 		this.enabled = enabled;
 		this.email = email;
 		this.password = password;
@@ -90,6 +90,7 @@ public class User {
 		this.updatedAt = updatedAt;
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
+		this.userItem = userItem;
 	}
 
 	public Integer getId() {
@@ -196,6 +197,14 @@ public class User {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 
+	public List<UserItem> getUserItem() {
+		return userItem;
+	}
+
+	public void setUserItem(List<UserItem> userItem) {
+		this.userItem = userItem;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", enabled=" + enabled + ", email=" + email + ", password=" + password + ", name="
@@ -203,12 +212,4 @@ public class User {
 				+ otpCode + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", nextOtpCodeAfterDate="
 				+ nextOtpCodeAfterDate + ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", userItem=" + userItem + "]";
 	}
-
-//	@Override
-//	public Object conversionTimeRetobj(Object a) {
-//		// TODO Auto-generated method stub
-//		return super.conversionTimeRetobj(a);
-//	}
-	
-	
 }

@@ -13,37 +13,36 @@ import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.InvoiceService;
 
-
-public class ApiInvoiceController extends BaseController{
+public class ApiInvoiceController extends BaseController {
 	private InvoiceService invoiceService;
-	
-	
+
 	@Autowired(required = true)
 	public void setInvoiceService(InvoiceService invoiceService) {
 		this.invoiceService = invoiceService;
 	}
-	
-	@RequestMapping(value="invoiceInsert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "invoiceInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Invoice> doinvoiceInsert(@RequestBody Invoice model) {
 		System.out.println("nel invoiceInsert, invoice > " + model);
 		invoiceService.save(model);
-		return sendSuccess(model); 
+		return sendSuccess(model);
 	}
-	@RequestMapping(value="invoiceFindById", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "invoiceFindById", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Invoice> doinvoiceFinfById(@RequestBody Invoice model) {
 		System.out.println("nel invoiceFindById, invoice > " + model.getId());
-	Invoice invoice=	invoiceService.find(model.getId());
-		return sendSuccess(invoice); 
+		Invoice invoice = invoiceService.find(model.getId());
+		return sendSuccess(invoice);
 	}
-	@RequestMapping(value="invoiceFindByUser", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "invoiceFindByUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<Invoice> doinvoiceFinfByuser(@RequestBody User model) {
 		System.out.println("nel invoiceFindById, invoice > " + model.getId());
-	Invoice invoice=	invoiceService.findByUser(model);
-		return sendSuccess(invoice); 
+		Invoice invoice = invoiceService.findByUser(model);
+		return sendSuccess(invoice);
 	}
-	
-	
-}
+
+   }

@@ -2,7 +2,9 @@ package it.exolab.tesina.auction.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -30,7 +35,52 @@ public class UserItem {
 	@Column(name="user_id")
 	private Integer userId;
 	
-	private String title, description, notes, picture1, picture2, picture3, picture4, picture5;
+//	@Fetch(value=FetchMode.JOIN)
+//	@OneToOne(fetch=FetchType.EAGER,optional=false)
+//	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
+//	private User user;
+	
+//	@Fetch(value=FetchMode.JOIN)
+//	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+//	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
+//	private User user;
+	
+	@Transient
+	@ManyToOne
+	@JoinColumn(name="user_id", referencedColumnName="id", nullable=false, insertable=false, updatable=false)
+	private User user;
+	
+
+//  @ManyToOne
+//  private User user;
+	
+	@Transient
+	@OneToMany(mappedBy="userItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Auction> auction;
+	
+	@Column
+	private String title;
+	
+	@Column 
+	String description;
+	
+	@Column
+	private String notes;
+	
+	@Column
+	private String picture1;
+	
+	@Column
+	private String picture2;
+	
+	@Column
+	private String picture3;
+	
+	@Column
+	private String picture4;
+	
+	@Column
+	private String picture5;
 	
 	@Column(name="created_at")
 	private Timestamp createdAt;
@@ -41,10 +91,11 @@ public class UserItem {
 	@Column(name="sold_at")
 	private Timestamp soldAt;
 	
-	@Fetch(value=FetchMode.JOIN)
-	@OneToOne(fetch=FetchType.EAGER,optional=false)
-	@JoinColumn(name="user_id", nullable=false,insertable=false, updatable=false)
-	private User user;
+/*
+ * @OneToOne(mappedBy = "userItem")
+    private Auction auction;
+ * 
+ */
 
 	public UserItem() {
 	
@@ -76,6 +127,15 @@ public class UserItem {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	 
+	
+	public List<Auction> getAuction() {
+		return auction;
+	}
+
+	public void setAuction(List<Auction> auction) {
+		this.auction = auction;
 	}
 
 	public Integer getSoldToUserId() {

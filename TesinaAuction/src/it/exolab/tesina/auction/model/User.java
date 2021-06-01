@@ -4,6 +4,7 @@ package it.exolab.tesina.auction.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -23,10 +25,27 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	private Integer enabled = 0;
-
-	private String email, password, name, surname, question, answer;
+	
+	@Column
+	private Integer enabled;
+	
+	@Column
+	private String email; 
+	
+	@Column
+	private String password;
+	
+	@Column
+	private String  name;
+	
+	@Column
+	private String  surname;
+	
+	@Column
+	private String  question;
+	
+	@Column
+	private String  answer;
 
 	@Column(name = "otp_code")
 	private String otpCode;
@@ -43,7 +62,11 @@ public class User {
 	@Column(name = "otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+//	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+//	private List<UserItem> userItem;
+	
+	@Transient
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserItem> userItem;
 	
 	

@@ -11,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -28,6 +30,17 @@ public class Auction {
 	@Column(name="user_item_id")
 	private Integer userItemId;
 	
+//	@Fetch(value=FetchMode.JOIN)
+//	@OneToOne(fetch=FetchType.EAGER,optional=false)
+//	@JoinColumn(name="user_item_id", nullable=false,insertable=false, updatable=false)
+//	private UserItem userItem;
+	
+	@Transient
+	@Fetch(value=FetchMode.JOIN)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_item_id", referencedColumnName="id", nullable=false, insertable=false, updatable=false)
+	private UserItem userItem;
+
 	@Column(name="winner_user_id")
 	private Integer winnerUserId;
 	
@@ -64,11 +77,6 @@ public class Auction {
 	@Column(name="closed_auction_at")
 	private Timestamp closedAuctionAt;
 	
-	@Fetch(value=FetchMode.JOIN)
-	@OneToOne(fetch=FetchType.EAGER,optional=false)
-	@JoinColumn(name="user_item_id", nullable=false,insertable=false, updatable=false)
-	private UserItem userItem;
-	
 	public Auction() {
 	
 	}
@@ -99,6 +107,14 @@ public class Auction {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public UserItem getUserItem() {
+		return userItem;
+	}
+
+	public void setUserItem(UserItem userItem) {
+		this.userItem = userItem;
 	}
 
 	public Integer getUserItemId() {

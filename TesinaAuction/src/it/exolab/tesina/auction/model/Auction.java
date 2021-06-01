@@ -45,7 +45,7 @@ public class Auction {
 	private Double startPrice;
 	
 	@Column(name="current_bid")
-	private Double currentBid;;
+	private Double currentBid;
 	
 	@Column(name="shipment_extra_price")
 	private Double shipmentExtraPrice;

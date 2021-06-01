@@ -60,8 +60,8 @@ public class Auction {
 	private Double fixedBidEveryTime;
 	
 	@Column(name="created_at")
-	private Timestamp createdAt;
-	@Time
+	private Timestamp createdAt; 
+	
 	@Column(name="updated_at")
 	private Timestamp updatedAt;
 	

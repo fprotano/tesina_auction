@@ -34,13 +34,21 @@ public class StaffController extends BaseController<Staff> {
 	    
 	}
 
-	@RequestMapping(value = "findByEmailAndPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "findByEmailAndPassword", method = RequestMethod.POST)    //Login
 
-	public ModelAndView doStaffFindByEmailAndPassword(@ModelAttribute Staff model) {
+	public ModelAndView doStaffFindByEmailAndPassword(@ModelAttribute Staff model) {    
 		System.out.println("nel StaffFind jsp  " + model);
 		Staff staff = staffService.findByEmailAndPassword(model.getEmail(), model.getPassword());
 		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		ret.addObject(staff);
+		return ret;
+	}
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+
+	public ModelAndView doStaffDelete(@ModelAttribute Staff model) {
+		System.out.println("nel StaffDelete jsp  " + model);
+		staffService.delete(model.getId());
+		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		return ret;
 	}
 }

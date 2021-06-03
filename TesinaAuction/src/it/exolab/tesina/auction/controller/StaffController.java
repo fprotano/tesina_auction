@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +29,13 @@ public class StaffController extends BaseController<Staff> {
 
 	@RequestMapping(value = "staffInsertUpdate", method = RequestMethod.POST)
 
-	public  ModelAndView  doStaffInsertUpdate(Staff model) {
+	public  ModelAndView  doStaffInsertUpdate(@ModelAttribute Staff model ) {
 		//System.out.println("nel StaffInsert, auction > " + model);
+		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		staffService.save(model);
+	
 		
-		return null;
+		return ret ;
 	    
 	}
 

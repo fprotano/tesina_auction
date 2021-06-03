@@ -32,8 +32,8 @@ public class HelpCenterService {
 	public void delete(int id) {
 		helpCenterRepo.delete(id);
 	}
-	public List<HelpCenter> findByAssignedIdAndClosed (int Assignedid){
-		return this.helpCenterRepo.findByAssignedIdAndClosed(Assignedid);
+	public List<HelpCenter> findbyAssignedIdAndClosed (int Assignedid){
+		return this.helpCenterRepo.findbyAssignedIdAndClosed(Assignedid);
 	}
 	
 }

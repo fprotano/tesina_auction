@@ -14,7 +14,7 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query(" SELECT h FROM help_center  AS  h WHERE  h.assigned_to_id =?1 AND h.closed_at=null ")
-	public List<HelpCenter> findByAssignedIdAndClosed(Integer assignedId );
+	@Query(" SELECT h FROM HelpCenter  AS  h WHERE  h.assignedToId =?1 AND h.closedAt=null ")
+	public List<HelpCenter> findbyAssignedIdAndClosed(Integer assignedId );
 
 }

@@ -45,9 +45,9 @@ public class StaffController extends BaseController<Staff> {
 	}
 	@RequestMapping(value = "doStaffFindBySurname", method = RequestMethod.POST)
 
-	public ModelAndView doStaffDelete(@ModelAttribute Staff model     ) {
-		System.out.println("nel StaffDelete jsp  " + model);
-		staffService.delete(model.getId());
+	public ModelAndView doStaffFindBySurname(@ModelAttribute Staff model     ) {
+		System.out.println("nel doStaffFindBySurname jsp  " + model);
+		staffService.FindBySurname(model.getSurname());
 		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		return ret;
 	}

@@ -26,7 +26,7 @@ public class StaffController extends BaseController<Staff> {
 		this.staffService = staffService;
 	}
 
-	@RequestMapping(value = "staffInsertUpdate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "staffInsertUpdate", method = RequestMethod.POST)
 
 	public  ModelAndView  doStaffInsertUpdate(Staff model) {
 		//System.out.println("nel StaffInsert, auction > " + model);
@@ -36,7 +36,7 @@ public class StaffController extends BaseController<Staff> {
 	    
 	}
 
-	@RequestMapping(value = "findById", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "findById", method = RequestMethod.POST)
 	@ResponseBody
 	public HttpResponse<Staff> doStaffFindBy(@RequestBody int id) {
 		System.out.println("nel StaffInsert, auction > " + id);

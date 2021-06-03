@@ -1,5 +1,7 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
+import it.exolab.tesina.auction.api.model.dto.AuctionDTO;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.service.api.AuctionService;
@@ -30,10 +33,22 @@ public class ApiAuctionController extends BaseController {
 	
 	@RequestMapping(value="auctionInsert", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Auction> doauctionInsert(@RequestBody Auction model) {
+	public HttpResponse<Auction> doAuctionInsert(@RequestBody AuctionDTO model) {
 		System.out.println("nel auctionInsert, auction > " + model);
-		auctionService.save(model);
-		return sendSuccess(model); 
+		
+		Auction newAuction = model.getAuction();
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		Calendar cal = Calendar.getInstance();
+		
+		cal.setTimeInMillis(model.getAuction().getStartAuctionAt().getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, model.getAuctionDayDuration());
+	    Timestamp auctioneEndDate = new Timestamp(cal.getTime().getTime());
+	    System.out.println(auctioneEndDate);
+	    newAuction.setCreatedAt(currentTime);
+	    newAuction.setEndAuctionAt(auctioneEndDate);
+	    System.out.println("nel auctionInsert dopo l-insert, auction > " + newAuction );
+		auctionService.save(newAuction);
+		return sendSuccess(newAuction); 
 	}
 	
 	

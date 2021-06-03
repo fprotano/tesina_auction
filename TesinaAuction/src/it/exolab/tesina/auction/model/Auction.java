@@ -44,7 +44,7 @@ public class Auction {
 	@JoinColumn(name="winner_user_id", nullable=false, insertable=false, updatable=false)
 	private User userWinner;
 	
-	@Column(name="fixed_bid_every_time")
+	@Column(name="free_bid_every_time")
 	private Integer freeBidEveryTime;
 	
 	@Column(name="start_price")
@@ -59,7 +59,7 @@ public class Auction {
 	@Column(name="min_earn")
 	private Double minEarn;
 	
-	@Column(name="fixed_bid_every_time", insertable=false, updatable=false)
+	@Column(name="fixed_bid_every_time")
 	private Double fixedBidEveryTime;
 	
 	@Column(name="created_at")

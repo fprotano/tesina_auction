@@ -2,13 +2,18 @@ package it.exolab.tesina.auction.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -21,7 +26,17 @@ public class Staff {
 	@Column(name="role_id")
 	public Integer roleId;
 	
-	private String email, password, name, surname;
+	@Column
+	private String email;
+	
+	@Column
+	private String password;
+	
+	@Column
+	private String  name;
+	
+	@Column
+	private String  surname;
 	
 	@Column(name="otp_code")
 	private String otpCode;
@@ -37,6 +52,10 @@ public class Staff {
 	
 	@Column(name="otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
+	
+	@Transient
+	@OneToMany(mappedBy="staffAssigned", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<HelpCenter> listHelpCenterOfStaff;
 
 	
 	public Staff() {

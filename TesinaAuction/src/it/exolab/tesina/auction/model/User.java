@@ -77,6 +77,9 @@ public class User {
 	@OneToMany(mappedBy="userWinner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Auction> wonAuctions;
 	
+	@Transient
+	@OneToMany(mappedBy="userDidQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<HelpCenter> listHelpCenterOfUser;
 	
 	public User() {
 	

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,17 +20,48 @@ public class HelpCenter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name="create_at")
 	private Timestamp createdAt;
+	
 	@Column(name="update_at")
 	private Timestamp updatedAt;
+	
 	@Column(name="closed_at")
 	private Timestamp closedAt;
+	
 	@Column(name="user_id")
 	private Integer userId;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false, insertable=false, updatable=false)
+	private User userDidQuestion;
+	
+	@Column
 	private String question;
+	
 	@Column(name="assigned_to_id")
 	private Integer assignedToId;
+	
+	@ManyToOne
+	@JoinColumn(name="assigned_to_id", nullable=false, insertable=false, updatable=false)
+	private Staff staffAssigned;
+
+	public HelpCenter() {
+		super();
+	}
+
+	public HelpCenter(Timestamp createdAt, Timestamp updatedAt, Timestamp closedAt, Integer userId,
+			User userDidQuestion, String question, Integer assignedToId) {
+		super();
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.closedAt = closedAt;
+		this.userId = userId;
+		this.userDidQuestion = userDidQuestion;
+		this.question = question;
+		this.assignedToId = assignedToId;
+	}
 
 	public Integer getId() {
 		return id;
@@ -70,6 +103,14 @@ public class HelpCenter {
 		this.userId = userId;
 	}
 
+	public User getUserDidQuestion() {
+		return userDidQuestion;
+	}
+
+	public void setUserDidQuestion(User userDidQuestion) {
+		this.userDidQuestion = userDidQuestion;
+	}
+
 	public String getQuestion() {
 		return question;
 	}
@@ -87,25 +128,39 @@ public class HelpCenter {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HelpCenter other = (HelpCenter) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "HelpCenter [id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", closedAt="
-				+ closedAt + ", userId=" + userId + ", question=" + question + ", assignedToId=" + assignedToId + "]";
+				+ closedAt + ", userId=" + userId + ", userDidQuestion=" + userDidQuestion + ", question=" + question
+				+ ", assignedToId=" + assignedToId + "]";
 	}
-
-	public HelpCenter(Timestamp createdAt, Timestamp updatedAt, Timestamp closedAt, Integer userId,
-			String question, Integer assignedToId) {
-		super();
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.closedAt = closedAt;
-		this.userId = userId;
-		this.question = question;
-		this.assignedToId = assignedToId;
-	}
-
-	public HelpCenter() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+	
+	
+	
 
 }

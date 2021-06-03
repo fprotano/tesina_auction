@@ -58,14 +58,45 @@ public class ApiAuctionController extends BaseController {
 		return sendSuccess(auctionsList);
 	}
 	
-	// find auctionbyid
+	@RequestMapping(value="finAuctiondByAuctionById", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<Auction> dofindAuctionBy1AuctionId(@RequestBody String auctionId) {
+		System.out.println(auctionId);
+		Auction auction = auctionService.find(Integer.parseInt(auctionId));
+		System.out.println(auction);
+		return sendSuccess(auction);
+	}
 	
-//	@RequestMapping(value="finAuctiondByAuctionById", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//	@ResponseBody
-//	public HttpResponse<Auction> dofindAuctionBy1AuctionId(@RequestBody String auctionId) {
-//		System.out.println(auctionId);
-//		Auction auction = auctionService.find(Integer.parseInt(auctionId));
-//		System.out.println(auction);
-//		return sendSuccess(auction);
-//	}
+	@RequestMapping(value = "closeAuction", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse closeAuction(@RequestBody String id) {
+		
+		auctionService.closeAuction(Integer.parseInt(id));
+		return sendSuccess(null);
+	}
+	
+	@RequestMapping(value = "closeAllExpiredAuctions", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse closeAllExpiredAuctions() {
+		
+		auctionService.closeAllExpiredAuctions();
+		return sendSuccess(null);
+	}
+	
+	@RequestMapping(value = "closeExpiredAuction", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse closeExpiredAuction(String id) {
+		
+		auctionService.closeExpiredAuction(Integer.parseInt(id));
+		return sendSuccess(null);
+	}
+	
+	@RequestMapping(value = "updateAuctionCurrentBid", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse updateAuctionCurrentBid(@RequestBody Auction model) {
+		
+		auctionService.updateCurrentBid(model.getId(), model.getCurrentBid(), model.getWinnerUserId());
+		return sendSuccess(null);
+	}
+	
 }

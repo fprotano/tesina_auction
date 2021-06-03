@@ -30,7 +30,7 @@ public class StaffController extends BaseController<Staff> {
 	@RequestMapping(value = "staffInsertUpdate", method = RequestMethod.POST)
 
 	public  ModelAndView  doStaffInsertUpdate(@ModelAttribute Staff model ) {
-		//System.out.println("nel StaffInsert, auction > " + model);
+		System.out.println("nel StaffInsert  jsp " + model);
 		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		staffService.save(model);
 	

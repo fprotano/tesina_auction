@@ -27,6 +27,28 @@ String cp = request.getContextPath();
 </head>
 <body>
 
+<c:if test =" ${ staff == null}">
+	
+	<form action="staff/login" method="post">
+	
+		<label for="email">Email : </label>
+		<input type="text" name="email" id="email" />
+	
+		<label for="password">Password : </label>
+		<input type="password" name="password" id="password" />
+		
+		<input type="submit" />
+		
+	</form>
+
+</c:if>
+	
+<c:if test = "${user !=null}">
+     	<li><a href="staff/logOut.jsp">logout</a></li>
+    	<li><a href="updateUtente.jsp">modifica account</a></li>
+</c:if>
+
+<!-- 
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -55,5 +77,7 @@ String cp = request.getContextPath();
       </div>
     </nav>
 <div class="container" style="margin-top:10px">
+
+ -->
 
 <br/><br/><br/>

@@ -35,4 +35,7 @@ public class StaffService {
 	public Staff findByEmailAndPassword(String email,String pass) {
 		return staffRepo.findByEmailAndPassword(email, pass);
 	}
+	public Staff  FindBySurname(String surname) {
+		return staffRepo.findBySurname(surname)  ;
+	}
 }

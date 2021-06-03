@@ -45,7 +45,7 @@ public class StaffController extends BaseController<Staff> {
 	}
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 
-	public ModelAndView doStaffDelete(@ModelAttribute Staff model   ) {
+	public ModelAndView doStaffDelete(@ModelAttribute Staff model     ) {
 		System.out.println("nel StaffDelete jsp  " + model);
 		staffService.delete(model.getId());
 		ModelAndView ret =new ModelAndView("admin/homeAdmin");

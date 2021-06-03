@@ -34,7 +34,7 @@ public class StaffController extends BaseController<Staff> {
 	    
 	}
 
-	@RequestMapping(value = "findByEmailAndPassword", method = RequestMethod.POST)    //Login
+	@RequestMapping(value = "login", method = RequestMethod.POST)    //Login
 
 	public ModelAndView doStaffFindByEmailAndPassword(@ModelAttribute Staff model) {    
 		System.out.println("nel StaffFind jsp  " + model);
@@ -43,7 +43,7 @@ public class StaffController extends BaseController<Staff> {
 		ret.addObject(staff);
 		return ret;
 	}
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "doStaffFindBySurname", method = RequestMethod.POST)
 
 	public ModelAndView doStaffDelete(@ModelAttribute Staff model     ) {
 		System.out.println("nel StaffDelete jsp  " + model);
@@ -51,4 +51,7 @@ public class StaffController extends BaseController<Staff> {
 		ModelAndView ret =new ModelAndView("admin/homeAdmin");
 		return ret;
 	}
+	
+	
+	
 }

@@ -32,4 +32,7 @@ public class StaffService {
 	public void delete(int id) {
 		staffRepo.delete(id);
 	}
+	public Staff findByEmailAndPassword(String email,String pass) {
+		return staffRepo.findByEmailAndPassword(email, pass);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.repository.HelpCenterRepo;
 
+
 public class HelpCenterService {
 	private HelpCenterRepo helpCenterRepo;
 
@@ -31,4 +32,8 @@ public class HelpCenterService {
 	public void delete(int id) {
 		helpCenterRepo.delete(id);
 	}
+	public List<HelpCenter> findByAssignedIdAndClosed (int Assignedid){
+		return this.helpCenterRepo.findByAssignedIdAndClosed(Assignedid);
+	}
+	
 }

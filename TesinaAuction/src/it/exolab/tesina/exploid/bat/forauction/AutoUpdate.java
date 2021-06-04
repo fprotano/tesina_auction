@@ -15,7 +15,7 @@ public static void main(String[]args) {
         } catch (Exception e) {
            System.out.println(e);
         }
-        conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/tesina_auction", "root", "root");
+        conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/tesina_auction", "root", "root"); // modificare con vostro indirizzo
         System.out.println("Connessione effetuata:");
         stmt = (Statement) conn.createStatement();
         String query1 = "update auction SET  closed_auction_at = now() where NOW() > end_auction_at; ";

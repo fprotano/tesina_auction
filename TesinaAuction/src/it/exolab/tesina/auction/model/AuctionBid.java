@@ -52,7 +52,7 @@ public class AuctionBid {
 
 	public AuctionBid(Timestamp createAt, Integer auctionId, Auction bidAuction, Integer userId, User userBid,
 			Double bid) {
-		super();
+	
 		this.createAt = createAt;
 		this.auctionId = auctionId;
 		this.bidAuction = bidAuction;

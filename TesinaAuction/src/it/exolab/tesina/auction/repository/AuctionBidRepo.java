@@ -11,7 +11,7 @@ import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionBid;
 
 
-public interface AuctionBidRepo extends   CrudRepository<AuctionBid, Integer>{
+public interface AuctionBidRepo extends CrudRepository<AuctionBid, Integer> {
 	
 	// insert, findbyid, findByAuctionID, findByUserIdWhereClosedAt=null
 	

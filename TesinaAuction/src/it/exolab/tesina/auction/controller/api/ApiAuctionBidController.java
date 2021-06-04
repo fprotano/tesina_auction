@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,11 @@ public class ApiAuctionBidController extends BaseController{
 	
 	// insert, findbyid, findByAuctionID, findByUserIdWhereClosedAt=null
 	
-	private AuctionBidService auctionBidSer;
+	private AuctionBidService auctionBidService;
 	
 	@Autowired(required = false)
-	public void setAuctionBidService(AuctionBidService auctionBidSer) {
-		this.auctionBidSer = auctionBidSer;
+	public void setAuctionBidService(AuctionBidService auctionBidService) {
+		this.auctionBidService = auctionBidService;
 	}
 	
 	
@@ -35,7 +36,10 @@ public class ApiAuctionBidController extends BaseController{
 	@ResponseBody
 	public HttpResponse<AuctionBid> doInsertBid(@RequestBody AuctionBid model) {
 		
-		this.auctionBidSer.save(model);
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		model.setCreateAt(currentTime);
+		System.out.println("nell insert del bid, auctionBid >> " + model);
+		auctionBidService.save(model);
 		return sendSuccess(model);
 		
 	}
@@ -44,7 +48,7 @@ public class ApiAuctionBidController extends BaseController{
 	@ResponseBody
 	public HttpResponse<AuctionBid> doFindAllBids(@RequestBody AuctionBid model) {
 		
-		List <AuctionBid> listBids = auctionBidSer.findAll();
+		List <AuctionBid> listBids = auctionBidService.findAll();
 		return sendSuccess(listBids);
 		
 	}
@@ -53,7 +57,7 @@ public class ApiAuctionBidController extends BaseController{
 	@ResponseBody
 	public HttpResponse<AuctionBid> doFindBidsByAuctionId(@RequestBody String auctionId) {
 		
-		List <AuctionBid> listBids = auctionBidSer.findBidsByAuctionId(Integer.parseInt(auctionId));
+		List <AuctionBid> listBids = auctionBidService.findBidsByAuctionId(Integer.parseInt(auctionId));
 		return sendSuccess(listBids);
 		
 	}
@@ -62,7 +66,7 @@ public class ApiAuctionBidController extends BaseController{
 	@ResponseBody
 	public HttpResponse<AuctionBid> doFindBidsOfActiveAuctionsByUserId(@RequestBody String userId) {
 		
-		List <AuctionBid> listBids = auctionBidSer.findBidsOfActiveAuctionsByUserId(Integer.parseInt(userId));
+		List <AuctionBid> listBids = auctionBidService.findBidsOfActiveAuctionsByUserId(Integer.parseInt(userId));
 		return sendSuccess(listBids);
 		
 	}
@@ -71,7 +75,7 @@ public class ApiAuctionBidController extends BaseController{
 	@ResponseBody
 	public HttpResponse<AuctionBid> doFindLastBidsOfActiveAuctionsByUserId(@RequestBody String userId) {
 		
-		List <AuctionBid> listBids = auctionBidSer.findLastBidsOfActiveAuctionsByUserId(Integer.parseInt(userId));
+		List <AuctionBid> listBids = auctionBidService.findLastBidsOfActiveAuctionsByUserId(Integer.parseInt(userId));
 		return sendSuccess(listBids);
 		
 	}

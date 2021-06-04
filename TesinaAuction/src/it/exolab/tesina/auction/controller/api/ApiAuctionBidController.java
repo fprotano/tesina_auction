@@ -18,7 +18,7 @@ import it.exolab.tesina.auction.service.api.AuctionBidService;
 
 @CrossOrigin
 @Controller
-@RequestMapping(value = "api/auction/bid")
+@RequestMapping(value = "api/auctionBid")
 public class ApiAuctionBidController extends BaseController{
 	
 	// insert, findbyid, findByAuctionID, findByUserIdWhereClosedAt=null

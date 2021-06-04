@@ -27,29 +27,6 @@ String cp = request.getContextPath();
 </head>
 <body>
 
-<c:if test =" ${ staff == null}">
-	
-	<form action="staff/login" method="post">
-	
-		<label for="email">Email : </label>
-		<input type="text" name="email" id="email" />
-	
-		<label for="password">Password : </label>
-		<input type="password" name="password" id="password" />
-		
-		<input type="submit" />
-		
-	</form>
-
-</c:if>
-	
-<c:if test = "${user !=null}">
-     	<li><a href="staff/logOut.jsp">logout</a></li>
-    	<li><a href="updateUtente.jsp">modifica account</a></li>
-</c:if>
-
-<!-- 
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -76,8 +53,62 @@ String cp = request.getContextPath();
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    
+    
 <div class="container" style="margin-top:10px">
 
- -->
+<br/><br/><br/>
+
+
+	
+<c:if test="${staff == null}">
+
+	
+	<form:form method="post" modelAttribute="staff" action="${pageContext.request.contextPath}/staff/login">
+		<label>Email: </label>
+		<br/>
+		<form:input path="email" />
+		<br/>
+		<label>Password: </label>
+		<br/>
+		<form:input path="password" />
+		<hr/>
+		<input type="submit" value="Login">
+	</form:form>
+		
+	 
+	<form:form method="post" modelAttribute="staff" action="${pageContext.request.contextPath}/staff/login">
+		<label>Email: </label>
+		<br/>
+		<form:input path="email" />
+		<br/>
+		<label>Password: </label>
+		<br/>
+		<form:input path="password" />
+		<hr/>
+		<input type="submit" value="Login">
+	</form:form>
+        
+    <!-- 
+	<form action="login" method="post">
+	
+	
+		<label for="email">Email : </label>
+		<input type="text" name="email" id="email" />
+	
+		<label for="password">Password : </label>
+		<input type="password" name="password" id="password" />
+		
+		<input type="submit" value="login" />
+		
+	</form>
+	 -->
+</c:if>
+	
+<c:if test = "${user !=null}">
+     	<li><a href="staff/logOut.jsp">logout</a></li>
+    	<li><a href="updateUtente.jsp">modifica account</a></li>
+</c:if>
+
 
 <br/><br/><br/>

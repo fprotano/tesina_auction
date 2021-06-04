@@ -33,7 +33,7 @@ public class StaffService {
 		staffRepo.delete(id);
 	}
 	public Staff findByEmailAndPassword(String email,String pass) {
-		return staffRepo.findByEmailAndPassword(email, pass);
+		return staffRepo.findStaffLogin(email, pass);
 	}
 	public Staff  FindBySurname(String surname) {
 		return staffRepo.findBySurname(surname)  ;

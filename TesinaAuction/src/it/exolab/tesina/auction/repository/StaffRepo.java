@@ -6,9 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.exolab.tesina.auction.model.Staff;
+import it.exolab.tesina.auction.model.User;
 
 public interface StaffRepo extends CrudRepository<Staff, Integer>{
 	
+	
+	public Staff findByEmailAndPassword(String email, String password);
 	
 	@Transactional
 	@Modifying

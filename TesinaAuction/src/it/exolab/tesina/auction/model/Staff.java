@@ -23,8 +23,11 @@ public class Staff {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer id;
 	
-	@Column(name="role_id")
-	public Integer roleId;
+	@Column(name="created_at")
+	private Timestamp createAt;
+	
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
 	
 	@Column
 	private String email;
@@ -38,17 +41,14 @@ public class Staff {
 	@Column
 	private String  surname;
 	
-	@Column(name="otp_code")
-	private String otpCode;
-	
-	@Column(name="created_at")
-	private Timestamp createAt;
-	
-	@Column(name="updated_at")
-	private Timestamp updatedAt;
+	@Column(name="role_id")
+	public Integer roleId;
 	
 	@Column(name="next_otp_code_after_date")
 	private Timestamp nextOtpCodeAfterDate;
+	
+	@Column(name="otp_code")
+	private String otpCode;
 	
 	@Column(name="otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
@@ -61,6 +61,20 @@ public class Staff {
 	public Staff() {
 
 	}
+	
+	
+
+	public Staff(Timestamp createAt, String email, String password, String name, String surname, Integer roleId) {
+		super();
+		this.createAt = createAt;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.roleId = roleId;
+	}
+
+
 
 	public Staff(Integer id, Integer roleId, String email, String password, String name, String surname, String otpCode,
 			Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,

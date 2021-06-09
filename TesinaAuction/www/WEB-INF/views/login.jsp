@@ -1,16 +1,20 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <form:form method="post" modelAttribute="staff" action="${pageContext.request.contextPath}/staff/login">
 
-<label>Email: </label>
-<br/>
-<form:input path="email" value="${ datiLogin.email }" />
-<br/>
-<label>Password: </label>
-<br/>
-<form:input path="password" value="${ datiLogin.password }" />
-<hr/>
-<input type="submit" value="Login">
+	<label>Email: </label>
+	<br/>
+	<form:input path="email" value="${ datiLogin.email }" />
+	<br/>
+	
+	<label>Password: </label>
+	<br/>
+	<form:input path="password" value="${ datiLogin.password }" />
+	<br/>
+	
+	<input type="submit" value="Login">
 </form:form>
 
 
@@ -50,14 +54,3 @@
 
  --%>
 
-
-
-
-
-
-
-
-
-
-</body>
-</html>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.exolab.tesina.auction.model.Staff;
 import it.exolab.tesina.auction.model.Role;
@@ -64,34 +65,44 @@ public class StaffController extends BaseController<Staff> {
 		}
 	
 	@RequestMapping(value = "admin-insert", method = RequestMethod.GET)
-	public ModelAndView redirectInsertStaff(HttpSession session) {
+	public ModelAndView redirectInsertStaff(HttpSession session, 
+			  @ModelAttribute("flashAttribute") String flashAttribute) {
 		
 		System.out.println("dentro admin-insert.GET");
 		
 		ModelAndView ret = new ModelAndView("home");
 		ret.addObject("action", "insert");
+		
 		List<Role> roles = roleService.findAll();
 		ret.addObject("roles", roles);
+		
 		Staff model= new Staff();
 		ret.addObject("insertStaff", model);
+		
+		if(flashAttribute != null)
+			ret.addObject("message", flashAttribute);
+		
 		System.out.println(ret);
 		return ret;
 		
 	}
 	
 	@RequestMapping(value = "admin-insert", method = RequestMethod.POST)
-	public ModelAndView doInsertStaff(HttpSession session, Staff insertStaff) {
+	public String doInsertStaff(HttpSession session, Staff insertStaff, RedirectAttributes attributes) {
 		
 		System.out.println("dentro admin-insert.POST");
 		
-		ModelAndView ret = new ModelAndView("home");
+//		ModelAndView ret = new ModelAndView("home");
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		insertStaff.setCreateAt(currentTime);
 		System.out.println("modello: "+insertStaff);
 		staffService.save(insertStaff);
-		ret.addObject("message", "registrazione effettuata con successo");
-		System.out.println(ret);
-		return ret;
+//		ret.addObject("message", "registrazione effettuata con successo");
+//		System.out.println(ret);
+//		return ret;
+		
+		attributes.addFlashAttribute("flashAttribute", "registrazione effettuata con successo");
+	    return"redirect:/staff/admin-insert";
 		
 	}
 

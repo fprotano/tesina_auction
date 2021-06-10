@@ -105,6 +105,23 @@ public class StaffController extends BaseController<Staff> {
 	    return"redirect:/staff/admin-insert";
 		
 	}
+	
+	@RequestMapping(value="list-helpDesk", method = RequestMethod.GET)
+	public ModelAndView getListAdministration() {
+		
+		System.out.println("dentro list.GET");
+		
+		ModelAndView ret = new ModelAndView("home");
+		ret.addObject("action", "actionListStaff");
+		
+		List<Staff> listStaff = staffService.findByRoleTitle("Help Desk");
+		ret.addObject("listStaff", listStaff);
+		
+		System.out.println(ret);
+		return ret;
+		
+		
+	}
 
 
 	@RequestMapping(value = "doStaffFindBySurname", method = RequestMethod.POST)

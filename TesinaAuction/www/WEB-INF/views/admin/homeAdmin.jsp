@@ -3,7 +3,7 @@
 <div>
 
 	<a href="${pageContext.request.contextPath}/staff/admin-insert"><button>Inserisci staff </button> </a>
-	<a href="#"><button>Lista staff </button> </a>
+	<a href="${pageContext.request.contextPath}/staff/list-helpDesk"><button>Lista staff </button> </a>
 
 </div>
 
@@ -13,6 +13,10 @@
 	
 		<c:when test="${ action == 'insert' }" >
 			<jsp:include page="insertStaff.jsp" />
+		</c:when>
+	
+		<c:when test="${ action == 'actionListStaff' }" >
+			<jsp:include page="listStaff.jsp" />
 		</c:when>
 	
 	</c:choose>

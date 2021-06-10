@@ -15,7 +15,7 @@
 			<jsp:include page="insertStaff.jsp" />
 		</c:when>
 	
-		<c:when test="${ action == 'actionListStaff' }" >
+		<c:when test="${ action == 'listStaff' }" >
 			<jsp:include page="listStaff.jsp" />
 		</c:when>
 	

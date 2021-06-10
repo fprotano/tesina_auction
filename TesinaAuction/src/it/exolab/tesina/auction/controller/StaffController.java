@@ -112,7 +112,7 @@ public class StaffController extends BaseController<Staff> {
 		System.out.println("dentro list.GET");
 		
 		ModelAndView ret = new ModelAndView("home");
-		ret.addObject("action", "actionListStaff");
+		ret.addObject("action", "listStaff");
 		
 		List<Staff> listStaff = staffService.findByRoleTitle("Help Desk");
 		ret.addObject("listStaff", listStaff);

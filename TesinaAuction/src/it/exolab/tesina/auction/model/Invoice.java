@@ -27,7 +27,7 @@ public class Invoice {
 	@Column(name="auction_order_id")
 	public Integer auctionOrderId;
 	
-	@Column(name="create_at")
+	@Column(name="created_at")
 	private Timestamp createAt;
 	
 	public Double amount, iva, total;

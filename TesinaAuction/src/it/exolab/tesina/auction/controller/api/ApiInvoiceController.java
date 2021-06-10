@@ -41,11 +41,12 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 		return sendSuccess(invoice);
 	}
 
-	@RequestMapping(value = "invoiceFindByUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "invoiceFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Invoice> doinvoiceFinfByuser(@RequestBody User model) {
-		System.out.println("nel invoiceFindById, invoice > " + model.getId());
-		Invoice invoice = invoiceService.findByUser(model);
+	public HttpResponse<Invoice> doinvoiceFindByUserId(@RequestBody User model) {
+		System.out.println("nel invoiceFindByIdUser, UserId > " + model.getId());
+		Invoice invoice = invoiceService.findByUserId(model);
+		System.out.println("nel invoiceFindByIdUser, invoice  > " + invoice);
 		return sendSuccess(invoice);
 	}
 

@@ -8,11 +8,12 @@ import it.exolab.tesina.auction.model.AuctionBid;
 import it.exolab.tesina.auction.repository.AuctionBidRepo;
 
 public class AuctionBidService {
+	
 private AuctionBidRepo auctionBidRepo;
 	
 	@Autowired(required = true)
 	public void setAuctionOrderRepo(AuctionBidRepo auctionBidRepo) {
-		this.auctionBidRepo =auctionBidRepo;
+		this.auctionBidRepo = auctionBidRepo;
 	}
 	
 	public AuctionBid find(int id) {

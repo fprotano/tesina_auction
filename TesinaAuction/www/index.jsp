@@ -1,34 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
-	<jsp:include page="templates/header.jsp">
-	<jsp:param value="home" name="title"/>
-	</jsp:include>
-
-<c:if test = "${staff != null}">
-
-		<c:choose>
-         
-         <c:when test = "${staff.roleId ==1}">
-           <!--  ADMIN -->
-           <jsp:include page="WEB-INF/views/admin/homeAdmin.jsp">
-           </jsp:include>
-         </c:when>
-         
-         <c:when test = "${staff.roleId ==2}">
-            <!--  HELP DESK -->
-           <jsp:include page="WEB-INF/views/helpDesk/homeHelpDesk.jsp">
-           </jsp:include>
-         </c:when>
-         
-      </c:choose>
-      
-      </c:if>
-      
-<c:if test="${staff == null}">
-	<p>per proseguire devi effettuare il login</p>
-</c:if>
-      
-
-<jsp:include page="templates/footer.jsp"></jsp:include>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>index</title>
+</head>
+<body>
+<jsp:forward page="staff/home"></jsp:forward>
+</body>
+</html>

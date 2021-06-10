@@ -11,9 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table
@@ -23,8 +28,11 @@ public class Staff {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer id;
 	
-	@Column(name="role_id")
-	public Integer roleId;
+	@Column(name="created_at")
+	private Timestamp createAt;
+	
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
 	
 	@Column
 	private String email;
@@ -38,17 +46,19 @@ public class Staff {
 	@Column
 	private String  surname;
 	
-	@Column(name="otp_code")
-	private String otpCode;
+	@Column(name="role_id")
+	public Integer roleId;
 	
-	@Column(name="created_at")
-	private Timestamp createAt;
-	
-	@Column(name="updated_at")
-	private Timestamp updatedAt;
+	@Fetch(value=FetchMode.JOIN)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="role_id", nullable=false, insertable=false, updatable=false)
+	private Role staffRole;
 	
 	@Column(name="next_otp_code_after_date")
 	private Timestamp nextOtpCodeAfterDate;
+	
+	@Column(name="otp_code")
+	private String otpCode;
 	
 	@Column(name="otp_code_expires_at")
 	private Timestamp otpCodeExpiresAt;
@@ -56,26 +66,9 @@ public class Staff {
 	@Transient
 	@OneToMany(mappedBy="staffAssigned", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<HelpCenter> listHelpCenterOfStaff;
-
 	
 	public Staff() {
 
-	}
-
-	public Staff(Integer id, Integer roleId, String email, String password, String name, String surname, String otpCode,
-			Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
-			Timestamp otpCodeExpiresAt) {
-		this.id = id;
-		this.roleId = roleId;
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.surname = surname;
-		this.otpCode = otpCode;
-		this.createAt = createAt;
-		this.updatedAt = updatedAt;
-		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
-		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 
 	public Integer getId() {
@@ -86,12 +79,20 @@ public class Staff {
 		this.id = id;
 	}
 
-	public Integer getRoleId() {
-		return roleId;
+	public Timestamp getCreateAt() {
+		return createAt;
 	}
 
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
+	public void setCreateAt(Timestamp createAt) {
+		this.createAt = createAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public String getEmail() {
@@ -126,28 +127,20 @@ public class Staff {
 		this.surname = surname;
 	}
 
-	public String getOtpCode() {
-		return otpCode;
+	public Integer getRoleId() {
+		return roleId;
 	}
 
-	public void setOtpCode(String otpCode) {
-		this.otpCode = otpCode;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
-	public Timestamp getCreateAt() {
-		return createAt;
+	public Role getStaffRole() {
+		return staffRole;
 	}
 
-	public void setCreateAt(Timestamp createAt) {
-		this.createAt = createAt;
-	}
-
-	public Timestamp getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setStaffRole(Role staffRole) {
+		this.staffRole = staffRole;
 	}
 
 	public Timestamp getNextOtpCodeAfterDate() {
@@ -158,6 +151,14 @@ public class Staff {
 		this.nextOtpCodeAfterDate = nextOtpCodeAfterDate;
 	}
 
+	public String getOtpCode() {
+		return otpCode;
+	}
+
+	public void setOtpCode(String otpCode) {
+		this.otpCode = otpCode;
+	}
+
 	public Timestamp getOtpCodeExpiresAt() {
 		return otpCodeExpiresAt;
 	}
@@ -166,11 +167,48 @@ public class Staff {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 	}
 
+	public List<HelpCenter> getListHelpCenterOfStaff() {
+		return listHelpCenterOfStaff;
+	}
+
+	public void setListHelpCenterOfStaff(List<HelpCenter> listHelpCenterOfStaff) {
+		this.listHelpCenterOfStaff = listHelpCenterOfStaff;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Staff other = (Staff) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return "Staff [id=" + id + ", roleId=" + roleId + ", email=" + email + ", password=" + password + ", name="
-				+ name + ", surname=" + surname + ", otpCode=" + otpCode + ", createAt=" + createAt + ", updatedAt="
-				+ updatedAt + ", nextOtpCodeAfterDate=" + nextOtpCodeAfterDate + ", otpCodeExpiresAt="
-				+ otpCodeExpiresAt + "]";
+		return "Staff [id=" + id + ", createAt=" + createAt + ", updatedAt=" + updatedAt + ", email=" + email
+				+ ", password=" + password + ", name=" + name + ", surname=" + surname + ", roleId=" + roleId
+				+ ", staffRole=" + staffRole + ", nextOtpCodeAfterDate=" + nextOtpCodeAfterDate + ", otpCode=" + otpCode
+				+ ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", listHelpCenterOfStaff=" + listHelpCenterOfStaff + "]";
 	}
+	
+	
+	
+	
 }

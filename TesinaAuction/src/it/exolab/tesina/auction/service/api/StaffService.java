@@ -38,4 +38,7 @@ public class StaffService {
 	public Staff  FindBySurname(String surname) {
 		return staffRepo.findBySurname(surname)  ;
 	}
+	public List<Staff> findByRoleTitle(String role){
+		return staffRepo.findByRoleTitle(role);
+	}
 }

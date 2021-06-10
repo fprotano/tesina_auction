@@ -43,11 +43,12 @@ public class ApiAuctionController extends BaseController {
 		cal.setTimeInMillis(model.getAuction().getStartAuctionAt().getTime());
 	    cal.add(Calendar.DAY_OF_MONTH, model.getAuctionDayDuration());
 	    Timestamp auctioneEndDate = new Timestamp(cal.getTime().getTime());
-	    System.out.println(auctioneEndDate);
+	    
 	    newAuction.setCreatedAt(currentTime);
 	    newAuction.setEndAuctionAt(auctioneEndDate);
-	    System.out.println("nel auctionInsert dopo l-insert, auction > " + newAuction );
+	    
 		auctionService.save(newAuction);
+		System.out.println("nel auctionInsert dopo l-insert, auction > " + newAuction );
 		return sendSuccess(newAuction); 
 	}
 	

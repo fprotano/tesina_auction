@@ -30,7 +30,7 @@ public class User {
 	private Integer id;
 	
 	@Column
-	private Integer enabled;
+	private Integer enabled= 0;
 	
 	@Column
 	private String email; 
@@ -85,11 +85,10 @@ public class User {
 	
 	}
 
-	public User(Integer enabled, String email, String password, String name, String surname, String question,
+	public User( String email, String password, String name, String surname, String question,
 			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
 			Timestamp otpCodeExpiresAt, List<UserItem> userItem, List<AuctionBid> userBids) {
 		super();
-		this.enabled = enabled;
 		this.email = email;
 		this.password = password;
 		this.name = name;

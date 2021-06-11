@@ -27,7 +27,7 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 	@Query(" SELECT h FROM HelpCenter as h "
 			+ " JOIN FETCH h.helpThreads as ht "
 			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
-			+ " AND ht.answer is null AND h.id = ht.helpCenterId "
+			+ " AND ht.answer is null  "
 			+ " ORDER BY ht.createdAt asc ")
 	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
 	

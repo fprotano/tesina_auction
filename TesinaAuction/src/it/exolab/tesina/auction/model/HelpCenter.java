@@ -56,7 +56,6 @@ public class HelpCenter {
 	@JoinColumn(name="assigned_to_id", nullable=false, insertable=false, updatable=false)
 	private Staff staffAssigned;
 	
-	@Transient
 	@OneToMany(mappedBy="helpCenterForThread", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<HelpCenterThread> helpThreads;
 	

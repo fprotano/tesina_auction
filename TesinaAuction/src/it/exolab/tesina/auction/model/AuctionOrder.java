@@ -4,9 +4,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +22,7 @@ public class AuctionOrder {
 	
 	@Column(name="order_no")
 	public Integer orderNo;
+	
 	
 	@Column(name="auction_id")
 	public Integer auctionId;
@@ -42,6 +46,10 @@ public class AuctionOrder {
 	
 	@Column(name="transaction_id")
 	private String transactionId;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="auction_id", nullable=false, insertable=false, updatable=false)
+	private Auction auction;
 
 	
 	public AuctionOrder(Integer orderNo, Integer auctionId, Integer auctionOrderStatusId, Timestamp createAt,

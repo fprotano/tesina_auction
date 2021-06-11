@@ -21,7 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table
+@Table(name="auction")
 public class Auction {
 	
 	@Id
@@ -35,11 +35,10 @@ public class Auction {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_item_id", nullable=false, insertable=false, updatable=false)
 	private UserItem userItem;
-
+	
 	@Column(name="winner_user_id")
 	private Integer winnerUserId;
 	
-	@Fetch(value=FetchMode.JOIN)
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="winner_user_id", nullable=false, insertable=false, updatable=false)
 	private User userWinner;
@@ -80,6 +79,11 @@ public class Auction {
 	@Transient
 	@OneToMany(mappedBy="bidAuction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AuctionBid> bids;
+	
+	@Transient
+	@Fetch(value=FetchMode.JOIN)
+	@OneToMany(mappedBy="bidAuction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<AuctionOrder> auctionOrder;
 
 	public Auction() {
 	

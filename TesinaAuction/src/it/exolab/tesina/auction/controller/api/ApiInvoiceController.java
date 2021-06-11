@@ -1,5 +1,7 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import it.exolab.tesina.auction.service.api.InvoiceService;
 @Controller
 @RequestMapping(value="api/invoice")
 public class ApiInvoiceController extends BaseController<Invoice> {
+	
 	private InvoiceService invoiceService;
 
 	@Autowired(required = true)
@@ -43,11 +46,11 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 
 	@RequestMapping(value = "invoiceFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Invoice> doinvoiceFindByUserId(@RequestBody User model) {
+	public HttpResponse<Invoice> doInvoiceFindByUserId(@RequestBody User model) {
 		System.out.println("nel invoiceFindByIdUser, UserId > " + model.getId());
-		Invoice invoice = invoiceService.findByUserId(model);
-		System.out.println("nel invoiceFindByIdUser, invoice  > " + invoice);
-		return sendSuccess(invoice);
+		List<Invoice> invoiceList = invoiceService.findByUserId(model);
+		System.out.println("nel invoiceFindByIdUser, invoice  > " + invoiceList);
+		return sendSuccess(invoiceList);
 	}
 
    }

@@ -14,6 +14,8 @@ import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.Invoice;
+import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
 
 @CrossOrigin
@@ -40,4 +42,14 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		List<AuctionOrder> auctionOrder =auctionOrderService.findAuctionOrderByAuctionId(model.getId());
 		return sendSuccess(auctionOrder); 
 	}
+	
+	@RequestMapping(value = "AuctionOrderFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<Invoice> doAuctionOrderFindByUserId(@RequestBody User model) {
+		System.out.println("nel AuctionOrderFindByUserId, UserId > " + model.getId());
+		List<AuctionOrder> auctionOrderList = auctionOrderService.findByUserId(model);
+		System.out.println("nel AuctionOrderFindByUserId, invoice  > " + auctionOrderList);
+		return sendSuccess(auctionOrderList);
+	}
+
 }

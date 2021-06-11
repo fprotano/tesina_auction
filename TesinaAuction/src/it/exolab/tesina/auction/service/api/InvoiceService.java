@@ -33,7 +33,7 @@ public class InvoiceService {
 	public void delete(int id) {
 		invoiceRepo.delete(id);
 	}
-	public Invoice findByUserId(User model){
+	public List<Invoice> findByUserId(User model){
 		return invoiceRepo.findByUserId(model.getId()) ;
 		
 	}

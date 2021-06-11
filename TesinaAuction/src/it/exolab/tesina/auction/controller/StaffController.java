@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.exolab.tesina.auction.model.Staff;
 import it.exolab.tesina.auction.model.Role;
+import it.exolab.tesina.auction.service.api.HelpCenterService;
 import it.exolab.tesina.auction.service.api.RoleService;
 import it.exolab.tesina.auction.service.api.StaffService;
 
@@ -28,6 +29,7 @@ import it.exolab.tesina.auction.service.api.StaffService;
 public class StaffController extends BaseController<Staff> {
 	private StaffService staffService;
 	private RoleService roleService;
+	private HelpCenterService helpSer;
 	
 	@Autowired(required = true)
 	public void setStaffService(StaffService staffService) {
@@ -37,6 +39,11 @@ public class StaffController extends BaseController<Staff> {
 	@Autowired(required = true)
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
+	}
+	
+	@Autowired(required = true)
+	public void setHelpCenterService(HelpCenterService helpSer) {
+		this.helpSer = helpSer;
 	}
 	
 	@RequestMapping(value="home", method=RequestMethod.GET)
@@ -50,25 +57,32 @@ public class StaffController extends BaseController<Staff> {
 		
 	 @RequestMapping(value="login", method=RequestMethod.POST)
 	 public ModelAndView login(Staff model, HttpSession session) {
+		 
 			ModelAndView ret = new ModelAndView("home");
 		 	Staff staff = staffService.findByEmailAndPassword(model.getEmail(), model.getPassword());
-			if(staff==null) {
+			
+		 	if(staff==null) {
 				ret.addObject("message", "Credenziali errate");
 				ret.addObject("datiLogin", model);
 				System.out.println("dentro controller/staff/login errore "+ret);
 				return ret;
 			} 
+		 	
 //		 	ret.addObject("staff",staff);
 		 	session.setAttribute("staff", staff);
-			System.out.println("dentro controller/staff/login "+ret);
+		 	
+		 	if(staff.getStaffRole().getTitle().equals("Help Desk")) {
+		 		
+		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
+		 		
+		 	}
+
 			return ret;
 		}
 	
 	@RequestMapping(value = "admin-insert", method = RequestMethod.GET)
 	public ModelAndView redirectInsertStaff(HttpSession session, 
 			  @ModelAttribute("flashAttribute") String flashAttribute) {
-		
-		System.out.println("dentro admin-insert.GET");
 		
 		ModelAndView ret = new ModelAndView("home");
 		ret.addObject("action", "insert");
@@ -81,8 +95,7 @@ public class StaffController extends BaseController<Staff> {
 		
 		if(flashAttribute != null)
 			ret.addObject("message", flashAttribute);
-		
-		System.out.println(ret);
+
 		return ret;
 		
 	}
@@ -90,12 +103,10 @@ public class StaffController extends BaseController<Staff> {
 	@RequestMapping(value = "admin-insert", method = RequestMethod.POST)
 	public String doInsertStaff(HttpSession session, Staff insertStaff, RedirectAttributes attributes) {
 		
-		System.out.println("dentro admin-insert.POST");
-		
 //		ModelAndView ret = new ModelAndView("home");
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		insertStaff.setCreateAt(currentTime);
-		System.out.println("modello: "+insertStaff);
+		insertStaff.setPassword("pass."+insertStaff.getEmail());
 		staffService.save(insertStaff);
 //		ret.addObject("message", "registrazione effettuata con successo");
 //		System.out.println(ret);
@@ -107,17 +118,14 @@ public class StaffController extends BaseController<Staff> {
 	}
 	
 	@RequestMapping(value="list-helpDesk", method = RequestMethod.GET)
-	public ModelAndView getListAdministration() {
-		
-		System.out.println("dentro list.GET");
+	public ModelAndView getListHelpDesk() {
 		
 		ModelAndView ret = new ModelAndView("home");
 		ret.addObject("action", "listStaff");
 		
 		List<Staff> listStaff = staffService.findByRoleTitle("Help Desk");
 		ret.addObject("listStaff", listStaff);
-		
-		System.out.println(ret);
+
 		return ret;
 		
 		

@@ -14,7 +14,6 @@ public class HelpCenterService {
 	@Autowired(required = true)
 	public void setAuctionRepo(HelpCenterRepo helpCenterRepo) {
 		this.helpCenterRepo = helpCenterRepo;
-
 	}
 
 	public HelpCenter find(int id) {
@@ -32,8 +31,13 @@ public class HelpCenterService {
 	public void delete(int id) {
 		helpCenterRepo.delete(id);
 	}
-	public List<HelpCenter> findbyAssignedIdAndClosed (int Assignedid){
-		return this.helpCenterRepo.findbyAssignedIdAndClosed(Assignedid);
+	
+	public List<HelpCenter> findbyAssignedIdAndOpen (int assignedId){
+		return this.helpCenterRepo.findbyAssignedIdAndOpen(assignedId);
+	}
+	
+	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(int assignedId){
+		return this.helpCenterRepo.findOpenHelpCenterAndWaitingAnswer(assignedId);
 	}
 	
 }

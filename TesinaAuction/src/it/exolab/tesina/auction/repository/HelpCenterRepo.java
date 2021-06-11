@@ -14,7 +14,42 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query(" SELECT h FROM HelpCenter  AS  h WHERE  h.assignedToId =?1 AND h.closedAt=null ")
-	public List<HelpCenter> findbyAssignedIdAndClosed(Integer assignedId );
+	@Query(" SELECT h FROM HelpCenter  AS  h WHERE  h.assignedToId =?1 AND h.closedAt is null ")
+	public List<HelpCenter> findbyAssignedIdAndOpen(Integer assignedId );
+	
+	/*
+	 *  "select c from Category as c " +
+    "inner join c.product as product " +
+    "where product.productId=:productId"
+	 */
+	
+	@Modifying
+	@Query(" SELECT h FROM HelpCenter as h "
+			+ " JOIN FETCH h.helpThreads as ht "
+			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
+			+ " AND ht.answer is null  "
+			+ " ORDER BY ht.createdAt asc ")
+	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
+	
+//	@Modifying
+//	@Query(" SELECT h FROM HelpCenterThread as ht "
+//			+ " JOIN ht.helpCenterForThread as h "
+//			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
+//			+ " AND ht.answer is null AND h.id = ht.helpCenterId "
+//			+ " ORDER BY ht.createdAt asc ")
+//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
+	
+//	@Modifying
+//	@Query("select h from it.exolab.tesina.auction.model.HelpCenter h "
+//			+ " inner join it.exolab.tesina.auction.model.HelpCenterThread t " + 
+//			"   where h.id  = t.helpCenterId ")
+//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
+	
+//	@Modifying
+//	@Query("SELECT h FROM HelpCenter h, HelpCenterThread t "
+//			+ " WHERE h.id=t.helpCenterId AND h.assignedToId= ?1 "
+//			+ " AND h.closedAt is null AND t.answer is null "
+//			+ " ORDER BY t.createdAt ASC ")
+//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
 
 }

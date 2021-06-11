@@ -6,12 +6,12 @@
 
 	<label>Email: </label>
 	<br/>
-	<form:input path="email" value="${ datiLogin.email }" />
+	<form:input path="email" value="${ datiLogin.email }" required="required" />
 	<br/>
 	
 	<label>Password: </label>
 	<br/>
-	<form:input path="password" value="${ datiLogin.password }" />
+	<form:input path="password" value="${ datiLogin.password }" required="required" />
 	<br/>
 	
 	<input type="submit" value="Login">

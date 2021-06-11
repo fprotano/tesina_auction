@@ -8,27 +8,29 @@
 
 	<label>Email: </label>
 	<br/>
-	 <form:input path="email" />
+	 <form:input path="email" required="required" />
 	<br/>
 	
+	<!-- 
 	<label>Password: </label>
 	<br/>
 	 <form:input path="password" />
 	<br/>
-	
+	 -->
+	 
 	<label>Nome: </label>
 	<br/>
-	<form:input path="name" />
+	<form:input path="name" required="required" />
 	<br/>
 	
 	<label>Cognome: </label>
 	<br/>
-	<form:input path="surname" />
+	<form:input path="surname" required="required" />
 	<br/>
 	
 	<c:if test="${ not empty roles }" >
 		<label for="role">Ruolo: </label>
-		<select name="roleId" id="role">
+		<select name="roleId" id="role" required="required" >
 			<option value="" disabled></option>
 			<!--  
 			<c:forEach var = "i" begin = "0" end = "${ roles.size() }">

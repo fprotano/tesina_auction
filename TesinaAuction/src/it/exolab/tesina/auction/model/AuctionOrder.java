@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="auction_order")
 public class AuctionOrder {
@@ -30,10 +33,10 @@ public class AuctionOrder {
 	@Column(name="auction_order_status_id")
 	public Integer auctionOrderStatusId;
 	
-	@Column(name="create_at")
+	@Column(name="created_at")
 	private Timestamp createAt;
 	
-	@Column(name="update_at")
+	@Column(name="updated_at")
 	private Timestamp updatedAt;
 	
 	@Column(name="payment_verify_expires_at")
@@ -47,6 +50,7 @@ public class AuctionOrder {
 	@Column(name="transaction_id")
 	private String transactionId;
 	
+	@Fetch(value=FetchMode.JOIN)
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="auction_id", nullable=false, insertable=false, updatable=false)
 	private Auction auction;

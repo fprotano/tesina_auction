@@ -81,8 +81,7 @@ public class Auction {
 	private List<AuctionBid> bids;
 	
 	@Transient
-	@Fetch(value=FetchMode.JOIN)
-	@OneToMany(mappedBy="bidAuction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="auction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AuctionOrder> auctionOrder;
 
 	public Auction() {

@@ -17,7 +17,7 @@ public interface AuctionRepo extends CrudRepository<Auction, Integer>{
 	@Query("SELECT a FROM Auction AS a "
 			+ " JOIN FETCH a.userItem AS ui "
 			+ " JOIN FETCH ui.user AS u "
-			+ "WHERE u.id=?1")
+			+ " WHERE u.id=?1")
 	public List<Auction> findAuctionsbyUser(Integer idUser);
 	
 //	@Transactional

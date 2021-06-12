@@ -39,8 +39,8 @@ public class AuctionOrderService {
 		return auctionOrderRepo.findAuctionOrderByAuctionId(auctionId);
 	}
  
-    public List<AuctionOrder> findByUserId(User model){
-		return auctionOrderRepo.finbyUserId(model.getId()) ;
+    public List<AuctionOrder> findbyUserId(Integer userId) {
+		return auctionOrderRepo.finbyUserId(userId) ;
 		
 	}
 }

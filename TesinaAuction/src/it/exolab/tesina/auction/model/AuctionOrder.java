@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -21,17 +22,16 @@ public class AuctionOrder {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer id;
+	private Integer id;
 	
 	@Column(name="order_no")
-	public Integer orderNo;
-	
+	private Integer orderNo;
 	
 	@Column(name="auction_id")
-	public Integer auctionId;
+	private Integer auctionId;
 	
 	@Column(name="auction_order_status_id")
-	public Integer auctionOrderStatusId;
+	private Integer auctionOrderStatusId;
 	
 	@Column(name="created_at")
 	private Timestamp createAt;
@@ -51,14 +51,16 @@ public class AuctionOrder {
 	private String transactionId;
 	
 	@Fetch(value=FetchMode.JOIN)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="auction_id", nullable=false, insertable=false, updatable=false)
 	private Auction auction;
 
-	
-	public AuctionOrder(Integer orderNo, Integer auctionId, Integer auctionOrderStatusId, Timestamp createAt,
-			Timestamp updatedAt, Timestamp paymentVerifyExpiresAt, Timestamp paidAt, Double amount,
-			String transactionId) {
+
+	public AuctionOrder(Integer id, Integer orderNo, Integer auctionId, Integer auctionOrderStatusId,
+			Timestamp createAt, Timestamp updatedAt, Timestamp paymentVerifyExpiresAt, Timestamp paidAt, Double amount,
+			String transactionId, Auction auction) {
+
+		this.id = id;
 		this.orderNo = orderNo;
 		this.auctionId = auctionId;
 		this.auctionOrderStatusId = auctionOrderStatusId;
@@ -68,6 +70,8 @@ public class AuctionOrder {
 		this.paidAt = paidAt;
 		this.amount = amount;
 		this.transactionId = transactionId;
+		this.auction = auction;
+
 	}
 
 	public AuctionOrder() {
@@ -153,12 +157,20 @@ public class AuctionOrder {
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
 	}
+	
+	public Auction getAuction() {
+		return auction;
+	}
+
+	public void setAuction(Auction auction) {
+		this.auction = auction;
+	}
 
 	@Override
 	public String toString() {
 		return "AuctionOrder [id=" + id + ", orderNo=" + orderNo + ", auctionId=" + auctionId
 				+ ", auctionOrderStatusId=" + auctionOrderStatusId + ", createAt=" + createAt + ", updatedAt="
 				+ updatedAt + ", paymentVerifyExpiresAt=" + paymentVerifyExpiresAt + ", paidAt=" + paidAt + ", amount="
-				+ amount + ", transactionId=" + transactionId + "]";
+				+ amount + ", transactionId=" + transactionId + ", auction=" + auction + "]";
 	}
 }

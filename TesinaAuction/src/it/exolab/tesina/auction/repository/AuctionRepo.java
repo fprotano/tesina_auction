@@ -20,6 +20,7 @@ public interface AuctionRepo extends CrudRepository<Auction, Integer>{
 			+ " WHERE u.id=?1")
 	public List<Auction> findAuctionsbyUser(Integer idUser);
 	
+	
 //	@Transactional
 //	@Modifying
 //	@Query("SELECT a FROM it.exolab.tesina.auction.model.Auction AS a, "

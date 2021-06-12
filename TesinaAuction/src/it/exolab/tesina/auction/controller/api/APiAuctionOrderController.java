@@ -51,10 +51,10 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	
 	@RequestMapping(value = "AuctionOrderFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Invoice> doAuctionOrderFindByUserId(@RequestBody User model) {
+	public HttpResponse<AuctionOrder> doAuctionOrderFindByUserId(@RequestBody User model) {
 		System.out.println("nel AuctionOrderFindByUserId, UserId > " + model.getId());
-		List<AuctionOrder> auctionOrderList = auctionOrderService.findbyUserId(model.getId());
-		System.out.println("nel AuctionOrderFindByUserId, invoice  > " + auctionOrderList);
+		List<AuctionOrder> auctionOrderList = auctionOrderService.finbyWinnerUserReturnAuctionUser(model.getId());
+		System.out.println("nel AuctionOrderFindByUserId, AuctionOrder  > " + auctionOrderList);
 		return sendSuccess(auctionOrderList);
 	}
 }

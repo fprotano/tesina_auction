@@ -43,4 +43,9 @@ public class AuctionOrderService {
 		return auctionOrderRepo.finbyUserId(userId) ;
 		
 	}
+    
+    public List<AuctionOrder> finbyWinnerUserReturnAuctionUser(Integer userId) {
+		return auctionOrderRepo.finbyWinnerUserReturnAuctionUser(userId) ;
+		
+	}
 }

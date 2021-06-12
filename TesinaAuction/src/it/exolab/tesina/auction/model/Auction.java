@@ -32,14 +32,14 @@ public class Auction {
 	private Integer userItemId;
 	
 	@Fetch(value=FetchMode.JOIN)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_item_id", nullable=false, insertable=false, updatable=false)
 	private UserItem userItem;
 	
 	@Column(name="winner_user_id")
 	private Integer winnerUserId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="winner_user_id", nullable=false, insertable=false, updatable=false)
 	private User userWinner;
 	

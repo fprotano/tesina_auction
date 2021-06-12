@@ -35,7 +35,7 @@ public class UserItem {
 	@Column(name="user_id")
 	private Integer userId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id", referencedColumnName="id", nullable=false, insertable=false, updatable=false)
 	private User user;
 	

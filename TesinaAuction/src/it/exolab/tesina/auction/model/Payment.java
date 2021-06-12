@@ -2,20 +2,20 @@ package it.exolab.tesina.auction.model;
 
 public class Payment {
 	
-	private double amount;
-	private String email, custom_code, transaction_id, url;
+	private Double amount;
+	private String email, customCode, transactionId, url;
 	
 	
 	public Payment() {
 
 	}
 	
-	public Payment(double amount, String email, String custom_code, String transaction_id, String url) {
+	public Payment(double amount, String email, String customCode, String transactionId, String url) {
 		
 		this.amount = amount;
 		this.email = email;
-		this.custom_code = custom_code;
-		this.transaction_id = transaction_id;
+		this.customCode = customCode;
+		this.transactionId = transactionId;
 		this.url = url;
 	}
 	
@@ -37,23 +37,23 @@ public class Payment {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCustom_code() {
-		return custom_code;
+	public String getCustomCode() {
+		return customCode;
 	}
-	public void setCustom_code(String custom_code) {
-		this.custom_code = custom_code;
+	public void setCustomCode(String customCode) {
+		this.customCode = customCode;
 	}
-	public String getTransaction_id() {
-		return transaction_id;
+	public String getTransactionId() {
+		return transactionId;
 	}
-	public void setTransaction_id(String transaction_id) {
-		this.transaction_id = transaction_id;
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
 	}
 	
 	@Override
 	public String toString() {
-		return "Payment [amount=" + amount + ", email=" + email + ", custom_code=" + custom_code + ", transaction_id="
-				+ transaction_id + ", url=" + url + "]";
+		return "Payment [amount=" + amount + ", email=" + email + ", customCode=" + customCode + ", transactionId="
+				+ transactionId + ", url=" + url + "]";
 	}
 	
 	

@@ -47,7 +47,7 @@ public class AuctionBid {
 	private Double bid;
 
 	public AuctionBid() {
-		super();
+	
 	}
 
 	public AuctionBid(Timestamp createAt, Integer auctionId, Auction bidAuction, Integer userId, User userBid,

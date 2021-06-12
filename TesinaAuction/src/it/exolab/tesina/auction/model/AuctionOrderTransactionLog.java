@@ -1,6 +1,7 @@
 package it.exolab.tesina.auction.model;
 
 import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -9,19 +10,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 @Entity
 @Table(name="auction_order_transaction_log")
 public class AuctionOrderTransactionLog {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name="create_at")
 	private Timestamp createdAt;
+	
 	@Column(name="update_at")
 	private Timestamp updatedAt;
+	
 	@Column(name="auction_order_id")
 	private Integer auctionOrderId;
+	
 	private String paramName;
+	
 	private String paramValue;
 	
 	

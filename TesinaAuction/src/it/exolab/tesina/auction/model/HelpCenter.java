@@ -61,7 +61,7 @@ public class HelpCenter {
 	
 
 	public HelpCenter() {
-		super();
+	
 	}
 
 

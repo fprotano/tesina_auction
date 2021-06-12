@@ -9,20 +9,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name="auction_order_status")
 public class AuctionOrderStatus {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String title;
 
 	public AuctionOrderStatus(String title) {
-		super();
 
 		this.title = title;
 	}
 
 	public AuctionOrderStatus() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Integer getId() {

@@ -16,21 +16,21 @@ public class Invoice {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer id;
+	private Integer id;
 		
 	@Column(name="invoice_no")
-	public Integer invoiceNo;
+	private Integer invoiceNo;
 	
 	@Column(name="user_id")
-	public Integer userId;
+	private Integer userId;
 	
 	@Column(name="auction_order_id")
-	public Integer auctionOrderId;
+	private Integer auctionOrderId;
 	
 	@Column(name="created_at")
 	private Timestamp createAt;
 	
-	public Double amount, iva, total;
+	private Double amount, iva, total;
 
 	
 	public Invoice() {

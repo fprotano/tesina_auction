@@ -26,7 +26,7 @@ public class Staff {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer id;
+	private Integer id;
 	
 	@Column(name="created_at")
 	private Timestamp createAt;
@@ -47,7 +47,7 @@ public class Staff {
 	private String  surname;
 	
 	@Column(name="role_id")
-	public Integer roleId;
+	private Integer roleId;
 	
 	@Fetch(value=FetchMode.JOIN)
 	@ManyToOne(fetch=FetchType.LAZY)

@@ -18,6 +18,7 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="help_center_thread")
 public class HelpCenterThread {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -40,12 +41,12 @@ public class HelpCenterThread {
 	private String answer;
 
 	public HelpCenterThread() {
-		super();
+		
 	}
 
 	public HelpCenterThread(Timestamp createdAt, Integer helpCenterId, HelpCenter helpCenterForThread, String question,
 			String answer) {
-		super();
+	
 		this.createdAt = createdAt;
 		this.helpCenterId = helpCenterId;
 		this.helpCenterForThread = helpCenterForThread;

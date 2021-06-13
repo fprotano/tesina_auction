@@ -2,7 +2,11 @@ package it.exolab.tesina.auction.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +25,7 @@ public class BaseController<T> {
 	protected HttpServletResponse response;
 	public static final String ERR_001 = "001";//
 	public static final String ERR_002 = "002";
+	private String url = "http://localhost:8080/TesinaMyBank/payment/inserisci";
 	protected Gson gson = new Gson();
 	
 	protected HttpResponse sendSuccess(Object data) {
@@ -50,6 +55,35 @@ public class BaseController<T> {
 				e.printStackTrace();
 			}
 		return ret;	
+	}
+	
+	protected void sendPost(String data) throws IOException {
+		URL obj = new URL(this.url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("POST");
+		// For POST only - START
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		os.write(data.getBytes());
+		os.flush();
+		os.close();
+		// For POST only - END
+
+		int responseCode = con.getResponseCode();
+		if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			
+		
+		}
 	}
 	
 	

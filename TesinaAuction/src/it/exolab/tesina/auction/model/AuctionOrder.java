@@ -23,10 +23,7 @@ public class AuctionOrder {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="order_no")
-	private Integer orderNo;
-	
+		
 	@Column(name="auction_id")
 	private Integer auctionId;
 	
@@ -47,6 +44,9 @@ public class AuctionOrder {
 	
 	private Double amount;
 	
+	@Column(name="order_no")
+	private String orderNo;
+	
 	@Column(name="transaction_id")
 	private String transactionId;
 	
@@ -56,7 +56,7 @@ public class AuctionOrder {
 	private Auction auction;
 
 
-	public AuctionOrder(Integer id, Integer orderNo, Integer auctionId, Integer auctionOrderStatusId,
+	public AuctionOrder(Integer id, String orderNo, Integer auctionId, Integer auctionOrderStatusId,
 			Timestamp createAt, Timestamp updatedAt, Timestamp paymentVerifyExpiresAt, Timestamp paidAt, Double amount,
 			String transactionId, Auction auction) {
 
@@ -86,11 +86,11 @@ public class AuctionOrder {
 		this.id = id;
 	}
 
-	public Integer getOrderNo() {
+	public String getOrderNo() {
 		return orderNo;
 	}
 
-	public void setOrderNo(Integer orderNo) {
+	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
 

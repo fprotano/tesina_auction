@@ -87,8 +87,6 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	public HttpResponse<Payment> doPaymentNotify(@RequestBody Payment model) {
 		
 		return null;
-		
-		
 	}
 
 }

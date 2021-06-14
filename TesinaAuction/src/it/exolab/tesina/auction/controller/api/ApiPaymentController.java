@@ -32,7 +32,7 @@ import it.exolab.tesina.auction.model.Payment;
 public class ApiPaymentController extends BaseController<Payment> {
 	
 
-	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
 	public void doAuctionOrderPayment(@RequestBody Payment model, HttpServletResponse httpServletResponse) throws IOException {
 		
@@ -57,7 +57,6 @@ public class ApiPaymentController extends BaseController<Payment> {
 	    writer.flush();
 	    String line;
 
-	    
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 	    while ((line = reader.readLine()) != null) {
 	      System.out.println(line);
@@ -65,11 +64,8 @@ public class ApiPaymentController extends BaseController<Payment> {
 	    writer.close();
 	    reader.close();
 		connection.connect();
-		
-		
 
 		System.out.println("prima del ret > " + connection);
-
 	}
 	
 

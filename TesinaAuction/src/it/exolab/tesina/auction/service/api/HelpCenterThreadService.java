@@ -34,6 +34,14 @@ public class HelpCenterThreadService {
 	public void delete(int id) {
 		helpCenterThreadRepo.delete(id);
 	}
+	
+	public List<HelpCenterThread> getThreadsByHelpCenterId (Integer id){
+		return this.helpCenterThreadRepo.findByHelpCenterId(id);
+	}
+	
+	public void updateAnswerThread(Integer id, String answer) {
+		this.helpCenterThreadRepo.updateAnswerThread(id, answer);
+	}
 
 
 }

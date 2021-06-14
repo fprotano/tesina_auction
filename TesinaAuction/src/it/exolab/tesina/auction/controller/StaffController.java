@@ -64,11 +64,9 @@ public class StaffController extends BaseController<Staff> {
 		 	if(staff==null) {
 				ret.addObject("message", "Credenziali errate");
 				ret.addObject("datiLogin", model);
-				System.out.println("dentro controller/staff/login errore "+ret);
 				return ret;
 			} 
 		 	
-//		 	ret.addObject("staff",staff);
 		 	session.setAttribute("staff", staff);
 		 	
 		 	if(staff.getStaffRole().getTitle().equals("Help Desk")) {
@@ -129,6 +127,13 @@ public class StaffController extends BaseController<Staff> {
 		return ret;
 		
 		
+	}
+	
+	@RequestMapping(value="logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+
+		session.removeAttribute("staff");
+		return "redirect:/staff/home";
 	}
 
 

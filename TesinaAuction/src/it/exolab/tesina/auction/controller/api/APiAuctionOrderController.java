@@ -78,6 +78,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		auctionOrderService.save(auctionOrder);
 		System.out.println("nel doAuctionOrderPayment,> " + auctionOrder);
+		System.out.println(model);
 		
 		return sendSuccess(model);
 	}

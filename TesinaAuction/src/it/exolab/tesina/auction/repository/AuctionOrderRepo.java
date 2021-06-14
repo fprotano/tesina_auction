@@ -28,4 +28,6 @@ public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
 			+ " JOIN FETCH ui.user AS u "
 			+ " WHERE a.winnerUserId = ?1 ")
 	public List<AuctionOrder> finbyWinnerUserReturnAuctionUser(Integer UserId);
+	
+	public AuctionOrder findByOrderNo(String OrderNo);
 }

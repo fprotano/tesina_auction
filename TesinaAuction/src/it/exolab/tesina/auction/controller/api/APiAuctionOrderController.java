@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.Payment;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
 
@@ -55,5 +57,21 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		List<AuctionOrder> auctionOrderList = auctionOrderService.finbyWinnerUserReturnAuctionUser(model.getId());
 		System.out.println("nel AuctionOrderFindByUserId, AuctionOrder  > " + auctionOrderList);
 		return sendSuccess(auctionOrderList);
+	}
+	
+	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<AuctionOrder> doAuctionOrderPayment(@RequestBody Payment model) {
+		
+		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
+		String bankUrl = "http://localhost:8080/TesinaMyBank/payment/inserisci";
+		model.setUrl(bankUrl);
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
+		auctionOrder.setAuctionOrderStatusId(2);
+		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		auctionOrderService.save(auctionOrder);
+		System.out.println("nel doAuctionOrderPayment,> " + auctionOrder);
+		
+		return sendSuccess(auctionOrder);
 	}
 }

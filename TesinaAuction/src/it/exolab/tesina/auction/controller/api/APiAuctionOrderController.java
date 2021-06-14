@@ -61,17 +61,34 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	
 	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<AuctionOrder> doAuctionOrderPayment(@RequestBody Payment model) {
+	public HttpResponse<Payment> doAuctionOrderPayment(@RequestBody Payment model) {
 		
 		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
-		String bankUrl = "http://localhost:8080/TesinaMyBank/payment/inserisci";
-		model.setUrl(bankUrl);
+		String urlBank = "http://localhost:8080/TesinaMyBank/payment/inserisci";
+		String urlUnDo = "daDefinire:1";
+		String urlSuccess = "daDefinire:2";
+		String urlNotify = "http://localhost:8080/TesinaAuction/api/auctionOrder/paymentNotify";
+		model.setUrlBank(urlBank);
+		model.setUrlUnDo(urlUnDo);
+		model.setUrlSuccess(urlSuccess);
+		model.setUrlNotify(urlNotify);
+		
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
 		auctionOrder.setAuctionOrderStatusId(2);
 		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		auctionOrderService.save(auctionOrder);
 		System.out.println("nel doAuctionOrderPayment,> " + auctionOrder);
 		
-		return sendSuccess(auctionOrder);
+		return sendSuccess(model);
 	}
+	
+	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<Payment> doPaymentNotify(@RequestBody Payment model) {
+		
+		return null;
+		
+		
+	}
+
 }

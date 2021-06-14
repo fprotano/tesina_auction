@@ -32,44 +32,42 @@ import it.exolab.tesina.auction.model.Payment;
 public class ApiPaymentController extends BaseController<Payment> {
 	
 
-	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
-	@ResponseBody
-	public void doAuctionOrderPayment(@RequestBody Payment model, HttpServletResponse httpServletResponse) throws IOException {
-		
-		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
-		String projectUrl = "http://localhost:8080/TesinaMyBank/payment/inserisci";
-
-		Gson gson = new Gson();
-		String json = gson.toJson(model);
-		URL url = new URL(projectUrl);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 
-		connection.setRequestMethod("POST");
-		connection.setDoOutput(true);
-
-		
-		connection.setRequestProperty("Accept-Charset", "UTF-8");
-		connection.setRequestProperty("Accept", "application/json" );
-		connection.setRequestProperty("Content-Type", "application/json" + "UTF-8");
-
-	    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-
-	    writer.write(json);
-	    writer.flush();
-	    String line;
-
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-	    while ((line = reader.readLine()) != null) {
-	      System.out.println(line);
-	    }
-	    writer.close();
-	    reader.close();
-		connection.connect();
-
-		System.out.println("prima del ret > " + connection);
-	}
-	
-
-	
-	
+//	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+//	@ResponseBody
+//	public void doAuctionOrderPayment(@RequestBody Payment model, HttpServletResponse httpServletResponse) throws IOException {
+//		
+//		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
+//		String projectUrl = "http://localhost:8080/TesinaMyBank/payment/inserisci";
+//
+//		Gson gson = new Gson();
+//		String json = gson.toJson(model);
+//	
+//		System.out.println(json);
+//		URL url = new URL(projectUrl);
+//		HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 
+//		connection.setRequestMethod("POST");
+//		connection.setDoOutput(true);
+//
+//		
+//		connection.setRequestProperty("Accept-Charset", "UTF-8");
+//		connection.setRequestProperty("Accept", "application/json" );
+//		connection.setRequestProperty("Content-Type", "application/json" + "UTF-8");
+//
+//	    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+//
+//	    writer.write(json);
+//	    writer.flush();
+//	    String line;
+//
+//	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//	    while ((line = reader.readLine()) != null) {
+//	      System.out.println(line);
+//	    }
+//	    writer.close();
+//	    reader.close();
+//		connection.connect();
+//
+//		System.out.println("prima del ret > " + connection);
+//	}
 
 }

@@ -7,10 +7,22 @@
 	<jsp:param value="${ title }" name="title"/>
 </jsp:include>
 <br>
-<c:if test="${not empty sessionScope.staff.name }">
-<p>${ sessionScope.staff.name } </p>
+
+<c:if test="${not empty message }" >
+	<p>${message}</p>
 </c:if>
-${ message } <br>
+
+<c:if test="${ empty sessionScope.staff }">
+	
+       	<c:out value="per proseguire, effettua il login" /><br><br>
+        <jsp:include page="login.jsp" />
+
+</c:if>
+
+<c:if test="${not empty sessionScope.staff }">
+	<a href="${pageContext.request.contextPath}/staff/logout"><button>log out</button></a>
+	<br>
+	<p>user : ${ sessionScope.staff.surname } ${ sessionScope.staff.name }</p><br>
 
 <c:choose>
 
@@ -22,10 +34,7 @@ ${ message } <br>
             <jsp:include page="helpDesk/homeHelpDesk.jsp" />
          </c:when>
          
-         <c:otherwise>
-         	<c:out value="per proseguire, effettua il login" /><br><br>
-            <jsp:include page="login.jsp" />
-         </c:otherwise>
       </c:choose>
 
+</c:if>
 <jsp:include page="/templates/footer.jsp"></jsp:include>

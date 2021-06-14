@@ -35,6 +35,20 @@ public class HelpCenterController extends BaseController<HelpCenter> {
 		Staff s = (Staff) session.getAttribute("staff");
 		List<HelpCenter> listHelpCenter = helpCenterService.findOpenHelpCenterAndWaitingAnswer(s.getId());
 		ret.addObject("listHelpCenter", listHelpCenter);
+		ret.addObject("goToThread", new HelpCenter());
+//		ret.addObject("listHelpCenter", helpCenterService.findOpenHelpCenterAndWaitingAnswer(s.getId()));
+
+		return ret;
+
+	}
+
+	@RequestMapping(value = "allThreads", method = RequestMethod.GET)
+	public ModelAndView findAllThreads(@ModelAttribute HelpCenter model, HttpSession session) {
+		ModelAndView ret = new ModelAndView("home");
+		Staff s = (Staff) session.getAttribute("staff");
+		List<HelpCenter> listHelpCenter = helpCenterService.findAll();
+		ret.addObject("listHelpCenter", listHelpCenter);
+		ret.addObject("goToThread", new HelpCenter());
 //		ret.addObject("listHelpCenter", helpCenterService.findOpenHelpCenterAndWaitingAnswer(s.getId()));
 
 		return ret;
@@ -43,7 +57,7 @@ public class HelpCenterController extends BaseController<HelpCenter> {
 
 	@RequestMapping(value = "findHelpCenter", method = RequestMethod.POST)
 	public ModelAndView dofindbyAssignedIdAndClosed(@ModelAttribute HelpCenter model) {
-		System.out.println("findbyAssignedIdAndClosed jsp " + model);
+
 		ModelAndView ret = new ModelAndView("admin/homeAdmin");
 		helpCenterService.findbyAssignedIdAndOpen(model.getAssignedToId());
 

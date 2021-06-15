@@ -1,35 +1,38 @@
 package it.exolab.tesina.auction.controller.api;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-
-import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.Gson;
 
 import it.exolab.tesina.auction.controller.BaseController;
+import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
+import it.exolab.tesina.auction.model.OotlBank;
 import it.exolab.tesina.auction.model.Payment;
 
 @CrossOrigin
 @Controller
 @RequestMapping(value = "api/payment")
 public class ApiPaymentController extends BaseController<Payment> {
+	
+	
+	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+	@ResponseBody
+	public void doPaymentNotify(@ModelAttribute OotlBank ootlBank) {
+		
+		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
+		Field[] fields = aotl.getClass().getDeclaredFields();
+		System.out.println(fields);
+		for(int i=0; i<ootlBank.getPn().length; i++) {
+			//if() comparazione nome con parameter
+			
+		}
+	}
 	
 
 //	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)

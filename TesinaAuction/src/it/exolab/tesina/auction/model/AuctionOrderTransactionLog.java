@@ -20,10 +20,10 @@ public class AuctionOrderTransactionLog {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="create_at")
+	@Column(name="created_at")
 	private Timestamp createdAt;
 	
-	@Column(name="update_at")
+	@Column(name="updated_at")
 	private Timestamp updatedAt;
 	
 	@Column(name="auction_order_id")
@@ -33,6 +33,19 @@ public class AuctionOrderTransactionLog {
 	
 	private String paramValue;
 	
+	
+	public AuctionOrderTransactionLog(Timestamp createdAt, Timestamp updatedAt, Integer auctionOrderId,
+			String paramName, String paramValue) {
+
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.auctionOrderId = auctionOrderId;
+		this.paramName = paramName;
+		this.paramValue = paramValue;
+	}
+	public AuctionOrderTransactionLog() {
+
+	}
 	
 	public Integer getId() {
 		return id;
@@ -70,19 +83,7 @@ public class AuctionOrderTransactionLog {
 	public void setParamValue(String paramValue) {
 		this.paramValue = paramValue;
 	}
-	public AuctionOrderTransactionLog(Timestamp createdAt, Timestamp updatedAt, Integer auctionOrderId,
-			String paramName, String paramValue) {
-		super();
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.auctionOrderId = auctionOrderId;
-		this.paramName = paramName;
-		this.paramValue = paramValue;
-	}
-	public AuctionOrderTransactionLog() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	@Override
 	public String toString() {
 		return "AuctionOrderTransactionLog [id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt

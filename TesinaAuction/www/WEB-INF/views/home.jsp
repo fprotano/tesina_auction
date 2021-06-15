@@ -2,7 +2,15 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<style>
+.msg{
+text-align: center;
+font-size: 20px;
+color:red;
+}
+</style>
 
+<jsp:include page="nav.jsp"></jsp:include>
 <jsp:include page="/templates/header.jsp">
 	<jsp:param value="${ title }" name="title"/>
 </jsp:include>
@@ -14,7 +22,7 @@
 
 <c:if test="${ empty sessionScope.staff }">
 	
-       	<c:out value="per proseguire, effettua il login" /><br><br>
+     <div class="msg">  <c:out value="Per proseguire effettua il login" /></div><br><br>
         <jsp:include page="login.jsp" />
 
 </c:if>

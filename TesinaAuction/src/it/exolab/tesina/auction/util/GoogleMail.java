@@ -14,6 +14,10 @@ public class GoogleMail {
 	
 	private GoogleMail() {
     }
+	
+	// username exolabCorso2021
+	// password e2021!tesina
+	
 
     /**
      * Send email using GMail SMTP server.

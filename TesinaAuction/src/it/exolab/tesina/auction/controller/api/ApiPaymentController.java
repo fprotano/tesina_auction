@@ -1,7 +1,6 @@
 package it.exolab.tesina.auction.controller.api;
 
-import java.lang.reflect.Field;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.controller.BaseController;
-import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
-import it.exolab.tesina.auction.model.OotlBank;
+import it.exolab.tesina.auction.model.AuctionOrder;
 import it.exolab.tesina.auction.model.Payment;
+import it.exolab.tesina.auction.service.api.AuctionOrderService;
 
 @CrossOrigin
 @Controller
@@ -21,19 +20,38 @@ import it.exolab.tesina.auction.model.Payment;
 public class ApiPaymentController extends BaseController<Payment> {
 	
 	
-	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
-	@ResponseBody
-	public void doPaymentNotify(@ModelAttribute OotlBank ootlBank) {
-		
-		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
-		Field[] fields = aotl.getClass().getDeclaredFields();
-		System.out.println(fields);
-		for(int i=0; i<ootlBank.getPn().length; i++) {
-			//if() comparazione nome con parameter
-			
-		}
+	private AuctionOrderService  auctionOrderService;
+	
+	@Autowired(required = true)
+	public void setAuctionOrderService(AuctionOrderService  auctionOrderService) {
+		this.auctionOrderService = auctionOrderService;
 	}
 	
+	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+	@ResponseBody
+	public void doPaymentNotify(@ModelAttribute Payment payment) {
+		
+		//String numOrder = payment.getCustomCode().substring(17);
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(payment.getCustomCode());
+		auctionOrder.setTransactionId(payment.getTransactionId());
+		auctionOrderService.save(auctionOrder);
+		System.out.println("nel payment notify ");
+	}
+	
+	
+//	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+//	@ResponseBody
+//	public void doPaymentNotify(@ModelAttribute OotlBank ootlBank) {
+//		
+//		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
+//		Field[] fields = aotl.getClass().getDeclaredFields();
+//		System.out.println(fields);
+//		for(int i=0; i<ootlBank.getPn().length; i++) {
+//			//if() comparazione nome con parameter
+//			
+//		}
+//	}
+//	
 
 //	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 //	@ResponseBody

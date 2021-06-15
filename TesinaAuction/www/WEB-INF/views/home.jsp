@@ -8,6 +8,12 @@ text-align: center;
 font-size: 20px;
 color:red;
 }
+.loggedUser{
+text-align: center;
+font-size: 27px;
+font-family: inherit;
+text-transform: uppercase;}
+
 </style>
 
 <jsp:include page="nav.jsp"></jsp:include>
@@ -30,8 +36,8 @@ color:red;
 <c:if test="${not empty sessionScope.staff }">
 	<a href="${pageContext.request.contextPath}/staff/logout"><button>log out</button></a>
 	<br>
-	<p>user : ${ sessionScope.staff.surname } ${ sessionScope.staff.name }</p><br>
-
+	<p class="loggedUser">Benvenuto ${ sessionScope.staff.surname } ${ sessionScope.staff.name }</p><br>
+	
 <c:choose>
 
          <c:when test = "${sessionScope.staff.roleId == 1}">

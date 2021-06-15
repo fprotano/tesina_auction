@@ -1,0 +1,1 @@
+java -cp AuctionBatch.jar it.exolab.tesina.exploid.bat.forauction.AutoUpdate "jdbc:mysql://localhost:3306/tesina_auction" "root" "root"

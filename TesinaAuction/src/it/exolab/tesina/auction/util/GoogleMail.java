@@ -47,7 +47,7 @@ public void sendMail(String getTo, String getSubject, String getText) throws Add
 	 */
 	
 //		this.metodo3(getTo, getSubject, getText);
-		metodo4( getTo,  getSubject,  getText);
+		metodo5( getTo,  getSubject,  getText);
 	
 	
 	}
@@ -220,7 +220,7 @@ public void sendMail(String getTo, String getSubject, String getText) throws Add
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("fromaddress@gmail.com", "*******");
+                return new PasswordAuthentication("exolabCorso2021@gmail.com", "e2021!tesina");
 
             }
 

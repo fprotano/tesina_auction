@@ -1,5 +1,8 @@
 package it.exolab.tesina.auction.util;
 import com.sun.mail.smtp.SMTPTransport;
+
+import it.exolab.tesina.auction.controller.SendEmailController;
+
 import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
@@ -31,6 +34,9 @@ public class GoogleMail {
 	
 public void sendMail(String getTo, String getSubject, String getText) throws AddressException, MessagingException {
 		
+//	SendEmail se = new SendEmail(getTo, "giggingongo@gmail.it", getSubject, getText);
+	SendEmailController sc = new SendEmailController();
+	sc.sendMail(getTo, "giggingongo@gmail.it", getSubject, getText);
 //			GoogleMail gm = new GoogleMail();
 //			
 //			gm.setServerProperties();
@@ -47,7 +53,7 @@ public void sendMail(String getTo, String getSubject, String getText) throws Add
 	 */
 	
 //		this.metodo3(getTo, getSubject, getText);
-		metodo5( getTo,  getSubject,  getText);
+//		metodo5( getTo,  getSubject,  getText);
 	
 	
 	}
@@ -211,7 +217,7 @@ public void sendMail(String getTo, String getSubject, String getText) throws Add
 
         // Setup mail server
         properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");
 

@@ -27,7 +27,7 @@ public class SendEmailController {
 	private static String auth = "mail.smtp.auth";
 //	private static String filePath = "C:\\Users\\alessio\\Downloads\\out.pdf";
 	
-	private final String yourPassword = "Giggi0101!";
+	private final String yourPassword = "e2021!tesina";
 	
 	
 	public void sendMail(String sendTo, String adminMail, String oggetto,  String comunicazione) {

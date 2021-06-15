@@ -36,7 +36,7 @@ public void sendMail(String getTo, String getSubject, String getText) throws Add
 		
 //	SendEmail se = new SendEmail(getTo, "giggingongo@gmail.it", getSubject, getText);
 	SendEmailController sc = new SendEmailController();
-	sc.sendMail(getTo, "giggingongo@gmail.it", getSubject, getText);
+	sc.sendMail(getTo, "exolabCorso2021@gmail.com", getSubject, getText);
 //			GoogleMail gm = new GoogleMail();
 //			
 //			gm.setServerProperties();

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,20 +26,27 @@ public class OTP <T, S>{
 			Staff staff = (Staff) model;
 			
 			if(staff.getOtpCode() == null || staff.getNextOtpCodeAfterDate()== null || this.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
-				if(this.afterDate(staff.getOtpCodeExpiresAt(), now)) {
+				if(staff.getOtpCodeExpiresAt()== null || this.afterDate(staff.getOtpCodeExpiresAt(), now)) {
 //					staff.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
 					staff.setOtpCode(this.generateRandomString());
 					staff.setOtpCodeExpiresAt(addMinutesToDate(now, 10));
 					
 					StaffService staffService = (StaffService) service;
-					staffService.updateOTP(staff.getId(), staff.getOtpCode(), 
-												staff.getOtpCodeExpiresAt());
 					try {
-						GoogleMail.Send("exolabCorso2021", "e2021!tesina",staff.getEmail() , "nuovo OTP", "salve! Le inviamo il nuovo codice OTP : "+staff.getOtpCode());
-					} catch (MessagingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+//						GoogleMail.Send("exolabCorso2021", "e2021!tesina",staff.getEmail() , "nuovo OTP", "salve! Le inviamo il nuovo codice OTP : "+staff.getOtpCode());
+						GoogleMail gm = new GoogleMail();
+						gm.sendMail(staff.getEmail(), "nuovo codice otp", "salve, le inviamo il nuovo codice otp : ' "+staff.getOtpCode()+" ' con scadenza il "+staff.getOtpCodeExpiresAt());
+
+						staffService.updateOTP(staff.getId(), staff.getOtpCode(), 
+													staff.getOtpCodeExpiresAt());
+					} catch (AddressException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (MessagingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
 				}
 				ret= new ModelAndView("home");
 				ret.addObject("userOTP", staff);
@@ -60,11 +68,18 @@ public class OTP <T, S>{
 					userService.updateOTP(user.getId(), user.getOtpCode(), 
 												user.getOtpCodeExpiresAt());
 					try {
-						GoogleMail.Send("exolabCorso2021", "e2021!tesina",user.getEmail() , "nuovo OTP", "salve! Le inviamo il nuovo codice OTP, con scadenza "+user.getOtpCodeExpiresAt()+" da inserire al prossimo login : "+user.getOtpCode());
-					} catch (MessagingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+//						GoogleMail.Send("exolabCorso2021", "e2021!tesina",user.getEmail() , "nuovo OTP", "salve! Le inviamo il nuovo codice OTP, con scadenza "+user.getOtpCodeExpiresAt()+" da inserire al prossimo login : "+user.getOtpCode());
+						
+						GoogleMail gm = new GoogleMail();
+						gm.sendMail(user.getEmail(), "nuovo codice otp", "salve, le inviamo il nuovo codice otp : ' "+user.getOtpCode()+" ' con scadenza il "+user.getOtpCodeExpiresAt());
+						} catch (AddressException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (MessagingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
 				}
 				ret= new ModelAndView("home");
 				ret.addObject("userOTP", user);

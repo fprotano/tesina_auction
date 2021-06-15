@@ -3,94 +3,134 @@ import com.sun.mail.smtp.SMTPTransport;
 import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
+
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class GoogleMail {
 	
-	private GoogleMail() {
+	Session newSession;
+	MimeMessage mimeMessage;
+	
+	public GoogleMail() {
     }
 	
 	// username exolabCorso2021
 	// password e2021!tesina
 	
+	
+public void sendMail(String getTo, String getSubject, String getText) throws AddressException, MessagingException {
+		
+//			GoogleMail gm = new GoogleMail();
+//			
+//			gm.setServerProperties();
+//			gm.draftMail(getTo, getSubject, getText);
+//			gm.sendEmail();
+	
+	this.sendPlainTextEmail("smtp.gmail.com", "587", "exolabCorso2021@gmail.com", 
+						"e2021!tesina", getTo, getSubject, getText);
+	
+	/*
+	 * String host, String port,
+            final String userName, final String password, String toAddress,
+            String subject, String message
+	 */
+		
+	}
 
-    /**
-     * Send email using GMail SMTP server.
-     *
-     * @param username GMail username
-     * @param password GMail password
-     * @param recipientEmail TO recipient
-     * @param title title of the message
-     * @param message message to be sent
-     * @throws AddressException if the email address parse failed
-     * @throws MessagingException if the connection is dead or not in the connected state or if the message is not a MimeMessage
-     */
-    public static void Send(final String username, final String password, String recipientEmail, String title, String message) throws AddressException, MessagingException {
-        GoogleMail.Send(username, password, recipientEmail, "", title, message);
-    }
+	private void sendEmail() throws MessagingException {
+		String fromUser = "exolabCorso2021@gmail.com";
+		String fromPassword = "e2021!tesina";
+		String emailHost = "smtp.gmail.com";
+		Transport transport = newSession.getTransport("smtp");
+		transport.connect(emailHost, fromUser, fromPassword);
+		transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+		transport.close();
+		System.out.println("mail inviata");
+	}
 
-    /**
-     * Send email using GMail SMTP server.
-     *
-     * @param username GMail username
-     * @param password GMail password
-     * @param recipientEmail TO recipient
-     * @param ccEmail CC recipient. Can be empty if there is no CC recipient
-     * @param title title of the message
-     * @param message message to be sent
-     * @throws AddressException if the email address parse failed
-     * @throws MessagingException if the connection is dead or not in the connected state or if the message is not a MimeMessage
-     */
-    public static void Send(final String username, final String password, String recipientEmail, String ccEmail, String title, String message) throws AddressException, MessagingException {
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+	private void draftMail(String getTo, String getSubject, String getText) throws AddressException, MessagingException {
+	
+		String to = getTo;
+		String from ="exolabCorso2021@gmail.com";
+		String subject = getSubject;
+		String emailBody = getText;
+		mimeMessage = new MimeMessage(newSession);
+		
+		mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		mimeMessage.setSubject(subject);
+		
+		MimeBodyPart mimeBodyPart = new MimeBodyPart();
+		mimeBodyPart.setContent(emailBody, "html/text");
+		
+		MimeMultipart mimeMultipart = new MimeMultipart();
+		mimeMultipart.addBodyPart(mimeBodyPart);
+		mimeMessage.setContent(mimeMultipart);
+}
 
-        // Get a Properties object
-        Properties props = System.getProperties();
-        props.setProperty("mail.smtps.host", "smtp.gmail.com");
-        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
-        props.setProperty("mail.smtp.port", "465");
-        props.setProperty("mail.smtp.socketFactory.port", "465");
-        props.setProperty("mail.smtps.auth", "true");
+	private void setServerProperties() {
+		Properties pr = System.getProperties();	
+		pr.put("mail.smtp.port", "547");
+		pr.put("mail.smtp.auth", "true");
+		pr.put("mail.smtp.starttls.enable", "true");
+		newSession = Session.getDefaultInstance(pr, null);
+		
+	}
+	
+	/*
+	 * ################################################################
+	 * ################################################################
+	 */
+	
+	
+	public void sendPlainTextEmail(String host, String port,
+            final String userName, final String password, String toAddress,
+            String subject, String message) throws AddressException,
+            MessagingException {
 
-        /*
-        If set to false, the QUIT command is sent and the connection is immediately closed. If set 
-        to true (the default), causes the transport to wait for the response to the QUIT command.
+        // sets SMTP server properties
+        Properties properties = new Properties();
+//        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+// *** BEGIN CHANGE
+        properties.put("mail.smtp.user", userName);
 
-        ref :   http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
-                http://forum.java.sun.com/thread.jspa?threadID=5205249
-                smtpsend.java - demo program from javamail
-        */
-        props.put("mail.smtps.quitwait", "false");
+        // creates a new session, no Authenticator (will connect() later)
+        Session session = Session.getDefaultInstance(properties);
+// *** END CHANGE
 
-        Session session = Session.getInstance(props, null);
+        // creates a new e-mail message
+        Message msg = new MimeMessage(session);
 
-        // -- Create a new message --
-        final MimeMessage msg = new MimeMessage(session);
-
-        // -- Set the FROM and TO fields --
-        msg.setFrom(new InternetAddress(username + "@gmail.com"));
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail, false));
-
-        if (ccEmail.length() > 0) {
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
-        }
-
-        msg.setSubject(title);
-        msg.setText(message, "utf-8");
+        msg.setFrom(new InternetAddress(userName));
+        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setSubject(subject);
         msg.setSentDate(new Date());
+        // set plain text message
+        msg.setText(message);
 
-        SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
-
-        t.connect("smtp.gmail.com", username, password);
-        t.sendMessage(msg, msg.getAllRecipients());      
+// *** BEGIN CHANGE
+        // sends the e-mail
+        Transport t = session.getTransport("smtp");
+        t.connect(userName, password);
+        t.sendMessage(msg, msg.getAllRecipients());
         t.close();
-    }
+        System.out.println("email spedita");
+// *** END CHANGE
 
+    }
 }

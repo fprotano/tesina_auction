@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 import javax.mail.MessagingException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.exolab.tesina.auction.model.Staff;
@@ -17,7 +18,7 @@ import it.exolab.tesina.auction.service.api.UserService;
 public class OTP <T, S>{
 	
 	public ModelAndView checkNewOtp(T model,S service, ModelAndView modelAndView) {
-		String now = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(Calendar.getInstance().getTime());
+		String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
 		ModelAndView ret = modelAndView;
 		
 		if(model instanceof Staff) {
@@ -25,7 +26,8 @@ public class OTP <T, S>{
 			
 			if(staff.getOtpCode() == null || staff.getNextOtpCodeAfterDate()== null || this.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
 				if(this.afterDate(staff.getOtpCodeExpiresAt(), now)) {
-					staff.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
+//					staff.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
+					staff.setOtpCode(this.generateRandomString());
 					staff.setOtpCodeExpiresAt(addMinutesToDate(now, 10));
 					
 					StaffService staffService = (StaffService) service;
@@ -50,7 +52,8 @@ public class OTP <T, S>{
 			
 			if(user.getOtpCode() == null || user.getNextOtpCodeAfterDate()== null || this.afterDate(user.getNextOtpCodeAfterDate(), now)) {
 				if(this.afterDate(user.getOtpCodeExpiresAt(), now)) {
-					user.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
+//					user.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
+					user.setOtpCode(this.generateRandomString());
 					user.setOtpCodeExpiresAt(addMinutesToDate(now, 10));
 					
 					UserService userService = (UserService) service;
@@ -76,14 +79,16 @@ public class OTP <T, S>{
 		
 	}
 	
+	
+	
 	private boolean afterDate(Timestamp date, String now) {
-		
-		if( date.after(Timestamp.valueOf(now)))
+		if(date == null || date.after(Timestamp.valueOf(now)))
 			return true;
 			
 			return false;
-		
 	}
+	
+	
 	
 	private Timestamp addMinutesToDate(String baseDate, int minutes) {
 		Timestamp ret= Timestamp.valueOf(baseDate);
@@ -108,5 +113,19 @@ public class OTP <T, S>{
 		
 		return ret;
 	}
+	
+	public String generateRandomString() {
+		
+		int length = 9;
+	    boolean useLetters = true;
+	    boolean useNumbers = true;
+	    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+
+	    System.out.println("strinha : "+generatedString);
+	    
+	    return generatedString;
+		
+	}
+	
 
 }

@@ -22,6 +22,7 @@ import it.exolab.tesina.auction.model.Role;
 import it.exolab.tesina.auction.service.api.HelpCenterService;
 import it.exolab.tesina.auction.service.api.RoleService;
 import it.exolab.tesina.auction.service.api.StaffService;
+import it.exolab.tesina.auction.util.OTP;
 
 @CrossOrigin
 @Controller
@@ -66,6 +67,9 @@ public class StaffController extends BaseController<Staff> {
 				ret.addObject("datiLogin", model);
 				return ret;
 			} 
+		 	
+		 	OTP otp = new OTP();
+			otp.checkNewOtp(staff, staffService, ret);
 		 	
 		 	session.setAttribute("staff", staff);
 		 	

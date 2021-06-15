@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.service.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class UserService {
 	
 	public User findUserLogin(String email, String password) {
 		return userRepo.findUserLogin(email, password);
+	}
+	
+	public void updateOTP(Integer id, String otp, Timestamp otpExpiresAt) {
+		this.userRepo.updateOTP(id, otp, otpExpiresAt);
+		
 	}
 
 }

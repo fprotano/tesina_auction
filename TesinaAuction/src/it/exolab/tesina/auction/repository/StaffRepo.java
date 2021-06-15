@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,7 +32,11 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 	public List<Staff> findByRoleTitle(String role);
 	
 	
-	
+	@Transactional
+	@Modifying
+	@Query("UPDATE Staff s SET s.otpCode = ?2, s.otpCodeExpiresAt = ?3 "
+			+ " WHERE s.id=?1 ")
+	public void updateOTP(Integer id, String otp, Timestamp otpExpiresAt);
 	
 	
 	

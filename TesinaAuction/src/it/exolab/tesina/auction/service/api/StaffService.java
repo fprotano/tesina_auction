@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.service.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,14 @@ public class StaffService {
 		return staffRepo.findByEmailAndPassword(email, pass);
 	}
 	public Staff  FindBySurname(String surname) {
-		return staffRepo.findBySurname(surname)  ;
+		return staffRepo.findBySurname(surname);
 	}
 	public List<Staff> findByRoleTitle(String role){
 		return staffRepo.findByRoleTitle(role);
+	}
+	
+	public void updateOTP(Integer id, String otp, Timestamp otpExpiresAt) {
+		this.staffRepo.updateOTP(id, otp, otpExpiresAt);
+		
 	}
 }

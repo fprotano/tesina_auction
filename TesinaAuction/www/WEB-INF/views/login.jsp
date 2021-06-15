@@ -11,7 +11,7 @@
 	
 	<label>Password: </label>
 	<br/>
-	<form:input path="password" value="${ datiLogin.password }" required="required" />
+	<form:password path="password" value="${ datiLogin.password }" required="required" />
 	<br/>
 	
 	<input type="submit" value="Login">

@@ -19,8 +19,8 @@ public class AuctionService {
 
 	}
 
-	public Auction find(int id) {
-		return auctionRepo.findOne(id);
+	public Auction findById(int id) {
+		return auctionRepo.findById(id);
 	}
 
 	public List<Auction> findAll() {

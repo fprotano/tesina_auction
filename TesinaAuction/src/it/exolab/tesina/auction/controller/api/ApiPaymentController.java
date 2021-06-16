@@ -31,11 +31,12 @@ public class ApiPaymentController extends BaseController<Payment> {
 	@ResponseBody
 	public void doPaymentNotify(@ModelAttribute Payment payment) {
 		
+		System.out.println("nel payment notify > " + payment);
 		//String numOrder = payment.getCustomCode().substring(17);
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(payment.getCustomCode());
 		auctionOrder.setTransactionId(payment.getTransactionId());
 		auctionOrderService.save(auctionOrder);
-		System.out.println("nel payment notify ");
+		System.out.println("nel payment notify > " + auctionOrder);
 	}
 	
 	

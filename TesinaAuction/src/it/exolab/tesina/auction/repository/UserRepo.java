@@ -26,5 +26,9 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	@Query("UPDATE User u SET u.otpCode = ?2, u.otpCodeExpiresAt = ?3 "
 			+ " WHERE u.id=?1 ")
 	public void updateOTP(Integer id, String otp, Timestamp otpExpiresAt);
+	
+	@Modifying
+	@Query("SELECT u FROM User u WHERE u.email=?1")
+	public User findUserbyEmail(String email);
 
 }

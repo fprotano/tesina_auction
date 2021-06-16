@@ -1,5 +1,7 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -10,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.controller.BaseController;
+import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
 import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
 import it.exolab.tesina.auction.model.Payment;
 import it.exolab.tesina.auction.model.ReturnPayment;
+import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
+import it.exolab.tesina.auction.service.api.AuctionService;
+import it.exolab.tesina.auction.service.api.UserService;
 
 @CrossOrigin
 @Controller
@@ -23,31 +29,43 @@ public class ApiPaymentController extends BaseController<Payment> {
 	
 	
 	private AuctionOrderService  auctionOrderService;
+	private AuctionService auctionService;
+	private UserService userService;
 	
 	@Autowired(required = true)
-	public void setAuctionOrderService(AuctionOrderService  auctionOrderService) {
+	public void setAuctionOrderService(AuctionOrderService  auctionOrderService, AuctionService auctionService, UserService userService) {
 		this.auctionOrderService = auctionOrderService;
+		this.auctionService = auctionService;
+		this.userService = userService;
 	}
 	
-	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
-	@ResponseBody
-	public void doPaymentNotify(@ModelAttribute Payment payment) {
-		
-		System.out.println("nel payment notify > " + payment);
-		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(payment.getCustomCode());
-		auctionOrder.setTransactionId(payment.getTransactionId());
-		auctionOrder.setAuctionOrderStatusId(3);
-		auctionOrderService.save(auctionOrder);
-		System.out.println("nel payment notify > " + auctionOrder);
-	}
+//	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+//	@ResponseBody
+//	public void doPaymentNotify(@ModelAttribute Payment payment) {
+//		
+//		System.out.println("nel payment notify > " + payment);
+//		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(payment.getCustomCode());
+//		auctionOrder.setTransactionId(payment.getTransactionId());
+//		auctionOrder.setAuctionOrderStatusId(3);
+//		auctionOrderService.save(auctionOrder);
+//		System.out.println("nel payment notify > " + auctionOrder);
+//	}
 	
 	
 	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
 	public void doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
 		
+		System.out.println("nel payment notify > " + returnPayment);
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(returnPayment.getPv()[4]);
+		if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
+			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
+			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
+			Auction auction = auctionService.findById(auctionOrder.getAuctionId());
+			auction.setWinnerUserId(userService.findUserbyEmail(returnPayment.getPv()[3]).getId());
+			System.out.println("nel payment notify > " + auction);
+		}
 		
-		System.out.println(returnPayment);
 			
 	}
 }

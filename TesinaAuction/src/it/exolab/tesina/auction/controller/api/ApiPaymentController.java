@@ -46,8 +46,8 @@ public class ApiPaymentController extends BaseController<Payment> {
 	@ResponseBody
 	public void doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
 		
-		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
-
+		
+		System.out.println(returnPayment);
 			
 	}
 }

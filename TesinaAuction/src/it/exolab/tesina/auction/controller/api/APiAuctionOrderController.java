@@ -1,6 +1,5 @@
 package it.exolab.tesina.auction.controller.api;
 
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -19,8 +18,6 @@ import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
-import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
-import it.exolab.tesina.auction.model.OotlBank;
 import it.exolab.tesina.auction.model.Payment;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;

@@ -54,13 +54,13 @@ public class OTP <M, S>{
 	private boolean checkOTP(Staff staff, StaffService service) {
 		
 		//se OTP è nullo, va direttamente alla sua generazione
-		if(staff.getOtpCode()==null) {
-			createNewOTP(staff, service);
-			return true;
-		}
+//		if(staff.getOtpCode()==null) {
+//			createNewOTP(staff, service);
+//			return true;
+//		}
 		
 		//controlla se  l'OTP ha una scadenza e se la ha superata
-		else if(staff.getNextOtpCodeAfterDate()== null || util.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
+		if( util.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
 			
 			//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
 			
@@ -78,14 +78,15 @@ public class OTP <M, S>{
 
 	private boolean checkOTP(User user, UserService service) {
 		//se OTP è nullo, va direttamente alla sua generazione
-				if(user.getOtpCode()==null) {
-					createNewOTP(user, service);
-					return true;
-				}
+//				if(user.getOtpCode()==null) {
+//					createNewOTP(user, service);
+//					return true;
+//				}
 				
 				//controlla se  l'OTP ha una scadenza e se la ha superata
-				else if(user.getNextOtpCodeAfterDate()== null || util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
-					
+//				else if(user.getNextOtpCodeAfterDate()== null || util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
+				if(util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
+			
 					//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
 					
 					
@@ -113,8 +114,8 @@ public class OTP <M, S>{
 		SendEmailController sendEmailController = new SendEmailController();
 	 	sendEmailController.sendMail(staff.getEmail(), "exolabcorso2021@gmail.com", "nuovo OTP", "salve, le inviamo il codice otp : \" "+staff.getOtpCode()+" \" necessario per effettuare il login e con scadenza "+staff.getOtpCodeExpiresAt());
 		
-	 	service.updateOTP(staff.getId(), staff.getOtpCode(), staff.getOtpCodeExpiresAt());
-		
+//	 	service.updateOTP(staff.getId(), staff.getOtpCode(), staff.getOtpCodeExpiresAt());
+	 	service.save(staff);
 	}
 	
 	public void createNewOTP(User user, UserService service) {
@@ -124,7 +125,8 @@ public class OTP <M, S>{
 		SendEmailController sendEmailController = new SendEmailController();
 	 	sendEmailController.sendMail(user.getEmail(), "exolabcorso2021@gmail.com", "nuovo OTP", "salve, le inviamo il codice otp : \" "+user.getOtpCode()+" \" necessario per effettuare il login e con scadenza "+user.getOtpCodeExpiresAt());
 		
-		service.updateOTP(user.getId(), user.getOtpCode(), user.getOtpCodeExpiresAt());
+//		service.updateOTP(user.getId(), user.getOtpCode(), user.getOtpCodeExpiresAt());
+	 	service.save(user);
 	}
 //	
 //	private boolean afterDate(Timestamp date, String now) {
@@ -199,7 +201,7 @@ public class OTP <M, S>{
 	
 	public Staff setNewOtpExp(Staff model, StaffService service) {
 		model.setNextOtpCodeAfterDate(util.addDaysToDate(now, 14));
-		service.save(model);
+//		service.save(model);
 		
 		return model;
 	}

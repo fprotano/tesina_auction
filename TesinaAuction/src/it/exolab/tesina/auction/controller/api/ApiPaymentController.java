@@ -1,5 +1,7 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.lang.reflect.Field;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
 import it.exolab.tesina.auction.model.Payment;
+import it.exolab.tesina.auction.model.ReturnPayment;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
 
 @CrossOrigin
@@ -40,19 +44,16 @@ public class ApiPaymentController extends BaseController<Payment> {
 	}
 	
 	
-//	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
-//	@ResponseBody
-//	public void doPaymentNotify(@ModelAttribute OotlBank ootlBank) {
-//		
-//		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
-//		Field[] fields = aotl.getClass().getDeclaredFields();
-//		System.out.println(fields);
-//		for(int i=0; i<ootlBank.getPn().length; i++) {
-//			//if() comparazione nome con parameter
-//			
-//		}
-//	}
-//	
+	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+	@ResponseBody
+	public void doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
+		
+		AuctionOrderTransactionLog aotl = new AuctionOrderTransactionLog();
+
+			
+	}
+}
+	
 
 //	@RequestMapping(value = "AuctionOrderPayment", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 //	@ResponseBody
@@ -92,4 +93,3 @@ public class ApiPaymentController extends BaseController<Payment> {
 //		System.out.println("prima del ret > " + connection);
 //	}
 
-}

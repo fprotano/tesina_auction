@@ -2,17 +2,16 @@ package it.exolab.tesina.auction.model;
 
 import java.util.Arrays;
 
-public class OotlBank {
+public class ReturnPayment {
 	
-	private String[] pn;
-	private String[] pv;
+	private String [] pn;
+	private String [] pv;
 	
-	
-	public OotlBank() {
+	public ReturnPayment() {
 
 	}
 
-	public OotlBank(String[] pn, String[] pv) {
+	public ReturnPayment(String[] pn, String[] pv) {
 		super();
 		this.pn = pn;
 		this.pv = pv;
@@ -36,12 +35,6 @@ public class OotlBank {
 
 	@Override
 	public String toString() {
-		return "OotlBank [pn=" + Arrays.toString(pn) + ", pv=" + Arrays.toString(pv) + "]";
+		return "ReturnPayment [pn=" + Arrays.toString(pn) + ", pv=" + Arrays.toString(pv) + "]";
 	}
-	
-	
-	
-	
-	
-
 }

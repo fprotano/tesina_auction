@@ -52,3 +52,12 @@ text-transform: uppercase;}
 
 </c:if>
 <jsp:include page="/templates/footer.jsp"></jsp:include>
+
+
+
+
+
+
+
+
+

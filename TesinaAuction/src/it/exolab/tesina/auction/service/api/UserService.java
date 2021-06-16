@@ -26,6 +26,8 @@ public class UserService {
 	}
 
 	public void save(User model) {
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		model.setUpdatedAt(now);
 		this.userRepo.save(model);
 	}
 

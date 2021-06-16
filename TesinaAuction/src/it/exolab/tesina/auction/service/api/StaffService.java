@@ -47,4 +47,9 @@ public class StaffService {
 		this.staffRepo.updateOTP(id, otp, otpExpiresAt);
 		
 	}
+	
+	public Staff findByEmailAndPasswordAndOtpCode(String email, String password, String otp) {
+		return this.staffRepo.findByEmailAndPasswordAndOtpCode(email,  password,  otp);
+		
+	}
 }

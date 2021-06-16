@@ -3,13 +3,10 @@ package it.exolab.tesina.auction.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.exolab.tesina.auction.model.Staff;
 import it.exolab.tesina.auction.model.Role;
+import it.exolab.tesina.auction.model.Staff;
 import it.exolab.tesina.auction.service.api.HelpCenterService;
 import it.exolab.tesina.auction.service.api.RoleService;
 import it.exolab.tesina.auction.service.api.StaffService;
 import it.exolab.tesina.auction.util.OTP;
+import it.exolab.tesina.auction.util.Utils;
 
 @CrossOrigin
 @Controller
@@ -67,9 +65,16 @@ public class StaffController extends BaseController<Staff> {
 				ret.addObject("datiLogin", model);
 				return ret;
 			} 
+		 	SendEmailController sendEmailController = new SendEmailController();
+		 	
+		 	sendEmailController.sendMail(staff.getEmail(), "exolabcorso2021@gmail.com", "prova", "otp farlocco 123456789");
 		 	
 		 	OTP otp = new OTP();
-			otp.checkNewOtp(staff, staffService, ret);
+		 	if(otp.checkIfOtpIsNeeded(staff, staffService)) {
+		 		ret.addObject("accountAskOTP", staff);
+		 		ret.addObject("action", "askOTP");
+		 		return ret;
+		 	}
 		 	
 		 	session.setAttribute("staff", staff);
 		 	
@@ -78,9 +83,32 @@ public class StaffController extends BaseController<Staff> {
 		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
 		 		
 		 	}
-
+		 	System.out.println(ret);
 			return ret;
 		}
+	 
+	 @RequestMapping(value = "login-OTP", method = RequestMethod.POST)
+	 public ModelAndView loginCheckInsertedOTP(Staff model, HttpSession session) {
+		 ModelAndView ret = new ModelAndView("home");
+		 Staff staff = staffService.findByEmailAndPasswordAndOtpCode(model.getEmail(), 
+				 								model.getPassword(), model.getOtpCode());
+		 
+		 Utils util = new Utils();
+		 OTP otp = new OTP();
+			
+		 if(util.afterDate(model.getOtpCodeExpiresAt(), staff.getOtpCodeExpiresAt())) {
+			otp.createNewOTP(staff, staffService);
+			
+			ret.addObject("message", "OTP scaduto, ti abbiamo inviato un nuovo codice per email");
+	 		ret.addObject("accountAskOTP", staff);
+	 		ret.addObject("action", "askOTP");
+	 		return ret;
+		 }
+		 
+		 otp.setNewOtpExp(staff, staffService);
+		 session.setAttribute("staff", staff);
+		 return ret;
+	 }
 	
 	@RequestMapping(value = "admin-insert", method = RequestMethod.GET)
 	public ModelAndView redirectInsertStaff(HttpSession session, 

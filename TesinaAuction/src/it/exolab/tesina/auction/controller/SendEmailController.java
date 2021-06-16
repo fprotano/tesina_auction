@@ -46,7 +46,7 @@ public class SendEmailController {
 		
 		    protected PasswordAuthentication getPasswordAuthentication() {
 		
-		        return new PasswordAuthentication(sendEmail.getAdminMail(), "yourPassword");
+		        return new PasswordAuthentication(sendEmail.getAdminMail(), yourPassword);
 		    }
 		});
 		//session.setDebug(true);

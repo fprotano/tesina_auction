@@ -20,6 +20,7 @@ import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.UserService;
+import it.exolab.tesina.auction.util.OTP;
 
 @CrossOrigin
 @Controller
@@ -40,6 +41,8 @@ public class ApiUserController extends BaseController<User> {
 		
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		model.setCreateAt(currentTime);
+		OTP<User, UserService> otp = new OTP<User, UserService>();
+		otp.setNewOtpExp(model, userService);
 		userService.save(model);
 		return sendSuccess(model);  //ritorno in http ogg
 	}

@@ -38,7 +38,7 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 			+ " WHERE s.id=?1 ")
 	public void updateOTP(Integer id, String otp, Timestamp otpExpiresAt);
 	
-	
-	
+
+	public Staff findByEmailAndPasswordAndOtpCode(String email, String password, String otp);
 	
 }

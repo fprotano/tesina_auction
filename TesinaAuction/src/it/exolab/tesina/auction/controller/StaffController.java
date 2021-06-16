@@ -65,12 +65,12 @@ public class StaffController extends BaseController<Staff> {
 				ret.addObject("datiLogin", model);
 				return ret;
 			} 
-		 	SendEmailController sendEmailController = new SendEmailController();
+//		 	SendEmailController sendEmailController = new SendEmailController();
+//		 	sendEmailController.sendMail(staff.getEmail(), "exolabcorso2021@gmail.com", "prova", "otp farlocco 123456789");
 		 	
-		 	sendEmailController.sendMail(staff.getEmail(), "exolabcorso2021@gmail.com", "prova", "otp farlocco 123456789");
-		 	
-		 	OTP otp = new OTP();
+		 	OTP<Staff, StaffService> otp = new OTP<Staff, StaffService>();
 		 	if(otp.checkIfOtpIsNeeded(staff, staffService)) {
+		 		staff.setOtpCode(null);
 		 		ret.addObject("accountAskOTP", staff);
 		 		ret.addObject("action", "askOTP");
 		 		return ret;
@@ -88,24 +88,30 @@ public class StaffController extends BaseController<Staff> {
 		}
 	 
 	 @RequestMapping(value = "login-OTP", method = RequestMethod.POST)
-	 public ModelAndView loginCheckInsertedOTP(Staff model, HttpSession session) {
+	 public ModelAndView loginCheckInsertedOTP(Staff accountAskOTP, HttpSession session) {
 		 ModelAndView ret = new ModelAndView("home");
-		 Staff staff = staffService.findByEmailAndPasswordAndOtpCode(model.getEmail(), 
-				 								model.getPassword(), model.getOtpCode());
-		 
+		 Staff staff = staffService.findByEmailAndPasswordAndOtpCode(accountAskOTP.getEmail(), accountAskOTP.getPassword(), accountAskOTP.getOtpCode());
+		 if(staff == null) {
+			 ret.addObject("message", "codice OTP errato");
+			 ret.addObject("accountAskOTP", accountAskOTP);
+			 ret.addObject("action", "askOTP");
+			 return ret;
+		 }
 		 Utils util = new Utils();
-		 OTP otp = new OTP();
+		 OTP<Staff, StaffService> otp = new OTP<Staff, StaffService>();
 			
-		 if(util.afterDate(model.getOtpCodeExpiresAt(), staff.getOtpCodeExpiresAt())) {
+		 if(util.afterDate(staff.getOtpCodeExpiresAt())) {
 			otp.createNewOTP(staff, staffService);
 			
 			ret.addObject("message", "OTP scaduto, ti abbiamo inviato un nuovo codice per email");
-	 		ret.addObject("accountAskOTP", staff);
+	 		ret.addObject("accountAskOTP", accountAskOTP);
 	 		ret.addObject("action", "askOTP");
 	 		return ret;
 		 }
 		 
 		 otp.setNewOtpExp(staff, staffService);
+		 staffService.save(staff);
+		 
 		 session.setAttribute("staff", staff);
 		 return ret;
 	 }
@@ -137,6 +143,10 @@ public class StaffController extends BaseController<Staff> {
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		insertStaff.setCreateAt(currentTime);
 		insertStaff.setPassword("pass."+insertStaff.getEmail());
+		
+		OTP<Staff, StaffService> otp = new OTP<Staff, StaffService>(); 
+		otp.setNewOtpExp(insertStaff, staffService);
+		
 		staffService.save(insertStaff);
 //		ret.addObject("message", "registrazione effettuata con successo");
 //		System.out.println(ret);

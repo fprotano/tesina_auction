@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
+import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionBid;
 import it.exolab.tesina.auction.service.api.AuctionBidService;
+import it.exolab.tesina.auction.service.api.AuctionService;
 
 @CrossOrigin
 @Controller
@@ -25,23 +27,33 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 	// insert, findbyid, findByAuctionID, findByUserIdWhereClosedAt=null
 	
 	private AuctionBidService auctionBidService;
+	private AuctionService auctionService;
 	
 	@Autowired(required = true)
-	public void setAuctionBidService(AuctionBidService auctionBidService) {
+	public void setAuctionBidService(AuctionBidService auctionBidService, AuctionService auctionService) {
 		this.auctionBidService = auctionBidService;
+		this.auctionService = auctionService;
 	}
 	
 	
 	@RequestMapping(value = "insertBid", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<AuctionBid> doInsertBid(@RequestBody AuctionBid model) {
+	public HttpResponse<AuctionBid> doInsertBid(@RequestBody AuctionBid auctionBid) {
 		
-		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-		model.setCreateAt(currentTime);
-		System.out.println("nell insert del bid, auctionBid >> " + model);
-		auctionBidService.save(model);
-		return sendSuccess(model);
+		auctionBid.setCreateAt(new Timestamp(System.currentTimeMillis()));
+		System.out.println("nell insert del bid, auctionBid >> " + auctionBid);
+		auctionBidService.save(auctionBid);
 		
+		Auction auction = auctionService.findById(auctionBid.getAuctionId());
+
+		if(auction.getCurrentBid() == null | auction.getCurrentBid() < auctionBid.getBid()) {
+			auction.setCurrentBid(auctionBid.getBid());
+			auction.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+			auctionService.save(auction);
+		}
+		auctionService.save(auction);
+		
+		return sendSuccess(auctionBid);
 	}
 	
 	@RequestMapping(value = "findAllBids", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -49,8 +61,7 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 	public HttpResponse<AuctionBid> doFindAllBids(@RequestBody AuctionBid model) {
 		
 		List <AuctionBid> listBids = auctionBidService.findAll();
-		return sendSuccess(listBids);
-		
+		return sendSuccess(listBids);	
 	}
 	
 	@RequestMapping(value = "auctionBids", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

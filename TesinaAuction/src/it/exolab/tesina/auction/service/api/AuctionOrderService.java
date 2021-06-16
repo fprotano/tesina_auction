@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.service.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class AuctionOrderService {
 	}
 
 	public void save(AuctionOrder model) {
+		model.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		this.auctionOrderRepo.save(model);
 	}
 

@@ -16,6 +16,11 @@ public class Utils{
 			return false;
 	}
 	
+	public boolean afterDate(Timestamp date) {
+		
+		return this.afterDate(date, new Timestamp(System.currentTimeMillis()));
+	}
+	
 	public boolean afterDate(Timestamp baseDate, Timestamp dateToCompare) {
 		
 		if(dateToCompare == null) {
@@ -24,6 +29,31 @@ public class Utils{
 		}
 		
 		else if(baseDate == null || baseDate.after(dateToCompare))
+			return true;
+			
+			return false;
+	}
+	
+	public boolean beforeDate(Timestamp date, String now) {
+		if(date == null || date.before(Timestamp.valueOf(now)))
+			return true;
+			
+			return false;
+	}
+	
+	public boolean beforeDate(Timestamp date) {
+		
+		return this.beforeDate(date, new Timestamp(System.currentTimeMillis()));
+	}
+	
+	public boolean beforeDate(Timestamp baseDate, Timestamp dateToCompare) {
+		
+		if(dateToCompare == null) {
+			// lancia exception
+			return false;
+		}
+		
+		else if(baseDate == null || baseDate.before(dateToCompare))
 			return true;
 			
 			return false;

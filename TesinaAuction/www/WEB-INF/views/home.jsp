@@ -26,10 +26,17 @@ text-transform: uppercase;}
 	<p>${message}</p>
 </c:if>
 
-<c:if test="${ empty sessionScope.staff }">
+<c:if test="${ empty sessionScope.staff && empty action }">
 	
      <div class="msg">  <c:out value="Per proseguire effettua il login" /></div><br><br>
         <jsp:include page="login.jsp" />
+
+</c:if>
+
+<c:if test="${ not empty action && action == 'askOTP' }">
+	
+     <div class="msg">  <c:out value="Per proseguire inerisci il codice OTP" /></div><br><br>
+        <jsp:include page="askOTP.jsp" />
 
 </c:if>
 

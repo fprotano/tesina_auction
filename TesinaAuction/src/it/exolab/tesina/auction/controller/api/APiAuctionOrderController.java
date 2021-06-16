@@ -70,8 +70,8 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
 		String urlBank = "http://localhost:8080/TesinaMyBank/payment/inserisci";
-		String urlUnDo = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnSuccess";
-		String urlSuccess = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnFailure";
+		String urlUnDo = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnFailure";
+		String urlSuccess = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnSuccess";
 		String urlNotify = "http://localhost:8080/TesinaAuction/api/payment/paymentNotify";
 		model.setUrlBank(urlBank);
 		model.setUrlUnDo(urlUnDo);
@@ -88,18 +88,32 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		return sendSuccess(model);
 	}
 	
+	@RequestMapping(value = "AuctionOrderDeletePayment", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<Payment> doAuctionOrderDeletePayment(@RequestBody Payment model) {
+		
+		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
+
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
+		auctionOrder.setAuctionOrderStatusId(2);
+		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		auctionOrderService.save(auctionOrder);
+		System.out.println("nel doAuctionOrderPayment, auctionOrder   > " + auctionOrder);
+		System.out.println("nel doAuctionOrderPayment, model   > " + model);
+		
+		return sendSuccess(model);
+	}
+	
 	@RequestMapping(value = "AuctionOrderReturnSuccess", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
 	public ModelAndView doAuctionOrderReturnSuccess(@ModelAttribute Payment payment) {
 		
 		String url = System.getenv("ServerAsta");
-		ModelAndView ret = new ModelAndView("redirect:" + url + "user");
+		ModelAndView ret = new ModelAndView("redirect:/" + url + "user");
 		payment.setUrlUnDo(null);
 		ret.addObject("payment", payment);
 		
 		return ret;
-		
-		
 	}
 	
 	@RequestMapping(value = "AuctionOrderReturnFailure", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
@@ -108,13 +122,11 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		
 		String url = System.getenv("ServerAsta");
-		ModelAndView ret = new ModelAndView("redirect:" + url + "user");
+		ModelAndView ret = new ModelAndView("redirect:/" + url + "user");
 		payment.setUrlSuccess(null);
 		ret.addObject("payment", payment);
 		
 		return ret;
-		
-		
 	}
 	
 }

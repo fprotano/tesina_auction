@@ -60,7 +60,7 @@ public class OTP <M, S>{
 //		}
 		
 		//controlla se  l'OTP ha una scadenza e se la ha superata
-		if( util.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
+		if( util.beforeDate(staff.getNextOtpCodeAfterDate(), now)) {
 			
 			//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
 			
@@ -85,7 +85,7 @@ public class OTP <M, S>{
 				
 				//controlla se  l'OTP ha una scadenza e se la ha superata
 //				else if(user.getNextOtpCodeAfterDate()== null || util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
-				if(util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
+				if(util.beforeDate(user.getNextOtpCodeAfterDate(), now)) {
 			
 					//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
 					
@@ -101,7 +101,8 @@ public class OTP <M, S>{
 	}
 	
 	private boolean checkGenerateNewOtp(Timestamp expOTP) {
-		if(expOTP==null || util.afterDate(expOTP, now))
+//		if(expOTP==null || util.afterDate(expOTP, now))
+		if(util.afterDate(expOTP, now))
 			return true;
 		
 		return false;
@@ -128,76 +129,7 @@ public class OTP <M, S>{
 //		service.updateOTP(user.getId(), user.getOtpCode(), user.getOtpCodeExpiresAt());
 	 	service.save(user);
 	}
-//	
-//	private boolean afterDate(Timestamp date, String now) {
-//		if(date == null || date.after(Timestamp.valueOf(now)))
-//			return true;
-//			
-//			return false;
-//	}
-//	
-//	private Timestamp addMinutesToDate(String baseDate, int minutes) {
-//		Timestamp ret= Timestamp.valueOf(baseDate);
-//		
-//		Calendar cal = Calendar.getInstance();
-//		cal.setTime(ret);
-//		cal.add(Calendar.MINUTE, minutes);
-//		ret.setTime(cal.getTime().getTime());
-////		ret = new Timestamp(cal.getTime().getTime());
-//		
-//		return ret;
-//	}
-//	
-//	private Timestamp addDaysToDate(String baseDate, int days) {
-//		Timestamp ret= Timestamp.valueOf(baseDate);
-//		
-//		Calendar cal = Calendar.getInstance();
-//		cal.setTime(ret);
-//		cal.add(Calendar.DAY_OF_WEEK, days);
-//		ret.setTime(cal.getTime().getTime());
-////		ret = new Timestamp(cal.getTime().getTime());
-//		
-//		return ret;
-//	}
-//	
-//	public String generateRandomString(int len) {
-//		
-//		int length = len;
-//	    boolean useLetters = true;
-//	    boolean useNumbers = true;
-//	    String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);	    
-//	    
-//	    return generatedString;
-//	}
 	
-	
-
-	
-	/*
-	 * if(staff.getOtpCode() == null || staff.getNextOtpCodeAfterDate()== null || this.afterDate(staff.getNextOtpCodeAfterDate(), now)) {
-			if(staff.getOtpCodeExpiresAt()== null || this.afterDate(staff.getOtpCodeExpiresAt(), now)) {
-//				staff.setOtpCode(String.valueOf((Math.random() * (9999 - 1)) + 1));
-				staff.setOtpCode(this.generateRandomString());
-				staff.setOtpCodeExpiresAt(addMinutesToDate(now, 10));
-				
-				StaffService staffService = (StaffService) service;
-				try {
-//					GoogleMail.Send("exolabCorso2021", "e2021!tesina",staff.getEmail() , "nuovo OTP", "salve! Le inviamo il nuovo codice OTP : "+staff.getOtpCode());
-					GoogleMail gm = new GoogleMail();
-					gm.sendMail(staff.getEmail(), "nuovo codice otp", "salve, le inviamo il nuovo codice otp : ' "+staff.getOtpCode()+" ' con scadenza il "+staff.getOtpCodeExpiresAt());
-
-					staffService.updateOTP(staff.getId(), staff.getOtpCode(), 
-												staff.getOtpCodeExpiresAt());
-				} catch (AddressException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (MessagingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				
-			}
-	 */
 	
 	public Staff setNewOtpExp(Staff model, StaffService service) {
 		model.setNextOtpCodeAfterDate(util.addDaysToDate(now, 14));

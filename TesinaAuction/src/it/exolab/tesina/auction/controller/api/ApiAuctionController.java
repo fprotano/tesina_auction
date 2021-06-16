@@ -78,7 +78,7 @@ public class ApiAuctionController extends BaseController {
 	@ResponseBody
 	public HttpResponse<Auction> dofindAuctionBy1AuctionId(@RequestBody String auctionId) {
 		System.out.println(auctionId);
-		Auction auction = auctionService.find(Integer.parseInt(auctionId));
+		Auction auction = auctionService.findById(Integer.parseInt(auctionId));
 		System.out.println(auction);
 		return sendSuccess(auction);
 	}

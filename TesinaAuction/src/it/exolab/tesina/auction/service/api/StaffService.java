@@ -27,6 +27,7 @@ public class StaffService {
 	}
 
 	public void save(Staff model) {
+		model.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		this.staffRepo.save(model);
 	}
 

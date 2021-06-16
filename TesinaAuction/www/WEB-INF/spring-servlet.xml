@@ -110,8 +110,8 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
     <property name="url" value="jdbc:mysql://localhost:3306/tesina_auction?serverTimezone=UTC&amp;useSSL=false" />
-    <property name="username" value="prova" />
-    <property name="password" value="t3sT-sql" />
+    <property name="username" value="root" />
+    <property name="password" value="root" />
   </bean>
 	
 	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

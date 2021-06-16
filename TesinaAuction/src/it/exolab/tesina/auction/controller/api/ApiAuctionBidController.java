@@ -46,7 +46,7 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 		
 		Auction auction = auctionService.findById(auctionBid.getAuctionId());
 
-		if(auction.getCurrentBid() == null || auction.getCurrentBid() < auctionBid.getBid()) {
+		if(auction.getCurrentBid() == null | auction.getCurrentBid() < auctionBid.getBid()) {
 			auction.setCurrentBid(auctionBid.getBid());
 			auction.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 			auctionService.save(auction);
@@ -54,7 +54,6 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 		auctionService.save(auction);
 		
 		return sendSuccess(auctionBid);
-		
 	}
 	
 	@RequestMapping(value = "findAllBids", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

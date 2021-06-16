@@ -70,8 +70,8 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
 		String urlBank = "http://localhost:8080/TesinaMyBank/payment/inserisci";
-		String urlUnDo = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnSuccess";
-		String urlSuccess = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnFailure";
+		String urlUnDo = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnFailure";
+		String urlSuccess = "http://localhost:8080/TesinaAuction/api/auctionOrder/AuctionOrderReturnSuccess";
 		String urlNotify = "http://localhost:8080/TesinaAuction/api/payment/paymentNotify";
 		model.setUrlBank(urlBank);
 		model.setUrlUnDo(urlUnDo);

@@ -12,6 +12,9 @@ import it.exolab.tesina.auction.model.Auction;
 
 public interface AuctionRepo extends CrudRepository<Auction, Integer>{
 	
+	
+	public Auction findById(Integer id);
+	
 	@Transactional
 	@Modifying
 	@Query("SELECT a FROM Auction AS a "

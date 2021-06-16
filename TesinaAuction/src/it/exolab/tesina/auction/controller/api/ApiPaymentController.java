@@ -35,6 +35,7 @@ public class ApiPaymentController extends BaseController<Payment> {
 		//String numOrder = payment.getCustomCode().substring(17);
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(payment.getCustomCode());
 		auctionOrder.setTransactionId(payment.getTransactionId());
+		auctionOrder.setAuctionOrderStatusId(3);
 		auctionOrderService.save(auctionOrder);
 		System.out.println("nel payment notify > " + auctionOrder);
 	}

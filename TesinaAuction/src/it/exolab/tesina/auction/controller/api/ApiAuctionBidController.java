@@ -54,7 +54,6 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 		auctionService.save(auction);
 		
 		return sendSuccess(auctionBid);
-		
 	}
 	
 	@RequestMapping(value = "findAllBids", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

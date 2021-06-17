@@ -9,16 +9,13 @@ public class Utils{
 	
 
 	
-	public boolean afterDate(Timestamp date, String now) {
-		if(date == null || date.after(Timestamp.valueOf(now)))
-			return true;
-			
-			return false;
+	public boolean afterDate(Timestamp baseDate, String dateToCmopare) {
+		return this.afterDate(baseDate, Timestamp.valueOf(dateToCmopare));
 	}
 	
-	public boolean afterDate(Timestamp date) {
+	public boolean afterDate(Timestamp baseDate) {
 		
-		return this.afterDate(date, new Timestamp(System.currentTimeMillis()));
+		return this.afterDate(baseDate, new Timestamp(System.currentTimeMillis()));
 	}
 	
 	public boolean afterDate(Timestamp baseDate, Timestamp dateToCompare) {
@@ -34,16 +31,13 @@ public class Utils{
 			return false;
 	}
 	
-	public boolean beforeDate(Timestamp date, String now) {
-		if(date == null || date.before(Timestamp.valueOf(now)))
-			return true;
-			
-			return false;
+	public boolean beforeDate(Timestamp baseDate, String dateToCompare) {
+		return this.beforeDate(baseDate, Timestamp.valueOf(dateToCompare));
 	}
 	
-	public boolean beforeDate(Timestamp date) {
+	public boolean beforeDate(Timestamp baseDate) {
 		
-		return this.beforeDate(date, new Timestamp(System.currentTimeMillis()));
+		return this.beforeDate(baseDate, new Timestamp(System.currentTimeMillis()));
 	}
 	
 	public boolean beforeDate(Timestamp baseDate, Timestamp dateToCompare) {
@@ -60,7 +54,16 @@ public class Utils{
 	}
 	
 	public Timestamp addMinutesToDate(String baseDate, int minutes) {
-		Timestamp ret= Timestamp.valueOf(baseDate);
+		return this.addMinutesToDate(Timestamp.valueOf(baseDate), minutes);
+	}	
+	
+	public Timestamp addMinutesToDate(int minutes) {
+		return this.addMinutesToDate(new Timestamp(System.currentTimeMillis()), minutes);
+		
+	}
+	
+	public Timestamp addMinutesToDate(Timestamp baseDate, int minutes) {
+		Timestamp ret= baseDate;
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(ret);
@@ -72,7 +75,15 @@ public class Utils{
 	}
 	
 	public Timestamp addDaysToDate(String baseDate, int days) {
-		Timestamp ret= Timestamp.valueOf(baseDate);
+		return this.addDaysToDate(Timestamp.valueOf(baseDate), days);
+	}
+	
+	public Timestamp addDaysToDate(int days) {
+		return this.addDaysToDate(new Timestamp(System.currentTimeMillis()), days);
+	}
+	
+	public Timestamp addDaysToDate(Timestamp baseDate, int days) {
+		Timestamp ret= baseDate;
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(ret);

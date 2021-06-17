@@ -100,7 +100,7 @@ public class StaffController extends BaseController<Staff> {
 		 Utils util = new Utils();
 		 OTP<Staff, StaffService> otp = new OTP<Staff, StaffService>();
 			
-		 if(util.afterDate(staff.getOtpCodeExpiresAt())) {
+		 if(util.beforeDate(staff.getOtpCodeExpiresAt())) {
 			otp.createNewOTP(staff, staffService);
 			
 			ret.addObject("message", "OTP scaduto, ti abbiamo inviato un nuovo codice per email");

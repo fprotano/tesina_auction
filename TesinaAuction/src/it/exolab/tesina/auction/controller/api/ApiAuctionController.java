@@ -82,7 +82,4 @@ public class ApiAuctionController extends BaseController {
 		System.out.println(auction);
 		return sendSuccess(auction);
 	}
-	
-	
-	
 }

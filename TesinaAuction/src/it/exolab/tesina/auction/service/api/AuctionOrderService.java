@@ -25,9 +25,13 @@ public class AuctionOrderService {
 		return auctionOrderRepo.findOne(id);
 	}
 	
-	public AuctionOrder findByOrderNo(String OrderNo) {
-	return auctionOrderRepo.findByOrderNo(OrderNo);
+	public AuctionOrder findbyOrderNo(String OrderNo) {
+	return auctionOrderRepo.findbyOrderNo(OrderNo);
 	}
+	
+	public AuctionOrder findByOrderNo(String OrderNo) {
+		return auctionOrderRepo.findByOrderNo(OrderNo);
+		}
 
 	public List<AuctionOrder> findAll() {
 		return (List<AuctionOrder>) auctionOrderRepo.findAll();

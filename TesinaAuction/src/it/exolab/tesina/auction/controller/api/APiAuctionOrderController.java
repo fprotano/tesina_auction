@@ -75,7 +75,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		model.setUrlSuccess(urlSuccess);
 		model.setUrlNotify(urlNotify);
 		
-		AuctionOrder auctionOrder = auctionOrderService.findbyOrderNo(model.getCustomCode());
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
 		auctionOrder.setAuctionOrderStatusId(2);
 		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		auctionOrderService.save(auctionOrder);
@@ -91,7 +91,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
 
-		AuctionOrder auctionOrder = auctionOrderService.findbyOrderNo(model.getCustomCode());
+		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
 		auctionOrder.setAuctionOrderStatusId(2);
 		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		auctionOrderService.save(auctionOrder);

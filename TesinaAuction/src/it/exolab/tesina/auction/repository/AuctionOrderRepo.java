@@ -31,7 +31,11 @@ public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
 			+ " WHERE a.winnerUserId = ?1 ")
 	public List<AuctionOrder> finbyWinnerUserReturnAuctionUser(Integer UserId);
 	
-	@Modifying
+	@Transactional
+	@Modifying(clearAutomatically = true)
 	@Query("SELECT ao FROM AuctionOrder ao WHERE ao.orderNo=?1")
-	public AuctionOrder findbyOrderNo(String email);
+	public AuctionOrder findbyOrderNo(String orderNo);
+	
+	
+	public AuctionOrder findByOrderNo(String orderNo);
 }

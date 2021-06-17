@@ -90,14 +90,9 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	public HttpResponse<Payment> doAuctionOrderDeletePayment(@RequestBody Payment model) {
 		
 		System.out.println("nel doAuctionOrderPayment, Payment > " + model);
-
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(model.getCustomCode());
-		auctionOrder.setAuctionOrderStatusId(2);
-		auctionOrder.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-		auctionOrderService.save(auctionOrder);
-		System.out.println("nel doAuctionOrderPayment, auctionOrder   > " + auctionOrder);
-		System.out.println("nel doAuctionOrderPayment, model   > " + model);
-		
+		auctionOrderService.delete(auctionOrder.getId());
+
 		return sendSuccess(model);
 	}
 	

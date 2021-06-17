@@ -59,7 +59,7 @@ public class ApiPaymentController extends BaseController<Payment> {
 	
 	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
-	public String doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
+	public void doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
 		
 		System.out.println("nel payment notify > returnPayment " + returnPayment);
 		System.out.println("nel payment notify > Auction Order " + returnPayment.getPv()[4]);
@@ -81,8 +81,6 @@ public class ApiPaymentController extends BaseController<Payment> {
 			auctionOrder.setAuctionOrderStatusId(3);
 			auctionOrderService.save(auctionOrder);
 		}
-		return "redirect: http://localhost:8080/TesinaMyBank/payment/sendDataRedirect";
-		
 	}
 }
 	

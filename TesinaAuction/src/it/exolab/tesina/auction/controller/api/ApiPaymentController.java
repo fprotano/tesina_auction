@@ -77,8 +77,9 @@ public class ApiPaymentController extends BaseController<Payment> {
 			UserItem userItem = userItemService.find(auction.getUserItemId());
 			userItem.setSoldToUserId(winnerId);
 			userItemService.save(userItem);
-			auctionOrderService.save(auctionOrder);
 			auctionService.save(auction);
+			auctionOrder.setAuctionOrderStatusId(3);
+			auctionOrderService.save(auctionOrder);
 			
 		}	
 	}

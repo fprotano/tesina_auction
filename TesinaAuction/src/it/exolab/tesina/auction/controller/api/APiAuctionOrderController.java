@@ -114,6 +114,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		
 		String url = System.getenv("ServerAsta");
+		
 		ModelAndView ret = new ModelAndView("redirect:/" + url + "user");
 		payment.setUrlSuccess(null);
 		ret.addObject("payment", payment);

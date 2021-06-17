@@ -53,7 +53,10 @@ public class ApiUserController extends BaseController<User> {
 		
 		System.out.println("nel login, model il ingresso > " + model);
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
-		
+//		if(modelNew == null)
+//			return sendErr("credenziali errate", "err001");
+		OTP<User, UserService> otp = new OTP<User, UserService>();
+		otp.checkIfOtpIsNeeded(modelNew, userService);
 		
 		// return sendSuccess(modelNew.conversionTimeRetobj(modelNew));
 		return sendSuccess(modelNew);

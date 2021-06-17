@@ -18,8 +18,10 @@ import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
 import it.exolab.tesina.auction.model.Payment;
 import it.exolab.tesina.auction.model.ReturnPayment;
 import it.exolab.tesina.auction.model.User;
+import it.exolab.tesina.auction.model.UserItem;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
 import it.exolab.tesina.auction.service.api.AuctionService;
+import it.exolab.tesina.auction.service.api.UserItemService;
 import it.exolab.tesina.auction.service.api.UserService;
 
 @CrossOrigin
@@ -31,12 +33,15 @@ public class ApiPaymentController extends BaseController<Payment> {
 	private AuctionOrderService  auctionOrderService;
 	private AuctionService auctionService;
 	private UserService userService;
+	private UserItemService userItemService;
 	
 	@Autowired(required = true)
-	public void setAuctionOrderService(AuctionOrderService  auctionOrderService, AuctionService auctionService, UserService userService) {
+	public void setAuctionOrderService(AuctionOrderService  auctionOrderService, AuctionService auctionService, UserService userService, 
+										UserItemService userItemService) {
 		this.auctionOrderService = auctionOrderService;
 		this.auctionService = auctionService;
 		this.userService = userService;
+		this.userItemService = userItemService;
 	}
 	
 //	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
@@ -61,13 +66,21 @@ public class ApiPaymentController extends BaseController<Payment> {
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(returnPayment.getPv()[4]);
 		if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
 			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
+			System.out.println("nel payment notify > transactionId" + returnPayment.getPv()[0]);
+			
+			System.out.println("nel payment notify > Auction Order " + auctionOrder);
 			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
 			Auction auction = auctionService.findById(auctionOrder.getAuctionId());
-			auction.setWinnerUserId(userService.findUserbyEmail(returnPayment.getPv()[3]).getId());
+			Integer winnerId = userService.findByEmail(returnPayment.getPv()[3]).getId();
+			auction.setWinnerUserId(winnerId);
 			System.out.println("nel payment notify > " + auction);
-		}
-		
+			UserItem userItem = userItemService.find(auction.getUserItemId());
+			userItem.setSoldToUserId(winnerId);
+			userItemService.save(userItem);
+			auctionOrderService.save(auctionOrder);
+			auctionService.save(auction);
 			
+		}	
 	}
 }
 	

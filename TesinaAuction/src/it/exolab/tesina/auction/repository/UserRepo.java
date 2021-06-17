@@ -30,5 +30,7 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	@Modifying
 	@Query("SELECT u FROM User u WHERE u.email=?1")
 	public User findUserbyEmail(String email);
+	
+	public User findByEmail(String email);
 
 }

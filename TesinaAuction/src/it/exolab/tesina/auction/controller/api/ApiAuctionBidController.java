@@ -44,16 +44,17 @@ public class ApiAuctionBidController extends BaseController<AuctionBid>{
 		System.out.println("nell insert del bid, auctionBid >> " + auctionBid);
 		auctionBidService.save(auctionBid);
 		
+		//questo sotto andra nel validator
 		Auction auction = auctionService.findById(auctionBid.getAuctionId());
-
-		if(auction.getCurrentBid() == null | auction.getCurrentBid() < auctionBid.getBid()) {
+		System.out.println("bid " + auction.getCurrentBid());
+		if(auction.getCurrentBid() == null & auctionBid.getBid() > auction.getStartPrice() 
+				|| auction.getCurrentBid() < auctionBid.getBid() & auctionBid.getBid() > auction.getStartPrice()) {
 			auction.setCurrentBid(auctionBid.getBid());
 			auction.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 			auctionService.save(auction);
+			return sendSuccess(auctionBid);
 		}
-		auctionService.save(auction);
-		
-		return sendSuccess(auctionBid);
+		return sendErr("errore", "001");
 	}
 	
 	@RequestMapping(value = "findAllBids", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

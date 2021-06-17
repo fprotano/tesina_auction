@@ -101,7 +101,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	public ModelAndView doAuctionOrderReturnSuccess(@ModelAttribute Payment payment) {
 		
 		String url = System.getenv("ServerAsta");
-		ModelAndView ret = new ModelAndView("redirect:/" + url + "user");
+		ModelAndView ret = new ModelAndView(url + "user");
 		payment.setUrlUnDo(null);
 		ret.addObject("payment", payment);
 		
@@ -115,7 +115,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		String url = System.getenv("ServerAsta");
 		
-		ModelAndView ret = new ModelAndView("redirect:/" + url + "user");
+		ModelAndView ret = new ModelAndView(url + "user");
 		payment.setUrlSuccess(null);
 		ret.addObject("payment", payment);
 		

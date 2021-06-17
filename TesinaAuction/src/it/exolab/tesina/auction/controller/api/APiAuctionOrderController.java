@@ -112,7 +112,6 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	@ResponseBody
 	public ModelAndView doAuctionOrderReturnFailure(@ModelAttribute Payment payment) {
 		
-		
 		String url = System.getenv("ServerAsta");
 		
 		ModelAndView ret = new ModelAndView(url + "user");

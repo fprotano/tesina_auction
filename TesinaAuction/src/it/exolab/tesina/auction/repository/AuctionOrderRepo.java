@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.User;
 
 
 public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
@@ -29,5 +31,7 @@ public interface AuctionOrderRepo extends CrudRepository<AuctionOrder, Integer>{
 			+ " WHERE a.winnerUserId = ?1 ")
 	public List<AuctionOrder> finbyWinnerUserReturnAuctionUser(Integer UserId);
 	
-	public AuctionOrder findByOrderNo(String OrderNo);
+	@Modifying
+	@Query("SELECT ao FROM AuctionOrder ao WHERE ao.orderNo=?1")
+	public AuctionOrder findbyOrderNo(String email);
 }

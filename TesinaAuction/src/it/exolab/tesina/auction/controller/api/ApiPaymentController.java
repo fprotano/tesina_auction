@@ -56,8 +56,9 @@ public class ApiPaymentController extends BaseController<Payment> {
 	@ResponseBody
 	public void doPaymentNotify(@ModelAttribute ReturnPayment returnPayment) {
 		
-		System.out.println("nel payment notify > " + returnPayment);
-		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(returnPayment.getPv()[4]);
+		System.out.println("nel payment notify > returnPayment " + returnPayment);
+		System.out.println("nel payment notify > Auction Order " + returnPayment.getPv()[4]);
+		AuctionOrder auctionOrder = auctionOrderService.findbyOrderNo(returnPayment.getPv()[4]);
 		if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
 			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
 			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));

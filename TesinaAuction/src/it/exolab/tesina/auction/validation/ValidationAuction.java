@@ -13,4 +13,9 @@ public class ValidationAuction {
 		return true;
 
 }
+	
+	public static boolean AuctionBid() {
+		return false;
+		
+	}
 }

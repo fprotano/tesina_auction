@@ -96,7 +96,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		return sendSuccess(model);
 	}
 	
-	@RequestMapping(value = "AuctionOrderReturnSuccess", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+	@RequestMapping(value = "AuctionOrderReturnSuccess", method = RequestMethod.GET,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
 	public ModelAndView doAuctionOrderReturnSuccess(@ModelAttribute Payment payment) {
 		
@@ -108,7 +108,7 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		return ret;
 	}
 	
-	@RequestMapping(value = "AuctionOrderReturnFailure", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
+	@RequestMapping(value = "AuctionOrderReturnFailure", method = RequestMethod.GET,consumes = MediaType.ALL_VALUE)
 	@ResponseBody
 	public ModelAndView doAuctionOrderReturnFailure(@ModelAttribute Payment payment) {
 		

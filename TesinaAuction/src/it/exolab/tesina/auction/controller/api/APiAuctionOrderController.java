@@ -120,5 +120,4 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 		
 		return ret;
 	}
-	
 }

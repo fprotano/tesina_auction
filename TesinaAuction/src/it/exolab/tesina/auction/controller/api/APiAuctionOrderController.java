@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
@@ -97,27 +98,21 @@ public class APiAuctionOrderController extends BaseController<AuctionOrder> {
 	}
 	
 	@RequestMapping(value = "AuctionOrderReturnSuccess", method = RequestMethod.GET,consumes = MediaType.ALL_VALUE)
-	@ResponseBody
-	public ModelAndView doAuctionOrderReturnSuccess(@ModelAttribute Payment payment) {
+	public String doAuctionOrderReturnSuccess(@ModelAttribute Payment payment) {
 		
 		String url = System.getenv("ServerAsta");
-		ModelAndView ret = new ModelAndView(url + "user");
-		payment.setUrlUnDo(null);
-		ret.addObject("payment", payment);
+		String result = "success";
+		System.out.println(url + "auctionOrder/" + result);
 		
-		return ret;
+		return "redirect: " + url + "auctionOrder/" + result;
 	}
 	
 	@RequestMapping(value = "AuctionOrderReturnFailure", method = RequestMethod.GET,consumes = MediaType.ALL_VALUE)
-	@ResponseBody
-	public ModelAndView doAuctionOrderReturnFailure(@ModelAttribute Payment payment) {
+	public String doAuctionOrderReturnFailure(@ModelAttribute Payment payment) {
 		
 		String url = System.getenv("ServerAsta");
+		String result = "Failure";
 		
-		ModelAndView ret = new ModelAndView(url + "user");
-		payment.setUrlSuccess(null);
-		ret.addObject("payment", payment);
-		
-		return ret;
+		return "redirect: " + url + "auctionOrder/" + result;
 	}
 }

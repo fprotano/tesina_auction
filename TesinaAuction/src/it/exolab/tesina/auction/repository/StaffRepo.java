@@ -41,11 +41,11 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 
 	public Staff findByEmailAndPasswordAndOtpCode(String email, String password, String otp);
 	
-	String query = " SELECT s " + 
-			" FROM staff s, help_center h " +
-			" WHERE s.id=h.assigned_to_id AND h.closed_at is not null " + 
+	String query = " SELECT s.* " + 
+			" FROM staff s left JOIN help_center h on s.id=h.assigned_to_id " + 
+			" WHERE  h.closed_at is null " + 
 			" GROUP BY s.id " + 
-			" ORDER BY COUNT(*) asc " + 
+			" ORDER BY COUNT(*) ASC, s.id ASC " + 
 			" limit 1 ";
 	
 	@Query( value = query, 

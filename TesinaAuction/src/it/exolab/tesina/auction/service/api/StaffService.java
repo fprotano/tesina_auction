@@ -53,4 +53,8 @@ public class StaffService {
 		return this.staffRepo.findByEmailAndPasswordAndOtpCode(email,  password,  otp);
 		
 	}
+	
+	public Staff findHelpDeskWithLessWork() {
+		return this.findHelpDeskWithLessWork();
+	}
 }

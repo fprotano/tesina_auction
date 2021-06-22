@@ -16,8 +16,8 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 	
 	public Staff findByEmailAndPassword(String email, String password);
 	
-	@Transactional
-	@Modifying
+//	@Transactional
+//	@Modifying
 	@Query("SELECT s FROM Staff s WHERE s.email=?1 and s.password=?2")
 	public Staff findStaffLogin(String email, String password);
 	
@@ -25,7 +25,7 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 	
 	public Staff findBySurname(String surname) ;
 	
-	@Modifying
+//	@Modifying
 	@Query("SELECT s FROM Staff s "
 			+ " JOIN FETCH s.staffRole sr "
 			+ " WHERE sr.title = ?1 ")
@@ -41,4 +41,14 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 
 	public Staff findByEmailAndPasswordAndOtpCode(String email, String password, String otp);
 	
+	String query = " SELECT s " + 
+			" FROM staff s, help_center h " +
+			" WHERE s.id=h.assigned_to_id AND h.closed_at is not null " + 
+			" GROUP BY s.id " + 
+			" ORDER BY COUNT(*) asc " + 
+			" limit 1 ";
+	
+	@Query( value = query, 
+			  nativeQuery = true)
+	public Staff findHelpDeskWithLessWork();
 }

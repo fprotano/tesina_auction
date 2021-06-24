@@ -40,4 +40,12 @@ public class HelpCenterService {
 		return this.helpCenterRepo.findOpenHelpCenterAndWaitingAnswer(assignedId);
 	}
 	
+	public List<HelpCenter> findByAssignedToId(Integer assignedToId){
+		return this.helpCenterRepo.findByAssignedToId(assignedToId);
+	}
+	
+	public List<HelpCenter> findByUserId(Integer userId){
+		return this.helpCenterRepo.findByUserId(userId);
+	}
+	
 }

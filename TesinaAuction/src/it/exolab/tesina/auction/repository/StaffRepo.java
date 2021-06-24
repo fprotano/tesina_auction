@@ -9,23 +9,20 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.exolab.tesina.auction.model.Staff;
-import it.exolab.tesina.auction.model.User;
 
 public interface StaffRepo extends CrudRepository<Staff, Integer>{
 	
 	
 	public Staff findByEmailAndPassword(String email, String password);
+
 	
-//	@Transactional
-//	@Modifying
 	@Query("SELECT s FROM Staff s WHERE s.email=?1 and s.password=?2")
 	public Staff findStaffLogin(String email, String password);
 	
-//	public Staff findOneByEmailAndPassword(String email, String password);
 	
 	public Staff findBySurname(String surname) ;
 	
-//	@Modifying
+
 	@Query("SELECT s FROM Staff s "
 			+ " JOIN FETCH s.staffRole sr "
 			+ " WHERE sr.title = ?1 ")
@@ -41,14 +38,13 @@ public interface StaffRepo extends CrudRepository<Staff, Integer>{
 
 	public Staff findByEmailAndPasswordAndOtpCode(String email, String password, String otp);
 	
-	String query = " SELECT s.* " + 
+	
+	@Query( value = " SELECT s.* " + 
 			" FROM staff s left JOIN help_center h on s.id=h.assigned_to_id " + 
 			" WHERE  h.closed_at is null " + 
 			" GROUP BY s.id " + 
 			" ORDER BY COUNT(*) ASC, s.id ASC " + 
-			" limit 1 ";
-	
-	@Query( value = query, 
+			" limit 1 ", 
 			  nativeQuery = true)
 	public Staff findHelpDeskWithLessWork();
 }

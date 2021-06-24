@@ -105,7 +105,9 @@ public class Utils{
 	}
 	
 	
-	
+	public static Timestamp getNow() {
+		return new Timestamp(System.currentTimeMillis());
+	}
 
 
 }

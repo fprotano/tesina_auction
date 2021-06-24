@@ -3,15 +3,31 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<p>aperto thread</p>
-
-<a href="${pageContext.request.contextPath}/helpCenter/HelpCenterToAnswer" >lista thread</a>
+<a href="${pageContext.request.contextPath}/helpCenter/HelpCenterOpenPosts" >lista thread ancora aperti</a>
+<a href="${pageContext.request.contextPath}/helpCenter/HelpCenterToAnswer" >lista thread in attesa di risposta</a>
 
 <c:forEach items="${ threads }" var="thread">
-	${thread.createdAt }<br>
-	${thread.question }<br>
+<!-- 	<table> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>Data creazione</th> -->
+<!-- 				<th>domanda</th> -->
+<!-- 				<th>risposta</th> -->
+				
+<!-- 			</tr> -->
+			
+<!-- 			<tr> -->
+<%-- 				<td>${thread.createdAt }</td> --%>
+<%-- 				<td>${thread.question }</td> --%>
+<%-- 				<td>${thread.answer }</td> --%>
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+	
+<!-- 	</table> -->
+	<p>data creazione : ${thread.createdAt }</p>
+	<p>doamnda : ${thread.question }</p>
 	<c:if test="${not empty thread.answer }">
-		<p>${ thread.answer }</p><br>
+		<p>risposta : ${ thread.answer }</p><br>
 	</c:if>
 	<c:if test="${thread.answer==null }">
 		<form:form method="post" modelAttribute="threadToAnswer" 
@@ -25,4 +41,14 @@
 			
 		</form:form>
 	</c:if>
+	
 </c:forEach>
+
+		<form:form method="post" modelAttribute="threadToAnswer" 
+									action="${pageContext.request.contextPath}/helpCenter/close"> 
+				
+								<form:hidden path = "helpCenterId" value = "${ threads[0].helpCenterId }" />
+								
+								<input type="submit" value="chiudi thread">
+			
+		</form:form>

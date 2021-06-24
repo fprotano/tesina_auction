@@ -88,7 +88,7 @@ public class User {
 	public User( String email, String password, String name, String surname, String question,
 			String answer, String otpCode, Timestamp createAt, Timestamp updatedAt, Timestamp nextOtpCodeAfterDate,
 			Timestamp otpCodeExpiresAt, List<UserItem> userItem, List<AuctionBid> userBids) {
-		super();
+	
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -102,6 +102,12 @@ public class User {
 		this.otpCodeExpiresAt = otpCodeExpiresAt;
 		this.userItem = userItem;
 		this.userBids = userBids;
+	}
+	
+	public User(String email, String otpCode) {
+		
+		this.email = email;
+		this.otpCode = otpCode;
 	}
 
 	public Integer getId() {

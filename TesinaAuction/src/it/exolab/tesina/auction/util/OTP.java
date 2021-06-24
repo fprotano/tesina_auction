@@ -18,6 +18,9 @@ import it.exolab.tesina.auction.service.api.StaffService;
 import it.exolab.tesina.auction.service.api.UserService;
 
 public class OTP <M, S>{
+	
+	private int otpExparationDays = 14;
+	private int otpExparationMinutes = 3;
 		
 //	String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime());
 	Utils util = new Utils();
@@ -66,8 +69,9 @@ public class OTP <M, S>{
 			
 			
 			//controlla se bisogna generare un nuovo OTP
-			if(checkGenerateNewOtp(staff.getOtpCodeExpiresAt()))
+			if(checkGenerateNewOtp(staff.getOtpCodeExpiresAt())) {
 				createNewOTP(staff, service);
+			}
 				
 			return true;
 		}
@@ -85,32 +89,34 @@ public class OTP <M, S>{
 				
 				//controlla se  l'OTP ha una scadenza e se la ha superata
 //				else if(user.getNextOtpCodeAfterDate()== null || util.afterDate(user.getNextOtpCodeAfterDate(), now)) {
-				if(util.beforeDate(user.getNextOtpCodeAfterDate())) {
+		if(util.beforeDate(user.getNextOtpCodeAfterDate())) {
+	
+			//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
 			
-					//se entra, vuol dire che l'OTP è da chiedere alla login o da generare
-					
-					
-					//controlla se bisogna generare un nuovo OTP
-					if(checkGenerateNewOtp(user.getOtpCodeExpiresAt()))
-						createNewOTP(user, service);
-						
-					return true;
-				}
+			
+			//controlla se bisogna generare un nuovo OTP
+			if(checkGenerateNewOtp(user.getOtpCodeExpiresAt())) {
+				createNewOTP(user, service);
+			}
 				
-				return false;
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private boolean checkGenerateNewOtp(Timestamp expOTP) {
 //		if(expOTP==null || util.afterDate(expOTP, now))
-		if(util.beforeDate(expOTP))
+		if(util.beforeDate(expOTP)) {
 			return true;
+		}
 		
 		return false;
 	}
 	
 	public void createNewOTP(Staff staff, StaffService service) {
-		staff.setOtpCode(this.util.generateRandomString(10));
-		staff.setOtpCodeExpiresAt(this.util.addMinutesToDate(10));
+		staff.setOtpCode(this.util.generateRandomString(otpExparationMinutes));
+		staff.setOtpCodeExpiresAt(this.util.addMinutesToDate(otpExparationMinutes));
 		
 		SendEmailController sendEmailController = new SendEmailController();
 	 	sendEmailController.sendMail(staff.getEmail(), "exolabcorso2021@gmail.com", "nuovo OTP", "salve, le inviamo il codice otp : \" "+staff.getOtpCode()+" \" necessario per effettuare il login e con scadenza "+staff.getOtpCodeExpiresAt());
@@ -120,8 +126,8 @@ public class OTP <M, S>{
 	}
 	
 	public void createNewOTP(User user, UserService service) {
-		user.setOtpCode(this.util.generateRandomString(10));
-		user.setOtpCodeExpiresAt(this.util.addMinutesToDate(10));
+		user.setOtpCode(this.util.generateRandomString(otpExparationMinutes));
+		user.setOtpCodeExpiresAt(this.util.addMinutesToDate(otpExparationMinutes));
 		
 		SendEmailController sendEmailController = new SendEmailController();
 	 	sendEmailController.sendMail(user.getEmail(), "exolabcorso2021@gmail.com", "nuovo OTP", "salve, le inviamo il codice otp : \" "+user.getOtpCode()+" \" necessario per effettuare il login e con scadenza "+user.getOtpCodeExpiresAt());
@@ -132,15 +138,14 @@ public class OTP <M, S>{
 	
 	
 	public Staff setNewOtpExp(Staff model, StaffService service) {
-		model.setNextOtpCodeAfterDate(util.addDaysToDate(14));
+		model.setNextOtpCodeAfterDate(util.addDaysToDate(otpExparationDays));
 //		service.save(model);
 		
 		return model;
 	}
 	
 	public void setNewOtpExp(User model, UserService service) {
-		model.setNextOtpCodeAfterDate(util.addDaysToDate(14));
+		model.setNextOtpCodeAfterDate(util.addDaysToDate(otpExparationDays));
 //		service.save(model);
 	}
-
 }

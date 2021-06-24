@@ -47,19 +47,21 @@ public class ApiUserController extends BaseController<User> {
 		return sendSuccess(model);  //ritorno in http ogg
 	}
 	
-	@RequestMapping(value="login", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="checkOtp", method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<User> doLogin(@RequestBody User model) {
+	public HttpResponse<User> doCheckOpt(@RequestBody User model) {
 		
-		System.out.println("nel login, model il ingresso > " + model);
+		System.out.println("nel checkOtp, model il ingresso > " + model);
+		
 		User modelNew = userService.findByEmailAndPassword(model.getEmail(), model.getPassword());
-//		if(modelNew == null)
-//			return sendErr("credenziali errate", "err001");
+		if(userService.findByEmailAndPassword(model.getEmail(), model.getPassword()) == null) {
+			return sendErr("credenziali errate", "err001");
+		}
 		OTP<User, UserService> otp = new OTP<User, UserService>();
 		otp.checkIfOtpIsNeeded(modelNew, userService);
 		
 		// return sendSuccess(modelNew.conversionTimeRetobj(modelNew));
-		return sendSuccess(modelNew);
+		return sendSuccess(new User(model.getEmail(), model.getOtpCode()));
 	}
 	
 	// findUserById

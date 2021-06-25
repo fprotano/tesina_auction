@@ -74,7 +74,6 @@ public class ApiUserController extends BaseController<User> {
 		if(logingUser == null) {
 			return sendErr("credenziali errate", "err001");
 		}
-		
 		return sendSuccess(logingUser);
 	}
 }

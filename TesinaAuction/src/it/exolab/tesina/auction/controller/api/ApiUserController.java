@@ -76,5 +76,4 @@ public class ApiUserController extends BaseController<User> {
 		
 		return sendSuccess(logingUser);
 	}
-	
 }

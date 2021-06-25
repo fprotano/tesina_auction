@@ -70,10 +70,12 @@ public class ApiUserController extends BaseController<User> {
 		
 		System.out.println("nel login, user otp > " + model);
 		User logingUser = userService.findByOtpCodeAndEmail(model.getOtpCode(), model.getEmail());
-		System.out.println(userService.findByOtpCodeAndEmail(model.getOtpCode(), model.getEmail()));
 		if(logingUser == null) {
 			return sendErr("credenziali errate", "err001");
 		}
+		OTP<User, UserService> otp = new OTP<User, UserService>();
+		otp.setNewOtpExp(logingUser, userService);
+		userService.save(logingUser);
 		return sendSuccess(logingUser);
 	}
 }

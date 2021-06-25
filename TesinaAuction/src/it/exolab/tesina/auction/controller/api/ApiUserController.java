@@ -66,10 +66,11 @@ public class ApiUserController extends BaseController<User> {
 	
 	@RequestMapping(value="login", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<User> doLogin(@RequestBody User user) {
+	public HttpResponse<User> doLogin(@RequestBody User model) {
 		
-		System.out.println("nel login, model il ingresso > " + user);
-		User logingUser = userService.findByOtpCodeAndEmail(user.getOtpCode(), user.getEmail());
+		System.out.println("nel login, user otp > " + model);
+		User logingUser = userService.findByOtpCodeAndEmail(model.getOtpCode(), model.getEmail());
+		System.out.println(userService.findByOtpCodeAndEmail(model.getOtpCode(), model.getEmail()));
 		if(logingUser == null) {
 			return sendErr("credenziali errate", "err001");
 		}

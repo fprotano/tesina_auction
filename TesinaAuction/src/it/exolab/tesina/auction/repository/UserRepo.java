@@ -18,6 +18,10 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	
 	public User findByOtpCodeAndEmail(String otpCode, String mail);
 	
+//	@Transactional
+//	@Query("SELECT u FROM User u WHERE u.otpCode=?1 and u.email=?2")
+//	public User findbyOtpCodeAndEmail(String otpCode, String mail);
+//	
 	@Transactional
 	@Modifying
 	@Query("SELECT u FROM User u WHERE u.email=?1 and u.password=?2")

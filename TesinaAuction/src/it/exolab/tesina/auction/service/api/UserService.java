@@ -39,6 +39,8 @@ public class UserService {
 	}
 	
 	public User findByOtpCodeAndEmail(String otpCode, String mail) {
+		System.out.println("zdfgsdf" + otpCode + "zdfgsdf" + mail);
+		System.out.println("sono nel service" + userRepo.findByOtpCodeAndEmail(otpCode, mail));
 		return userRepo.findByOtpCodeAndEmail(otpCode, mail);
 	}
 	

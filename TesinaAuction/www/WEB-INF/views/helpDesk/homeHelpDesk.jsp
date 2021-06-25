@@ -12,7 +12,7 @@
 <c:if test="${empty action }">
 	<c:if test="${ listHelpCenter.size()>0 }">
 <%-- 		<c:if test="${ listOpenPosts.size()>0 }"> --%>
-	
+	<p>${ typeOfSelectedHelpCenter }</p><br>
 		<table>
 			<tr>
 				<th>domanda  </th>
@@ -48,7 +48,7 @@
 	
 	<c:if test="${listHelpCenter.size()==0 }">
 <%-- 	<c:if test="${listOpenPosts.size()==0 }"> --%>
-		<p>nessun post ${ typeOfSelectedHelpCenter }</p>
+		<p>nessun ${ typeOfSelectedHelpCenter }</p>
 		
 		<!-- FAI METODO TIMED PER RICARICAMENTO DELLA LISTA -->
 	</c:if>

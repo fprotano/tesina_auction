@@ -37,6 +37,7 @@ public class HelpCenterThreadController  extends BaseController<HelpCenter> {
 		List<HelpCenterThread> threads = helpCenterThreadService.getThreadsByHelpCenterId(model.getId());
 		ret.addObject("threads", threads);
 		ret.addObject("action", "thread");
+		ret.addObject("currentThread", model);
 		ret.addObject("threadToAnswer", new HelpCenterThread());
 
 		return ret;

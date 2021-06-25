@@ -25,6 +25,9 @@ import it.exolab.tesina.auction.util.Utils;
 public class HelpCenterController extends BaseController<HelpCenter> {
 
 	private HelpCenterService helpCenterService;
+	private String[] typeOfSelectedHelpCenter = new String[] {"post in attesa di risposte", 
+																"post ancora aperti", 
+																"storico post"};
 
 	@Autowired(required = true)
 	public void setHelpCenterService(HelpCenterService helpCenterService) {
@@ -38,7 +41,7 @@ public class HelpCenterController extends BaseController<HelpCenter> {
 		List<HelpCenter> listHelpCenter = helpCenterService.findOpenHelpCenterAndWaitingAnswer(s.getId());
 		ret.addObject("listHelpCenter", listHelpCenter);
 		ret.addObject("goToThread", new HelpCenter());
-		ret.addObject("typeOfSelectedHelpCenter", "in attesa di risposte");
+		ret.addObject("typeOfSelectedHelpCenter", typeOfSelectedHelpCenter[0]);
 
 		return ret;
 
@@ -50,10 +53,23 @@ public class HelpCenterController extends BaseController<HelpCenter> {
 		Staff s = (Staff) session.getAttribute("staff");
 		List<HelpCenter> listHelpCenter = helpCenterService.findbyAssignedIdAndOpen(s.getId());
 		
-		ret.addObject("listOpenPosts", listHelpCenter);
+		ret.addObject("listHelpCenter", listHelpCenter);
 		ret.addObject("goToThread", new HelpCenter());
-		ret.addObject("typeOfSelectedHelpCenter", "ancora aperto");
+		ret.addObject("typeOfSelectedHelpCenter", typeOfSelectedHelpCenter[1]);
 		return ret;
+	}
+
+	@RequestMapping(value = "allPostsByHelpCenterId", method = RequestMethod.GET)
+	public ModelAndView findAllPostsByHelpCenterId (@ModelAttribute HelpCenter model, HttpSession session) {
+		ModelAndView ret = new ModelAndView("home");
+		Staff s = (Staff) session.getAttribute("staff");
+		List<HelpCenter> listHelpCenter = helpCenterService.findByAssignedToId(s.getId());
+		ret.addObject("listHelpCenter", listHelpCenter);
+		ret.addObject("goToThread", new HelpCenter());
+		ret.addObject("typeOfSelectedHelpCenter", typeOfSelectedHelpCenter[2]);
+		
+		return ret;
+
 	}
 	
 
@@ -80,21 +96,8 @@ public class HelpCenterController extends BaseController<HelpCenter> {
 
 	}
 
-	@RequestMapping(value = "allPostsByHelpCenterId", method = RequestMethod.GET)
-	public ModelAndView findAllPostsByHelpCenterId (@ModelAttribute HelpCenter model, HttpSession session) {
-		ModelAndView ret = new ModelAndView("home");
-		Staff s = (Staff) session.getAttribute("staff");
-		List<HelpCenter> listHelpCenter = helpCenterService.findByAssignedToId(s.getId());
-		ret.addObject("listHelpCenter", listHelpCenter);
-		ret.addObject("goToThread", new HelpCenter());
-//		ret.addObject("listHelpCenter", helpCenterService.findOpenHelpCenterAndWaitingAnswer(s.getId()));
-
-		return ret;
-
-	}
-
 	@RequestMapping(value = "findHelpCenter", method = RequestMethod.POST)
-	public ModelAndView dofindbyAssignedIdAndClosed(@ModelAttribute HelpCenter model) {
+	public ModelAndView dofindbyAssignedIdAndOpen(@ModelAttribute HelpCenter model) {
 
 		ModelAndView ret = new ModelAndView("admin/homeAdmin");
 		helpCenterService.findbyAssignedIdAndOpen(model.getAssignedToId());

@@ -38,6 +38,10 @@ public class UserService {
 		return userRepo.findByEmailAndPassword(email, password);
 	}
 	
+	public User findByOtpCodeAndEmail(String otpCode, String mail) {
+		return userRepo.findByOtpCodeAndEmail(otpCode, mail);
+	}
+	
 	public User findUserbyEmail(String email) {
 		return userRepo.findUserbyEmail(email);
 	}

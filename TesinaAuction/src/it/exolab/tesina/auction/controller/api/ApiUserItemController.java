@@ -21,6 +21,7 @@ import it.exolab.tesina.auction.controller.BaseController;
 
 import it.exolab.tesina.auction.model.UserItem;
 import it.exolab.tesina.auction.service.api.UserItemService;
+import it.exolab.tesina.auction.validation.ValidationUserItem;
 
 @CrossOrigin
 @Controller
@@ -42,9 +43,15 @@ public class ApiUserItemController extends BaseController<UserItem> {
 		System.out.println("nel userItemInsert, model il ingresso > " + model);
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		model.setCreatedAt(currentTime);
+		boolean validation=ValidationUserItem.validationItem(model);
+		if(validation) {
 		userItemService.save(model);
 		System.out.println(model);
 		return sendSuccess(model);
+		}
+		else {
+			return sendErr("err", "001");
+		}
 	}
 
 	@RequestMapping(value = "findUserItemByUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

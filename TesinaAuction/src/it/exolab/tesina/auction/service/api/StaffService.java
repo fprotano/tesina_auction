@@ -55,6 +55,6 @@ public class StaffService {
 	}
 	
 	public Staff findHelpDeskWithLessWork() {
-		return this.findHelpDeskWithLessWork();
+		return this.staffRepo.findHelpDeskWithLessWork();
 	}
 }

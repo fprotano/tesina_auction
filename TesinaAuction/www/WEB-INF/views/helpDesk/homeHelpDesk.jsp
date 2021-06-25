@@ -3,13 +3,15 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<jsp:include page="navBarHelpThread.jsp" />
 
-<c:if test="${(empty action) || (action !='storico')}">
-	<a href="${pageContext.request.contextPath}/helpCenter/allThreads">storico thread</a>
-</c:if>
+<%-- <c:if test="${(empty action) || (action !='storico')}"> --%>
+<%-- 	<a href="${pageContext.request.contextPath}/helpCenter/allPosts">storico problemi</a> --%>
+<%-- </c:if> --%>
 
 <c:if test="${empty action }">
 	<c:if test="${ listHelpCenter.size()>0 }">
+<%-- 		<c:if test="${ listOpenPosts.size()>0 }"> --%>
 	
 		<table>
 			<tr>
@@ -21,15 +23,11 @@
 			</tr>
 		
 			<c:forEach items="${listHelpCenter}" var="domanda">
+<%-- 				<c:forEach items="${listOpenPosts}" var="domanda"> --%>
 				<tr>
 						<td>${domanda.question}</td>
 						<td>${domanda.createdAt}</td>
-						<c:if test="${empty domanda.updatedAt}">
-							<td>${domanda.createdAt}</td>
-						</c:if>
-						<c:if test="${not empty domanda.updatedAt}">
-							<td>${domanda.updatedAt}</td>
-						</c:if>
+						<td>${domanda.updatedAt}</td>
 						<td>${domanda.userDidQuestion.surname } ${domanda.userDidQuestion.name}</td>
 					
 						<td>
@@ -49,9 +47,10 @@
 	</c:if>
 	
 	<c:if test="${listHelpCenter.size()==0 }">
-		<p>nessuna domanda in attesa di risposta</p>
+<%-- 	<c:if test="${listOpenPosts.size()==0 }"> --%>
+		<p>nessun post ${ typeOfSelectedHelpCenter }</p>
 		
-		<!-- FAI METODO TIMED PER RIACRIMENTO DELLA LISTA -->
+		<!-- FAI METODO TIMED PER RICARICAMENTO DELLA LISTA -->
 	</c:if>
 
 </c:if>

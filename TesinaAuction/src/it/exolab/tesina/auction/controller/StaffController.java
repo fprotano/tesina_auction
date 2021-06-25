@@ -50,7 +50,7 @@ public class StaffController extends BaseController<Staff> {
 		ModelAndView ret = new ModelAndView("home");
 		
 		ret.addObject("title", "home");
-		System.out.println("dentro  controller/staff/home "+ret);
+//		System.out.println("dentro  controller/staff/home "+ret);
 		return ret;
 	}
 		
@@ -80,8 +80,8 @@ public class StaffController extends BaseController<Staff> {
 		 	
 		 	if(staff.getStaffRole().getTitle().equals("Help Desk")) {
 		 		
-		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
-		 		
+//		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
+		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterOpenPosts");
 		 	}
 		 	System.out.println(ret);
 			return ret;
@@ -167,7 +167,6 @@ public class StaffController extends BaseController<Staff> {
 		ret.addObject("listStaff", listStaff);
 
 		return ret;
-		
 		
 	}
 	

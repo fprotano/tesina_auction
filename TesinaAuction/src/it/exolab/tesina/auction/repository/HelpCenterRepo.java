@@ -12,24 +12,28 @@ import it.exolab.tesina.auction.model.HelpCenter;
 public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 	
 	
-	@Transactional
-	@Modifying
 	@Query(" SELECT h FROM HelpCenter  AS  h WHERE  h.assignedToId =?1 AND h.closedAt is null ")
-	public List<HelpCenter> findbyAssignedIdAndOpen(Integer assignedId );
+	public List<HelpCenter> findbyAssignedIdAndOpen(Integer assignedToId );
 	
-	/*
-	 *  "select c from Category as c " +
-    "inner join c.product as product " +
-    "where product.productId=:productId"
-	 */
 	
-	@Modifying
 	@Query(" SELECT h FROM HelpCenter as h "
 			+ " JOIN FETCH h.helpThreads as ht "
 			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
 			+ " AND ht.answer is null  "
 			+ " ORDER BY ht.createdAt asc ")
 	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
+
+	public List<HelpCenter> findByAssignedToId(Integer assignedToId);
+	
+	@Transactional
+	@Query(" SELECT h FROM HelpCenter h "
+			+ " JOIN FETCH h.staffAssigned s "
+			+ " WHERE h.userId = ?1 ")
+//	@Query(value = "SELECT h.*, s.name, s.surname "
+//					+ " FROM help_center h, staff s"
+//					+ " WHERE h.assigned_to_id = s.id AND h.user_id = ?1 ",
+//			nativeQuery = true)
+	public List<HelpCenter> findByUserId(Integer userId);
 	
 //	@Modifying
 //	@Query(" SELECT h FROM HelpCenterThread as ht "

@@ -16,10 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-
 
 @Entity
 @Table
@@ -104,10 +100,9 @@ public class User {
 		this.userBids = userBids;
 	}
 	
-	public User(String email, String otpCode) {
+	public User(String email) {
 		
 		this.email = email;
-		this.otpCode = otpCode;
 	}
 
 	public Integer getId() {

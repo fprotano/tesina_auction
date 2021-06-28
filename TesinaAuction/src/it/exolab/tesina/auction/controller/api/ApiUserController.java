@@ -58,8 +58,9 @@ public class ApiUserController extends BaseController<User> {
 			return sendErr("credenziali errate", "err001");
 		}
 		OTP<User, UserService> otp = new OTP<User, UserService>();
+		//controlla l'otp, se serve manda un modello vuoto con solo email
 		if(otp.checkIfOtpIsNeeded(modelNew, userService)) {
-			return sendSuccess(new User(model.getEmail(), model.getOtpCode()));
+			return sendSuccess(new User(model.getEmail()));
 		}
 		return sendSuccess(modelNew);
 	}

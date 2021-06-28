@@ -15,14 +15,17 @@ import it.exolab.tesina.auction.controller.BaseController;
 import it.exolab.tesina.auction.model.Auction;
 import it.exolab.tesina.auction.model.AuctionOrder;
 import it.exolab.tesina.auction.model.AuctionOrderTransactionLog;
+import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.model.Payment;
 import it.exolab.tesina.auction.model.ReturnPayment;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.model.UserItem;
 import it.exolab.tesina.auction.service.api.AuctionOrderService;
 import it.exolab.tesina.auction.service.api.AuctionService;
+import it.exolab.tesina.auction.service.api.InvoiceService;
 import it.exolab.tesina.auction.service.api.UserItemService;
 import it.exolab.tesina.auction.service.api.UserService;
+import it.exolab.tesina.auction.util.Utils;
 
 @CrossOrigin
 @Controller
@@ -34,14 +37,16 @@ public class ApiPaymentController extends BaseController<Payment> {
 	private AuctionService auctionService;
 	private UserService userService;
 	private UserItemService userItemService;
+	private InvoiceService invoiceService;
 	
 	@Autowired(required = true)
-	public void setAuctionOrderService(AuctionOrderService  auctionOrderService, AuctionService auctionService, UserService userService, 
-										UserItemService userItemService) {
+	public void setPaymentService(AuctionOrderService  auctionOrderService, AuctionService auctionService, UserService userService, 
+										UserItemService userItemService, InvoiceService invoiceService) {
 		this.auctionOrderService = auctionOrderService;
 		this.auctionService = auctionService;
 		this.userService = userService;
 		this.userItemService = userItemService;
+		this.invoiceService = invoiceService;
 	}
 	
 //	@RequestMapping(value = "paymentNotify", method = RequestMethod.POST,consumes = MediaType.ALL_VALUE)
@@ -81,6 +86,13 @@ public class ApiPaymentController extends BaseController<Payment> {
 			
 			auctionOrder.setAuctionOrderStatusId(3);
 			auctionOrderService.save(auctionOrder);
+			
+			invoiceService.save( new Invoice((invoiceService.findLastInvoice()+1), 
+											winnerId, 
+											auctionOrder.getId(), 
+											Utils.getNow(), 
+											auctionOrder.getAmount(), 
+											(auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*22))));
 		}
 	}
 	

@@ -1,0 +1,2 @@
+ALTER TABLE `invoice`
+	CHANGE COLUMN `iva` `iva` DECIMAL(4,2) NOT NULL DEFAULT '22.00' AFTER `amount`;

@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import it.exolab.tesina.auction.service.api.InvoiceService;
+
 public class Utils{
 	
 
@@ -108,6 +110,7 @@ public class Utils{
 	public static Timestamp getNow() {
 		return new Timestamp(System.currentTimeMillis());
 	}
+	
 
 
 }

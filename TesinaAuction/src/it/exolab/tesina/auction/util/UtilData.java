@@ -13,10 +13,10 @@ public class UtilData {
 	protected final static String NUMERO_ORDINE = "Numero Ordine";
 	protected final static String DESCRIZIONE = "Descrizione";
 	protected final static String PREZZO = "Prezzo";
-	protected final static String IVA = "Iva";
-	protected final static String VALORE_IVA = "21";
-	
-	
-	
+	protected final static String QUANTITA = "1";
+	protected final static String IVA = "Iva 22% : ";
+	protected final static String SUBTOTALE = "Subtotale: ";
+	protected final static String TOTALE = "Totale: ";
+	protected final static Integer VALORE_IVA = 22;
 
 }

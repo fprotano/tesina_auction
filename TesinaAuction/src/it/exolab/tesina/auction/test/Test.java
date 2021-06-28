@@ -40,11 +40,12 @@ public class Test extends UtilData {
 	
 	// aggiunhe righe
 	private static void addRows(PdfPTable table, Invoice invoice, UserItem userItem, AuctionOrder auctionOrder) {
-	    table.addCell(invoice.getAuctionOrderId().toString());
+		table.addCell(QUANTITA);
+		//table.addCell(invoice.getAuctionOrderId().toString()); da scommentare
+	    table.addCell("prova");
 	    table.addCell(userItem.getDescription());
-	    table.addCell(auctionOrder.getAmount().toString());
-	    table.addCell(VALORE_IVA);
-	
+//	    table.addCell(auctionOrder.getAmount().toString()); da scommentare
+	    table.addCell("prova");
 	}
 
 	public static void main(String[] args) {
@@ -62,7 +63,6 @@ public class Test extends UtilData {
 			addRows(table, invoice, userItem, auctionOrder);
 		
 			
-
 			try {
 				
 				
@@ -80,6 +80,9 @@ public class Test extends UtilData {
 				document.add(new Paragraph(user.getSurname() + " " + user.getName() + SPAZIATURA + NUMERO_FATTURA + invoice.getInvoiceNo()));
 				document.add(new Paragraph(" "));
 				document.add(table);
+				document.add(new Paragraph(SPAZIATURA + SUBTOTALE + auctionOrder.getAmount()));
+				document.add(new Paragraph(SPAZIATURA + IVA + ((auctionOrder.getAmount()/100)*VALORE_IVA)));
+				document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
 				document.close();
 				
 				

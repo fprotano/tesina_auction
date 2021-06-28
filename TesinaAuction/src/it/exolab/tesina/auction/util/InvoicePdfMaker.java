@@ -1,5 +1,5 @@
 package it.exolab.tesina.auction.util;
 
-public class InvoiceMaker {
+public class InvoicePdfMaker {
 
 }

@@ -65,23 +65,26 @@ public class ApiPaymentController extends BaseController<Payment> {
 		System.out.println("nel payment notify > Auction Order " + returnPayment.getPv()[4]);
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(returnPayment.getPv()[4]);
 		if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
-			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
-			System.out.println("nel payment notify > transactionId" + returnPayment.getPv()[0]);
 			
-			System.out.println("nel payment notify > Auction Order " + auctionOrder);
+			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
 			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
+			
 			Auction auction = auctionService.findById(auctionOrder.getAuctionId());
 			Integer winnerId = userService.findByEmail(returnPayment.getPv()[3]).getId();
-			auction.setWinnerUserId(winnerId);
-			System.out.println("nel payment notify > " + auction);
 			UserItem userItem = userItemService.find(auction.getUserItemId());
+			
+			auction.setWinnerUserId(winnerId);
+			auctionService.save(auction);
+			
 			userItem.setSoldToUserId(winnerId);
 			userItemService.save(userItem);
-			auctionService.save(auction);
+			
 			auctionOrder.setAuctionOrderStatusId(3);
 			auctionOrderService.save(auctionOrder);
 		}
 	}
+	
+	
 }
 	
 

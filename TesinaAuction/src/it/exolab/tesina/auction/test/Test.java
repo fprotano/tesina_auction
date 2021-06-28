@@ -1,15 +1,103 @@
 package it.exolab.tesina.auction.test;
 
-import it.exolab.tesina.auction.validation.ValidationAuction;
-import it.exolab.tesina.auction.validation.ValidationUser;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.stream.Stream;
 
-public class Test {
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
+
+import it.exolab.tesina.auction.model.AuctionOrder;
+import it.exolab.tesina.auction.model.Invoice;
+import it.exolab.tesina.auction.model.User;
+import it.exolab.tesina.auction.model.UserItem;
+import it.exolab.tesina.auction.util.UtilData;
+
+public class Test extends UtilData {
+	
+	// intestazione colonne
+	private static void addTableHeader(PdfPTable table) {
+		
+	    Stream.of(NUMERO_ORDINE, DESCRIZIONE, PREZZO, IVA).forEach(columnTitle -> {
+	        PdfPCell header = new PdfPCell();
+	        header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+	        header.setBorderWidth(2);
+	        header.setExtraParagraphSpace(10.0f);
+	        header.setPhrase(new Phrase(columnTitle));
+	        table.addCell(header);
+	    });
+	}
+	
+	// aggiunhe righe
+	private static void addRows(PdfPTable table, Invoice invoice, UserItem userItem, AuctionOrder auctionOrder) {
+	    table.addCell(invoice.getAuctionOrderId().toString());
+	    table.addCell(userItem.getDescription());
+	    table.addCell(auctionOrder.getAmount().toString());
+	    table.addCell(VALORE_IVA);
+	
+	}
 
 	public static void main(String[] args) {
-	String eMail = "ciao@liilooo.it";
+	
+			Invoice invoice = new Invoice();
+			User user = new User();
+			UserItem userItem = new UserItem();
+			AuctionOrder auctionOrder = new AuctionOrder();
+			// crea oggetto 'documento' vuoto
+			Document document = new Document();
+			Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 16, BaseColor.BLACK);
+			PdfPTable table = new PdfPTable(4);
+			LineSeparator line = new LineSeparator();
+			addTableHeader(table);
+			addRows(table, invoice, userItem, auctionOrder);
+		
+			
 
-	System.out.println(ValidationUser.emailValidator(eMail));
-   System.out.println(ValidationUser.isValidPassword("simoNem01?"));
+			try {
+				
+				
+				// crea un file di tipo pdf
+				PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
+				document.open();
+				// il 'chunk' e' l'elemento piu' piccolo che si puo aggiungere
+//				Chunk chunk = new Chunk("riga di prova", font);
+				document.add(new Paragraph(RAGIONE__SOCIALE));
+				document.add(new Paragraph(INDIRIZZO1));
+				document.add(new Paragraph(INDIRIZZO2));
+				document.add(Chunk.NEWLINE);
+				document.add(line);
+				document.add(new Paragraph(INTESTAZIONE + SPAZIATURA + DATA_FATTURA + invoice.getCreateAt()));
+				document.add(new Paragraph(user.getSurname() + " " + user.getName() + SPAZIATURA + NUMERO_FATTURA + invoice.getInvoiceNo()));
+				document.add(new Paragraph(" "));
+				document.add(table);
+				document.close();
+				
+				
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+	
+			
+		
    
    
    

@@ -41,5 +41,9 @@ public class InvoiceService {
 	public Integer findLastInvoice() {
 		return invoiceRepo.findLastInvoice();
 	}
+	
+	public Invoice findByAuctionOrderId(Integer auctionOrderId) {
+		return invoiceRepo.findByAuctionOrderId(auctionOrderId);
+	}
 
 }

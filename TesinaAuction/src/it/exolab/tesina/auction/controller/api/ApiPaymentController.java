@@ -87,11 +87,11 @@ public class ApiPaymentController extends BaseController<Payment> {
 			auctionOrder.setAuctionOrderStatusId(3);
 			auctionOrderService.save(auctionOrder);
 			
-			invoiceService.save( new Invoice((invoiceService.findLastInvoice()+1), 
-					winnerId, 
-					auctionOrder.getId(), 
-					Utils.getNow(), 
-					auctionOrder.getAmount()));
+			invoiceService.save(new Invoice((invoiceService.findLastInvoice()+1), 
+											winnerId, 
+											auctionOrder.getId(), 
+											Utils.getNow(), 
+											auctionOrder.getAmount()));
 		}
 	}
 	

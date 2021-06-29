@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table
 public class Invoice {
@@ -30,7 +32,13 @@ public class Invoice {
 	@Column(name="created_at")
 	private Timestamp createAt;
 	
-	private Double amount, iva, total;
+	@Column(name="total", nullable = false, insertable = false, updatable = false)
+	private Double total;
+	
+	@Column(name="iva", nullable = false, insertable = false, updatable = false)
+	private Double iva;
+	
+	private Double amount;
 
 	
 	public Invoice() {

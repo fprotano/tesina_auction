@@ -91,8 +91,7 @@ public class ApiPaymentController extends BaseController<Payment> {
 											winnerId, 
 											auctionOrder.getId(), 
 											Utils.getNow(), 
-											auctionOrder.getAmount(), 
-											(auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*22))));
+											auctionOrder.getAmount()));
 		}
 	}
 	

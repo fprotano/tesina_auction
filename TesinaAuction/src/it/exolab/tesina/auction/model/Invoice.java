@@ -38,15 +38,13 @@ public class Invoice {
 	}
 	
 	public Invoice(Integer invoiceNo, Integer userId, Integer auctionOrderId, Timestamp createAt,
-			Double amount, Double total) {
+			Double amount) {
 
 		this.invoiceNo = invoiceNo;
 		this.userId = userId;
 		this.auctionOrderId = auctionOrderId;
 		this.createAt = createAt;
 		this.amount = amount;
-
-		this.total = total;
 	}
 
 	public Invoice(Integer id, Integer invoiceNo, Integer userId, Integer auctionOrderId, Timestamp createAt,

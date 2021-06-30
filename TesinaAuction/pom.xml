@@ -12,6 +12,8 @@
 
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -130,6 +132,20 @@
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.12.0</version>
+		</dependency>
+		
+		<!-- 		pdf dependencies -->
+		
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>5.5.13.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>2.0.4</version>
 		</dependency>
  
 	</dependencies>

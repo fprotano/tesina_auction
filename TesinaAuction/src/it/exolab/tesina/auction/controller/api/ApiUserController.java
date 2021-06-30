@@ -58,22 +58,25 @@ public class ApiUserController extends BaseController<User> {
 			return sendErr("credenziali errate", "err001");
 		}
 		OTP<User, UserService> otp = new OTP<User, UserService>();
+		//controlla l'otp, se serve manda un modello vuoto con solo email
 		if(otp.checkIfOtpIsNeeded(modelNew, userService)) {
-			return sendSuccess(new User(model.getEmail(), model.getOtpCode()));
+			return sendSuccess(new User(model.getEmail()));
 		}
 		return sendSuccess(modelNew);
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<User> doLogin(@RequestBody User user) {
+	public HttpResponse<User> doLogin(@RequestBody User model) {
 		
-		System.out.println("nel login, model il ingresso > " + user);
-		User logingUser = userService.findByOtpCodeAndEmail(user.getOtpCode(), user.getEmail());
+		System.out.println("nel login, user otp > " + model);
+		User logingUser = userService.findByOtpCodeAndEmail(model.getOtpCode(), model.getEmail());
 		if(logingUser == null) {
 			return sendErr("credenziali errate", "err001");
 		}
-		
+		OTP<User, UserService> otp = new OTP<User, UserService>();
+		otp.setNewOtpExp(logingUser, userService);
+		userService.save(logingUser);
 		return sendSuccess(logingUser);
 	}
 }

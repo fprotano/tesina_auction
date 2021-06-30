@@ -1,0 +1,1 @@
+ALTER TABLE `invoice` ADD COLUMN `total` DECIMAL (11,2) AS (`amount` + ((`amount`/100)*`iva`)) NULL AFTER `iva`;

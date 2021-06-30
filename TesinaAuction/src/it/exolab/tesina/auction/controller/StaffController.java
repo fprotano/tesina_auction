@@ -81,7 +81,7 @@ public class StaffController extends BaseController<Staff> {
 		 	if(staff.getStaffRole().getTitle().equals("Help Desk")) {
 		 		
 //		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
-		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterOpenPosts");
+		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
 		 	}
 		 	System.out.println(ret);
 			return ret;

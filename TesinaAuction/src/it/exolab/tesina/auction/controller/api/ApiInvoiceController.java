@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
 import it.exolab.tesina.auction.controller.BaseController;
+import it.exolab.tesina.auction.model.AuctionOrder;
 import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.InvoiceService;
@@ -28,19 +29,13 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 		this.invoiceService = invoiceService;
 	}
 
-	@RequestMapping(value = "invoiceInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public HttpResponse<Invoice> doinvoiceInsert(@RequestBody Invoice model) {
-		System.out.println("nel invoiceInsert, invoice > " + model);
-		invoiceService.save(model);
-		return sendSuccess(model);
-	}
 
-	@RequestMapping(value = "invoiceFindById", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "downloadInvoice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Invoice> doinvoiceFinfById(@RequestBody Invoice model) {
-		System.out.println("nel invoiceFindById, invoice > " + model.getId());
-		Invoice invoice = invoiceService.find(model.getId());
+	public HttpResponse<Invoice> doDownloadInvoice(@RequestBody AuctionOrder model) {
+		System.out.println("nel doDownloadInvoice, AuctionOrder > " + model.getId());
+		Invoice invoice = invoiceService.findByAuctionOrderId(model.getId());
+		System.out.println("nel doDownloadInvoice, invoice > " + invoice);
 		return sendSuccess(invoice);
 	}
 

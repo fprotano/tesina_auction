@@ -39,10 +39,10 @@ public class HelpCenter {
 	private Timestamp closedAt;
 	
 	@Column(name="user_id")
-	private Integer userId;
+	private Integer userId; 
 	
 	@Fetch(value=FetchMode.JOIN)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id", nullable=false, insertable=false, updatable=false)
 	private User userDidQuestion;
 	
@@ -53,11 +53,11 @@ public class HelpCenter {
 	private Integer assignedToId;
 	
 	@Fetch(value=FetchMode.JOIN)
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="assigned_to_id", nullable=false, insertable=false, updatable=false)
 	private Staff staffAssigned;
 	
-	@OneToMany(mappedBy="helpCenterForThread", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="helpCenterForThread", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<HelpCenterThread> helpThreads;
 	
 

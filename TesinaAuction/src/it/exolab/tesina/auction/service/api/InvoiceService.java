@@ -37,5 +37,13 @@ public class InvoiceService {
 		return invoiceRepo.findByUserId(model.getId()) ;
 		
 	}
+	
+	public Integer findLastInvoice() {
+		return invoiceRepo.findLastInvoice();
+	}
+	
+	public Invoice findByAuctionOrderId(Integer auctionOrderId) {
+		return invoiceRepo.findByAuctionOrderId(auctionOrderId);
+	}
 
 }

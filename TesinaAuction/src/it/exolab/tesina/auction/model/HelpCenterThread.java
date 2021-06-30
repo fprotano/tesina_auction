@@ -27,7 +27,7 @@ public class HelpCenterThread {
 	private Timestamp createdAt;
 	
 	@Column(name="help_center_id")
-	private Integer helpCenterId;
+	private Integer helpCenterId; 
 	
 	@Fetch(value=FetchMode.JOIN)
 	@ManyToOne(fetch=FetchType.LAZY)

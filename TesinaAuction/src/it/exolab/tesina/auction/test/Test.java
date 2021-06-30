@@ -84,8 +84,7 @@ public class Test extends UtilData {
 				document.add(new Paragraph(SPAZIATURA + IVA + ((auctionOrder.getAmount()/100)*VALORE_IVA)));
 				document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
 				document.close();
-				
-				
+
 				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -94,7 +93,6 @@ public class Test extends UtilData {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-   
 	}
 
 }

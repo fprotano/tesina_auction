@@ -94,8 +94,6 @@ public class ApiPaymentController extends BaseController<Payment> {
 											auctionOrder.getAmount()));
 		}
 	}
-	
-	
 }
 	
 

@@ -130,7 +130,7 @@ public class HelpCenterThread {
 	@Override
 	public String toString() {
 		return "HelpCenterThread [id=" + id + ", createdAt=" + createdAt + ", helpCenterId=" + helpCenterId
-				+ ", helpCenterForThread=" + helpCenterForThread + ", question=" + question + ", answer=" + answer
+				+ ", question=" + question + ", answer=" + answer
 				+ "]";
 	}
 	

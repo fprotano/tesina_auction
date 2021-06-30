@@ -46,7 +46,7 @@ public class HelpCenterService {
 		return this.helpCenterRepo.findByAssignedToId(assignedToId);
 	}
 	
-	public List<HelpCenter> findByUserId(Integer userId){
+	public List<HelpCenter> findbyUserId(Integer userId){
 		return this.helpCenterRepo.findByUserId(userId);
 	}
 	

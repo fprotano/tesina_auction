@@ -25,8 +25,8 @@
 	<!-- 		</thead> -->
 		
 	<!-- 	</table> -->
-		<p>data creazione : ${thread.createdAt }</p>
-		<p>doamnda : ${thread.question }</p>
+		<p>data creazione domanda : ${thread.createdAt }</p>
+		<p>domanda : ${thread.question }</p>
 		<c:if test="${not empty thread.answer }">
 			<p>risposta : ${ thread.answer }</p><br>
 		</c:if>
@@ -35,7 +35,7 @@
 										action="${pageContext.request.contextPath}/helpCenterThread/answer"> 
 					
 									<form:hidden path = "id" value = "${ thread.id }" />
-									<lablel>Risposta : </lable><br/>
+									<label>Risposta : </label><br/>
 									<form:input path="answer" required="required" />
 									
 									<input type="submit" value="invia risposta">
@@ -45,13 +45,17 @@
 		
 	</c:forEach>
 	
-	<c:if test="${ not empty currentThread && currentThread.closedAt != null }">
+	<c:if test="${ not empty currentThread && currentThread.closedAt == null }">
 		<form:form method="post" modelAttribute="threadToAnswer" 
 									action="${pageContext.request.contextPath}/helpCenter/close"> 
 				
-								<form:hidden path = "helpCenterId" value = "${ threads[0].helpCenterId }" />
+								<form:hidden path = "helpCenterId" value = "${ currentThread.id }" />
 								<input type="submit" value="chiudi thread">
 		</form:form>
+	</c:if>
+	
+	<c:if test="${ not empty currentThread && not empty currentThread.closedAt }">
+		<p>post chiuso il ${ currentThread.closedAt }</p>
 	</c:if>
 </c:if>
 

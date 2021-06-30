@@ -33,7 +33,7 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 //					+ " FROM help_center h, staff s"
 //					+ " WHERE h.assigned_to_id = s.id AND h.user_id = ?1 ",
 //			nativeQuery = true)
-	public List<HelpCenter> findbyUserId(Integer userId);
+	public List<HelpCenter> findByUserId(Integer userId);
 	
 //	@Modifying
 //	@Query(" SELECT h FROM HelpCenterThread as ht "

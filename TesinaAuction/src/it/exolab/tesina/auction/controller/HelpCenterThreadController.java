@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.model.HelpCenterThread;
+import it.exolab.tesina.auction.service.api.HelpCenterService;
 import it.exolab.tesina.auction.service.api.HelpCenterThreadService;
 import it.exolab.tesina.auction.util.Utils;
 
@@ -24,10 +25,16 @@ import it.exolab.tesina.auction.util.Utils;
 public class HelpCenterThreadController  extends BaseController<HelpCenter> {
 	
 	private HelpCenterThreadService helpCenterThreadService;
-
+	private HelpCenterService helpCenterService;
+	
 	@Autowired(required = true)
 	public void setHelpCenterThreadService(HelpCenterThreadService helpCenterThreadService) {
 		this.helpCenterThreadService = helpCenterThreadService;
+	}
+	
+	@Autowired(required = true)
+	public void setHelpCenterService(HelpCenterService helpCenterService) {
+		this.helpCenterService = helpCenterService;
 	}
 
 	@RequestMapping(value = "thread", method = RequestMethod.POST)
@@ -37,6 +44,7 @@ public class HelpCenterThreadController  extends BaseController<HelpCenter> {
 		List<HelpCenterThread> threads = helpCenterThreadService.getThreadsByHelpCenterId(model.getId());
 		ret.addObject("threads", threads);
 		ret.addObject("action", "thread");
+		model= this.helpCenterService.find(model.getId());
 		ret.addObject("currentThread", model);
 		ret.addObject("threadToAnswer", new HelpCenterThread());
 

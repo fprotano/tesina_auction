@@ -47,7 +47,7 @@ public class HelpCenterService {
 	}
 	
 	public List<HelpCenter> findbyUserId(Integer userId){
-		return this.helpCenterRepo.findbyUserId(userId);
+		return this.helpCenterRepo.findByUserId(userId);
 	}
 	
 }

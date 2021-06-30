@@ -44,15 +44,15 @@ public class ApiUserItemController extends BaseController<UserItem> {
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		model.setCreatedAt(currentTime);
 		boolean validation=ValidationUserItem.validationItem(model);
-		if(validation) {
+		//if(validation) {
 		userItemService.save(model);
 		System.out.println(model);
 		return sendSuccess(model);
 		}
-		else {
-			return sendErr("err", "001");
-		}
-	}
+		//else {
+			//return sendErr("err", "001");
+		//}
+	
 
 	@RequestMapping(value = "findUserItemByUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

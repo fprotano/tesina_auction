@@ -207,8 +207,6 @@ public class Staff {
 				+ ", staffRole=" + staffRole + ", nextOtpCodeAfterDate=" + nextOtpCodeAfterDate + ", otpCode=" + otpCode
 				+ ", otpCodeExpiresAt=" + otpCodeExpiresAt + ", listHelpCenterOfStaff=" + listHelpCenterOfStaff + "]";
 	}
-	
-	
-	
+
 	
 }

@@ -72,9 +72,10 @@ public class ApiHelpCenterController extends BaseController<HelpCenter>{
 	@ResponseBody
 	public HttpResponse<HelpCenter> findAllOfUser(@PathVariable Integer userId){
 		System.out.println("dentro findAllOfUser");
-		List <HelpCenter> listHelpCenter = this.helpCenterService.findByUserId(userId);
-		for(HelpCenter lh : listHelpCenter)
-			System.out.println(lh);
+		List <HelpCenter> listHelpCenter = this.helpCenterService.findbyUserId(userId);
+		System.out.println("lista degli help ----->" + listHelpCenter);
+//		for(HelpCenter lh : listHelpCenter)
+//			System.out.println(lh);
 		return sendSuccess(listHelpCenter);
 		
 	}

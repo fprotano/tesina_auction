@@ -1,9 +1,13 @@
 package it.exolab.tesina.auction.controller.api;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +21,7 @@ import it.exolab.tesina.auction.model.AuctionOrder;
 import it.exolab.tesina.auction.model.Invoice;
 import it.exolab.tesina.auction.model.User;
 import it.exolab.tesina.auction.service.api.InvoiceService;
+import it.exolab.tesina.auction.util.InvoicePdfMaker;
 @CrossOrigin
 @Controller
 @RequestMapping(value="api/invoice")
@@ -32,11 +37,22 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 
 	@RequestMapping(value = "downloadInvoice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public HttpResponse<Invoice> doDownloadInvoice(@RequestBody AuctionOrder model) {
+	public HttpResponse<byte[]> doDownloadInvoice(@RequestBody AuctionOrder model) {
 		System.out.println("nel doDownloadInvoice, AuctionOrder > " + model.getId());
 		Invoice invoice = invoiceService.findByAuctionOrderId(model.getId());
-		System.out.println("nel doDownloadInvoice, invoice > " + invoice);
-		return sendSuccess(invoice);
+		byte[] pdfToByte = new InvoicePdfMaker().pdfMaker();
+		String byteToString = Base64.getEncoder().encodeToString(pdfToByte);
+//		HttpHeaders headers = new HttpHeaders();
+//	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+	    // Here you have to set the actual filename of your pdf
+//	    String filename = "output.pdf";
+//	    headers.setContentDispositionFormData(filename, filename);
+//	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+//	    ResponseEntity<byte[]> response = new ResponseEntity<>(pdfToByte, headers, HttpStatus.OK);
+
+	    
+		System.out.println("nel doDownloadInvoice, invoice > " + pdfToByte.toString());
+		return sendSuccess(byteToString);
 	}
 
 	@RequestMapping(value = "invoiceFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

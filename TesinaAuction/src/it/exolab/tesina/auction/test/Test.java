@@ -1,5 +1,6 @@
 package it.exolab.tesina.auction.test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.stream.Stream;
@@ -59,6 +60,8 @@ public class Test extends UtilData {
 			Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 16, BaseColor.BLACK);
 			PdfPTable table = new PdfPTable(4);
 			LineSeparator line = new LineSeparator();
+			
+			
 			addTableHeader(table);
 			addRows(table, invoice, userItem, auctionOrder);
 		
@@ -67,7 +70,8 @@ public class Test extends UtilData {
 				
 				
 				// crea un file di tipo pdf
-				PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
+				// PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
+				PdfWriter.getInstance(document, new ByteArrayOutputStream());
 				document.open();
 				// il 'chunk' e' l'elemento piu' piccolo che si puo aggiungere
 //				Chunk chunk = new Chunk("riga di prova", font);
@@ -85,10 +89,6 @@ public class Test extends UtilData {
 				document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
 				document.close();
 
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (DocumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

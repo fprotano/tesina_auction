@@ -75,6 +75,9 @@ public class HelpCenterThreadController  extends BaseController<HelpCenter> {
 		model.setAnswer(threadToAnswer.getAnswer());
 		this.helpCenterThreadService.save(model);
 		
+		HelpCenter hp = this.helpCenterService.find(model.getHelpCenterId());
+		this.helpCenterService.save(hp);
+		
 		redir.addFlashAttribute("redir",model);
 		
 		return ret;

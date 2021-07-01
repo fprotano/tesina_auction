@@ -5,11 +5,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import it.exolab.tesina.auction.api.model.dto.FactoryConvertDTOtoModelOrViceVersa;
+import it.exolab.tesina.auction.api.model.dto.HelpCenterDTO;
 import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.repository.HelpCenterRepo;
 
 
-public class HelpCenterService {
+public class HelpCenterService 	extends FactoryConvertDTOtoModelOrViceVersa<HelpCenterDTO, HelpCenter>{
+	
+	public HelpCenterService() {
+		super(HelpCenterDTO.class, HelpCenter.class);
+	}
+
 	private HelpCenterRepo helpCenterRepo;
 
 	@Autowired(required = true)
@@ -47,6 +54,7 @@ public class HelpCenterService {
 	}
 	
 	public List<HelpCenter> findbyUserId(Integer userId){
+//		return this.convertListOfModelToListOfDto(this.helpCenterRepo.findByUserId(userId));
 		return this.helpCenterRepo.findByUserId(userId);
 	}
 	

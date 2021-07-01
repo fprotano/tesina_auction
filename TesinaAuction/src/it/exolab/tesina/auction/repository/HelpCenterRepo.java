@@ -25,10 +25,11 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 
 	public List<HelpCenter> findByAssignedToId(Integer assignedToId);
 	
-//	@Transactional
-//	@Query(" SELECT h FROM HelpCenter h "
-//			+ " JOIN FETCH h.staffAssigned s "
-//			+ " WHERE h.userId = ?1 ")
+	@Transactional
+	@Query(" SELECT h FROM HelpCenter h "
+			+ " JOIN FETCH h.staffAssigned s "
+			+ " WHERE h.userId = ?1 "
+			+ " ORDER BY h.updatedAt Desc")
 //	@Query(value = "SELECT h.*, s.name, s.surname "
 //					+ " FROM help_center h, staff s"
 //					+ " WHERE h.assigned_to_id = s.id AND h.user_id = ?1 ",

@@ -1,6 +1,6 @@
 package it.exolab.tesina.auction.controller.api;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.exolab.tesina.auction.api.model.HttpResponse;
+import it.exolab.tesina.auction.api.model.dto.HelpCenterDTO;
 import it.exolab.tesina.auction.controller.BaseController;
-import it.exolab.tesina.auction.model.Auction;
-import it.exolab.tesina.auction.model.AuctionBid;
 import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.model.HelpCenterThread;
 import it.exolab.tesina.auction.service.api.HelpCenterService;
@@ -52,11 +51,9 @@ public class ApiHelpCenterController extends BaseController<HelpCenter>{
 	@RequestMapping(value = "insert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpResponse<HelpCenter> doInsert(@RequestBody HelpCenter model) {
-		System.out.println("arrivato a insert backEnd");
 		model.setAssignedToId(staffService.findHelpDeskWithLessWork().getId());
 		model.setCreatedAt(Utils.getNow());
 		helpCenterService.save(model);
-		System.out.println("help center : "+model);
 		
 		HelpCenterThread helpCenterThread = new HelpCenterThread();
 		helpCenterThread.setCreatedAt(model.getCreatedAt());
@@ -71,12 +68,13 @@ public class ApiHelpCenterController extends BaseController<HelpCenter>{
 	@RequestMapping (value="fAOfUs/{userId}", method = RequestMethod.GET)
 	@ResponseBody
 	public HttpResponse<HelpCenter> findAllOfUser(@PathVariable Integer userId){
-		System.out.println("dentro findAllOfUser");
+
 		List <HelpCenter> listHelpCenter = this.helpCenterService.findbyUserId(userId);
-		System.out.println("lista degli help ----->" + listHelpCenter);
-//		for(HelpCenter lh : listHelpCenter)
-//			System.out.println(lh);
-		return sendSuccess(listHelpCenter);
+		List <HelpCenterDTO> listHelpCenterToSend = new ArrayList<HelpCenterDTO>();
+		for (HelpCenter hc : listHelpCenter) {
+			listHelpCenterToSend.add(new HelpCenterDTO(hc));
+		}
+		return sendSuccess(listHelpCenterToSend);
 		
 	}
 

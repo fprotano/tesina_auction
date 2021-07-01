@@ -11,10 +11,10 @@ import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.repository.HelpCenterRepo;
 
 
-public class HelpCenterService 	extends FactoryConvertDTOtoModelOrViceVersa<HelpCenterDTO, HelpCenter>{
+public class HelpCenterService 	{
 	
 	public HelpCenterService() {
-		super(HelpCenterDTO.class, HelpCenter.class);
+		
 	}
 
 	private HelpCenterRepo helpCenterRepo;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.exolab.tesina.auction.api.model.dto.FactoryConvertDTOtoModelOrViceVersa;
 import it.exolab.tesina.auction.api.model.dto.HelpCenterDTO;
 import it.exolab.tesina.auction.model.HelpCenter;
 import it.exolab.tesina.auction.repository.HelpCenterRepo;

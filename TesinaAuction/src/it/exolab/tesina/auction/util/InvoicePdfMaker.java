@@ -53,8 +53,8 @@ public class InvoicePdfMaker extends UtilData {
 			document.add(new Paragraph(RAGIONE__SOCIALE));
 			document.add(new Paragraph(INDIRIZZO1));
 			document.add(new Paragraph(INDIRIZZO2));
-//			document.add(Chunk.NEWLINE);
-//			document.add(line);
+			document.add(Chunk.NEWLINE);
+			document.add(line);
 //			document.add(new Paragraph(INTESTAZIONE + SPAZIATURA + DATA_FATTURA + invoice.getCreateAt()));
 //			document.add(new Paragraph(user.getSurname() + " " + user.getName() + SPAZIATURA + NUMERO_FATTURA + invoice.getInvoiceNo()));
 //			document.add(new Paragraph(" "));

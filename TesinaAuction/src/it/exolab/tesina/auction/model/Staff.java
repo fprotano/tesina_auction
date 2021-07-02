@@ -71,6 +71,13 @@ public class Staff {
 
 	}
 
+	public Staff(String email, String password, Timestamp otpCodeExpiresAt) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.otpCodeExpiresAt = otpCodeExpiresAt;
+	}
+
 	public Integer getId() {
 		return id;
 	}

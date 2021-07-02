@@ -70,7 +70,8 @@ public class StaffController extends BaseController<Staff> {
 		 	
 		 	OTP<Staff, StaffService> otp = new OTP<Staff, StaffService>();
 		 	if(otp.checkIfOtpIsNeeded(staff, staffService)) {
-		 		staff.setOtpCode(null);
+//		 		staff.setOtpCode(null);
+		 		staff = new Staff(staff.getEmail(), staff.getPassword(), staff.getOtpCodeExpiresAt());
 		 		ret.addObject("accountAskOTP", staff);
 		 		ret.addObject("action", "askOTP");
 		 		return ret;
@@ -81,7 +82,6 @@ public class StaffController extends BaseController<Staff> {
 		 	if(staff.getStaffRole().getTitle().equals("Help Desk")) {
 		 		return ret = new ModelAndView("redirect:/helpCenter/HelpCenterToAnswer");
 		 	}
-		 	System.out.println(ret);
 			return ret;
 		}
 	 

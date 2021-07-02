@@ -96,10 +96,18 @@ public class ApiPaymentController extends BaseController<Payment> {
 		}
 		//stato 2 pagamento annullato
 		if(returnPayment.getPv()[5].equals("2")) {
+			
+			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
+			auctionOrder.setAuctionOrderStatusId(4);
+			auctionOrderService.save(auctionOrder);
 		
 		}
 		//stato 2 pagamento in verifica
-		if(returnPayment.getPv()[5].equals("3")) {
+		if(returnPayment.getPv()[5].equals("1")) {
+			
+			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
+			auctionOrder.setAuctionOrderStatusId(2);
+			auctionOrderService.save(auctionOrder);
 		
 		}
 

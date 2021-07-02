@@ -69,31 +69,40 @@ public class ApiPaymentController extends BaseController<Payment> {
 		System.out.println("nel payment notify > returnPayment " + returnPayment);
 		System.out.println("nel payment notify > Auction Order " + returnPayment.getPv()[4]);
 		AuctionOrder auctionOrder = auctionOrderService.findByOrderNo(returnPayment.getPv()[4]);
-		if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
-			
-			auctionOrder.setTransactionId(returnPayment.getPv()[0]);
-			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
-			
-			Auction auction = auctionService.findById(auctionOrder.getAuctionId());
-			// winner id should be set by winner bid
-			Integer winnerId = userService.findByEmail(returnPayment.getPv()[3]).getId();
-			UserItem userItem = userItemService.find(auction.getUserItemId());
-			
-			auction.setWinnerUserId(winnerId);
-			auctionService.save(auction);
-			
-			userItem.setSoldToUserId(winnerId);
-			userItemService.save(userItem);
-			
-			auctionOrder.setAuctionOrderStatusId(3);
-			auctionOrderService.save(auctionOrder);
-			
-			invoiceService.save(new Invoice((invoiceService.findLastInvoice()+1), 
-											winnerId, 
-											auctionOrder.getId(), 
-											Utils.getNow(), 
-											auctionOrder.getAmount()));
+		Auction auction = auctionService.findById(auctionOrder.getAuctionId());
+		Integer winnerId = auction.getWinnerUserId();
+		//stato 3 pagamento effettuato
+		if(returnPayment.getPv()[5].equals("3")) {
+			if(auctionOrder.getAmount() == Double.parseDouble(returnPayment.getPv()[1])) {
+				auctionOrder.setTransactionId(returnPayment.getPv()[0]);
+				auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
+				UserItem userItem = userItemService.find(auction.getUserItemId());
+				
+				auction.setWinnerUserId(winnerId);
+				auctionService.save(auction);
+				
+				userItem.setSoldToUserId(winnerId);
+				userItemService.save(userItem);
+				
+				auctionOrder.setAuctionOrderStatusId(3);
+				auctionOrderService.save(auctionOrder);
+				
+				invoiceService.save(new Invoice((invoiceService.findLastInvoice()+1), 
+												winnerId, 
+												auctionOrder.getId(), 
+												Utils.getNow(), 
+												auctionOrder.getAmount()));
+			}
 		}
+		//stato 2 pagamento annullato
+		if(returnPayment.getPv()[5].equals("2")) {
+		
+		}
+		//stato 2 pagamento in verifica
+		if(returnPayment.getPv()[5].equals("3")) {
+		
+		}
+
 	}
 }
 	

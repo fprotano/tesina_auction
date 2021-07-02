@@ -11,7 +11,6 @@
 
 <c:if test="${empty action }">
 	<c:if test="${ listHelpCenter.size()>0 }">
-<%-- 		<c:if test="${ listOpenPosts.size()>0 }"> --%>
 	<p>${ typeOfSelectedHelpCenter }</p><br>
 		<table>
 			<tr>

@@ -8,23 +8,7 @@
 
 <c:if test="${ threads.size()>0 }">
 	<c:forEach items="${ threads }" var="thread">
-	<!-- 	<table> -->
-	<!-- 		<thead> -->
-	<!-- 			<tr> -->
-	<!-- 				<th>Data creazione</th> -->
-	<!-- 				<th>domanda</th> -->
-	<!-- 				<th>risposta</th> -->
-					
-	<!-- 			</tr> -->
-				
-	<!-- 			<tr> -->
-	<%-- 				<td>${thread.createdAt }</td> --%>
-	<%-- 				<td>${thread.question }</td> --%>
-	<%-- 				<td>${thread.answer }</td> --%>
-	<!-- 			</tr> -->
-	<!-- 		</thead> -->
-		
-	<!-- 	</table> -->
+	
 		<p>data creazione domanda : ${thread.createdAt }</p>
 		<p>domanda : ${thread.question }</p>
 		<c:if test="${not empty thread.answer }">

@@ -20,6 +20,7 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 			+ " JOIN FETCH h.helpThreads as ht "
 			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
 			+ " AND ht.answer is null  "
+			+ " GROUP BY h.id "
 			+ " ORDER BY ht.createdAt asc ")
 	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
 
@@ -35,26 +36,5 @@ public interface HelpCenterRepo extends CrudRepository<HelpCenter,Integer> {
 //					+ " WHERE h.assigned_to_id = s.id AND h.user_id = ?1 ",
 //			nativeQuery = true)
 	public List<HelpCenter> findByUserId(Integer userId);
-	
-//	@Modifying
-//	@Query(" SELECT h FROM HelpCenterThread as ht "
-//			+ " JOIN ht.helpCenterForThread as h "
-//			+ " WHERE h.assignedToId = ?1 AND h.closedAt is null "
-//			+ " AND ht.answer is null AND h.id = ht.helpCenterId "
-//			+ " ORDER BY ht.createdAt asc ")
-//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
-	
-//	@Modifying
-//	@Query("select h from it.exolab.tesina.auction.model.HelpCenter h "
-//			+ " inner join it.exolab.tesina.auction.model.HelpCenterThread t " + 
-//			"   where h.id  = t.helpCenterId ")
-//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
-	
-//	@Modifying
-//	@Query("SELECT h FROM HelpCenter h, HelpCenterThread t "
-//			+ " WHERE h.id=t.helpCenterId AND h.assignedToId= ?1 "
-//			+ " AND h.closedAt is null AND t.answer is null "
-//			+ " ORDER BY t.createdAt ASC ")
-//	public List<HelpCenter> findOpenHelpCenterAndWaitingAnswer(Integer assignedId);
 
 }

@@ -102,7 +102,7 @@ public class ApiPaymentController extends BaseController<Payment> {
 			auctionOrderService.save(auctionOrder);
 		
 		}
-		//stato 2 pagamento in verifica
+		//stato 1 pagamento in verifica
 		if(returnPayment.getPv()[5].equals("1")) {
 			
 			auctionOrder.setTransactionId(returnPayment.getPv()[0]);

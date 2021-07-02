@@ -67,15 +67,25 @@ public class ApiHelpCenterController extends BaseController<HelpCenter>{
 	
 	@RequestMapping (value="fAOfUs/{userId}", method = RequestMethod.GET)
 	@ResponseBody
-	public HttpResponse<HelpCenter> findAllOfUser(@PathVariable Integer userId){
+	public HttpResponse<HelpCenterDTO> findAllOfUser(@PathVariable Integer userId){
 
-		List <HelpCenter> listHelpCenter = this.helpCenterService.findbyUserId(userId);
-		List <HelpCenterDTO> listHelpCenterToSend = new ArrayList<HelpCenterDTO>();
-		for (HelpCenter hc : listHelpCenter) {
-			listHelpCenterToSend.add(new HelpCenterDTO(hc));
-		}
-		return sendSuccess(listHelpCenterToSend);
+//		List <HelpCenter> listHelpCenter = this.helpCenterService.findbyUserId(userId);
+//		List <HelpCenterDTO> listHelpCenterToSend = new ArrayList<HelpCenterDTO>();
+//		for (HelpCenter hc : listHelpCenter) {
+//			listHelpCenterToSend.add(new HelpCenterDTO(hc));
+//		}
+//		return sendSuccess(listHelpCenterToSend);
 		
+//		List<HelpCenterDTO> ret = HelpCenterDTO.setListHelpCenterDTOForUser(this.helpCenterService.findbyUserId(userId));
+		return sendSuccess(HelpCenterDTO.setListHelpCenterDTOForUser(this.helpCenterService.findbyUserId(userId)));
+		
+	}
+	
+	@RequestMapping (value="findById/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public HttpResponse<HelpCenterDTO> findById(@PathVariable Integer id){
+		System.out.println("in findById");
+		return sendSuccess(HelpCenterDTO.setHelpCenterDTOForUser(this.helpCenterService.find(id)));
 	}
 
 }

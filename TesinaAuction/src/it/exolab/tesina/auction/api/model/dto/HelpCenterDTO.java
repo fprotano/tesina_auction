@@ -43,6 +43,23 @@ public class HelpCenterDTO {
 			HelpCenterThreadDTO hctDTO = new HelpCenterThreadDTO(lht);
 			this.helpThreads.add(hctDTO);
 		}
+		
+	}
+
+	public HelpCenterDTO(Integer id, Timestamp createdAt, Timestamp updatedAt, Timestamp closedAt, String question,
+			Staff staffAssigned, List<HelpCenterThread> helpThreads) {
+		super();
+		this.id = id;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.closedAt = closedAt;
+		this.question = question;
+		this.staffAssigned = staffAssigned;
+		this.helpThreads= new ArrayList<HelpCenterThreadDTO>();
+		for(HelpCenterThread lht : helpThreads) {
+			HelpCenterThreadDTO hctDTO = new HelpCenterThreadDTO(lht);
+			this.helpThreads.add(hctDTO);
+		}
 	}
 
 	public Integer getId() {
@@ -123,6 +140,19 @@ public class HelpCenterDTO {
 
 	public void setHelpThreads(List<HelpCenterThreadDTO> helpThreads) {
 		this.helpThreads = helpThreads;
+	}
+	
+	public static HelpCenterDTO setHelpCenterDTOForUser(HelpCenter model) {
+		return new HelpCenterDTO(model.getId(), model.getCreatedAt(), model.getUpdatedAt(), 
+								 model.getClosedAt(), model.getQuestion(), model.getStaffAssigned(),
+								 model.getHelpThreads());
+	}
+	
+	public static List<HelpCenterDTO> setListHelpCenterDTOForUser(List<HelpCenter> model) {
+		List<HelpCenterDTO> ret = new ArrayList<HelpCenterDTO>();
+		for(HelpCenter hc: model)
+			ret.add(HelpCenterDTO.setHelpCenterDTOForUser(hc));
+		return ret;
 	}
 
 	@Override

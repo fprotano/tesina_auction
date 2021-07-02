@@ -41,5 +41,15 @@ public class ApiHelpCenterThreadController  extends BaseController<HelpCenterThr
 		
 		return sendSuccess(model);
 	}
+	
+	@RequestMapping(value="deleteThread", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public HttpResponse<HelpCenterThread> doDelete(@RequestBody HelpCenterThread model) {
+		helpCenterThreadService.delete(model.getHelpCenterId());
+
+		this.helpCenterService.save(this.helpCenterService.find(model.getHelpCenterId()));
+		
+		return sendSuccess(model);
+	}
 
 }

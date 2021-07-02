@@ -1,6 +1,9 @@
 package it.exolab.tesina.auction.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.stream.Stream;
 
 import com.itextpdf.text.BaseColor;
@@ -14,7 +17,6 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.Barcode128.Barcode128CodeSet;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import it.exolab.tesina.auction.model.AuctionOrder;
@@ -40,11 +42,11 @@ public class InvoicePdfMaker extends UtilData {
 		addTableHeader(table);
 		addRows(table, invoice, userItem, auctionOrder);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		
+		//byte[] pdfToByte = null;
 		try {
 			
 			// crea un file di tipo pdf
-			// PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
+			//PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
 			
 			PdfWriter.getInstance(document, baos);
 			document.open();
@@ -64,11 +66,16 @@ public class InvoicePdfMaker extends UtilData {
 //			document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
 			document.close();
 
-		} catch (DocumentException e) {
+		} catch (DocumentException  e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(baos.toString());
+//		try {
+//			baos.write(pdfToByte);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return baos.toByteArray() ;
 		
 	}

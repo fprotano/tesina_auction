@@ -33,7 +33,7 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 	public void setInvoiceService(InvoiceService invoiceService) {
 		this.invoiceService = invoiceService;
 	}
-
+	
 
 	@RequestMapping(value = "downloadInvoice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -41,7 +41,7 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 		System.out.println("nel doDownloadInvoice, AuctionOrder > " + model.getId());
 		Invoice invoice = invoiceService.findByAuctionOrderId(model.getId());
 		byte[] pdfToByte = new InvoicePdfMaker().pdfMaker();
-		String byteToString = Base64.getEncoder().encodeToString(pdfToByte);
+		// String byteToString = Base64.getEncoder().encodeToString(pdfToByte);
 //		HttpHeaders headers = new HttpHeaders();
 //	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
 	    // Here you have to set the actual filename of your pdf
@@ -52,7 +52,7 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 
 	    
 		System.out.println("nel doDownloadInvoice, invoice > " + pdfToByte.toString());
-		return sendSuccess(byteToString);
+		return sendSuccess(pdfToByte);
 	}
 
 	@RequestMapping(value = "invoiceFindByUserId", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

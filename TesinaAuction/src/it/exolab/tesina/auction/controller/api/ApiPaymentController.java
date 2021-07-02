@@ -75,6 +75,7 @@ public class ApiPaymentController extends BaseController<Payment> {
 			auctionOrder.setPaidAt(new Timestamp(System.currentTimeMillis()));
 			
 			Auction auction = auctionService.findById(auctionOrder.getAuctionId());
+			// winner id should be set by winner bid
 			Integer winnerId = userService.findByEmail(returnPayment.getPv()[3]).getId();
 			UserItem userItem = userItemService.find(auction.getUserItemId());
 			

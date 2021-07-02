@@ -70,8 +70,8 @@ public class Test extends UtilData {
 				
 				
 				// crea un file di tipo pdf
-				// PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
-				PdfWriter.getInstance(document, new ByteArrayOutputStream());
+				PdfWriter.getInstance(document, new FileOutputStream("pdfDiProva.pdf"));
+				// PdfWriter.getInstance(document, new ByteArrayOutputStream());
 				document.open();
 				// il 'chunk' e' l'elemento piu' piccolo che si puo aggiungere
 //				Chunk chunk = new Chunk("riga di prova", font);
@@ -85,11 +85,14 @@ public class Test extends UtilData {
 				document.add(new Paragraph(" "));
 				document.add(table);
 				document.add(new Paragraph(SPAZIATURA + SUBTOTALE + auctionOrder.getAmount()));
-				document.add(new Paragraph(SPAZIATURA + IVA + ((auctionOrder.getAmount()/100)*VALORE_IVA)));
-				document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
+				//document.add(new Paragraph(SPAZIATURA + IVA + ((auctionOrder.getAmount()/100)*VALORE_IVA)));
+				// document.add(new Paragraph(TOTALE + (auctionOrder.getAmount()+((auctionOrder.getAmount()/100)*VALORE_IVA))));
 				document.close();
 
 			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

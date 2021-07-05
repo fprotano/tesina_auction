@@ -41,14 +41,7 @@ public class ApiInvoiceController extends BaseController<Invoice> {
 		System.out.println("nel doDownloadInvoice, AuctionOrder > " + model.getId());
 		Invoice invoice = invoiceService.findByAuctionOrderId(model.getId());
 		byte[] pdfToByte = new InvoicePdfMaker().pdfMaker();
-		// String byteToString = Base64.getEncoder().encodeToString(pdfToByte);
-//		HttpHeaders headers = new HttpHeaders();
-//	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
-	    // Here you have to set the actual filename of your pdf
-//	    String filename = "output.pdf";
-//	    headers.setContentDispositionFormData(filename, filename);
-//	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-//	    ResponseEntity<byte[]> response = new ResponseEntity<>(pdfToByte, headers, HttpStatus.OK);
+		// non funziona, credo manchi 	qualcosa nel pdfMaker
 
 	    
 		System.out.println("nel doDownloadInvoice, invoice > " + pdfToByte.toString());

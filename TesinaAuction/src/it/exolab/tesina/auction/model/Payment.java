@@ -4,15 +4,15 @@ public class Payment {
 	
 	private Double amount;
 	private String email, customCode, transactionId, urlUnDo, urlSuccess, urlNotify, urlBank;
-	
+	private Integer status, expirationDays;
 	
 	public Payment() {
 
 	}
 	
 	public Payment(Double amount, String email, String customCode, String transactionId, String urlUnDo,
-			String urlSuccess, String urlNotify, String urlBank) {
-
+			String urlSuccess, String urlNotify, String urlBank, Integer status, Integer expirationDays) {
+		
 		this.amount = amount;
 		this.email = email;
 		this.customCode = customCode;
@@ -21,7 +21,11 @@ public class Payment {
 		this.urlSuccess = urlSuccess;
 		this.urlNotify = urlNotify;
 		this.urlBank = urlBank;
+		this.status = status;
+		this.expirationDays = expirationDays;
 	}
+
+
 
 	public String getUrlUnDo() {
 		return urlUnDo;
@@ -88,11 +92,29 @@ public class Payment {
 		this.urlBank = urlBank;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getExpirationDays() {
+		return expirationDays;
+	}
+
+	public void setExpirationDays(Integer expirationDays) {
+		this.expirationDays = expirationDays;
+	}
+
 	@Override
 	public String toString() {
 		return "Payment [amount=" + amount + ", email=" + email + ", customCode=" + customCode + ", transactionId="
 				+ transactionId + ", urlUnDo=" + urlUnDo + ", urlSuccess=" + urlSuccess + ", urlNotify=" + urlNotify
-				+ ", urlBank=" + urlBank + "]";
+				+ ", urlBank=" + urlBank + ", status=" + status + ", expirationDays=" + expirationDays + "]";
 	}
+
+	
 	
 }
